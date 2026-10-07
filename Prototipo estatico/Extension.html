@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extensión</title>
+    <script src="src/static.js"></script>
+</head>
+<body>
+    <navbar>
+        <a href="InformeSemestral.html">Informe Semestral</a>
+    </navbar>
+    <main>
+        <section>
+            <form action="">
+                <label for="nombre">Nombre del profesor:</label>
+                <select name="nombre" id="nombre">
+                    <option value="profesor1">Andrey</option>
+                    <option value="profesor2">Edwin</option>
+                    <option value="profesor3">Mónica</option>
+                </select>
+                <br>
+                <label for="tipo">Tipo de actividad:</label>
+                <select name="tipo" id="tipo">
+                    <option value="actividad1">Charla</option>
+                    <option value="actividad2">Proyecto</option>
+                    <option value="actividad3">Seminario</option>
+                </select>
+                <br>
+                <label for="nombreA">Nombre de la actividad:</label>
+                <input type="text" name="nombreA" id="nombreA">
+                <br>
+                <label for="tituloP">Título de la participación</label>
+                <select name="tituloP" id="tituloP">
+                    <option value="participacion1">Ponente</option>
+                    <option value="participacion2">Asistente</option>
+                </select>
+                <br>
+                <label for="fecha">Fecha:</label>
+                <input type="date" name="fecha" id="fecha">
+                <br>
+                <label for="lugar">Lugar:</label>
+                <input type="text" name="lugar" id="lugar">
+                <br>
+                <label for="tipoP">Tipo de participación:</label>
+                <select name="tipoP" id="tipoP">
+                    <option value="participacion1">Ponente</option>
+                    <option value="participacion2">Charlista</option>
+                </select>
+                <br>
+                <label for="organizadores">Organizadores:</label>
+                <input type="text" name="organizadores" id="organizadores">
+                <br>
+                <label for="otraInfo">Otra información:</label>
+                <textarea name="otraInfo" id="otraInfo" cols="30" rows="5"></textarea>
+                <br>
+                <button type="submit">Enviar</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
