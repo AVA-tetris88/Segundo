@@ -18,7 +18,7 @@ function VerificarCredenciales() {
     let i = 0;
     usuarios.forEach(indice => {
         if (indice.correo == usuario && indice.contrasenna == contrasenna){
-            location.href = "Index.html";
+            location.href = "index.html";
             i = 1;
         }
     });
