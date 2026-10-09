@@ -85,8 +85,8 @@ async function cargarNombreUsuario() {
         .select('nombre')
         .eq('id', user.id)
 
-    if (perfilError) {
-        console.error("Error al obtener perfil:", perfilError.message);
+    if (error) {
+        console.error("Error al obtener perfil:", error.message);
         return;
     }
     else{
@@ -111,4 +111,4 @@ frmRegistrarActividad.addEventListener("submit", async function(e) {
     limpiarFormulario();
 })
 
-inpNombreProfesor.value = cargarNombreUsuario();
+inpNombreProfesor.value = String(cargarNombreUsuario());
