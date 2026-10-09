@@ -29,6 +29,7 @@ async function verExt() {
 //   \/\_____\ \ \_____\ \ \_____\ \ \_____\ \ \_____\ \ \_\\"\_\ \ \_____\ \ \_\ \ \_\ \_\ 
 //    \/_____/  \/_____/  \/_____/  \/_____/  \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_/\/_/ 
 
-btnVer.addEventListener("click", function() {
-    verExt();
+btnVer.addEventListener("click", async function(e) {
+    e.preventDefault();
+    await verExt();
 })

@@ -35,19 +35,18 @@ async function iniciarSesion(correo, contrasenna) {
 //   \/\_____\ \ \_____\ \ \_____\ \ \_____\ \ \_____\ \ \_\\"\_\ \ \_____\ \ \_\ \ \_\ \_\ 
 //    \/_____/  \/_____/  \/_____/  \/_____/  \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_/\/_/ 
                                                                                                 
-document.addEventListener('keypress', function(tecla){
+document.addEventListener('keypress', async function(tecla){
     if(tecla.key == 'Enter'){
         tecla.preventDefault();
-        e.preventDefault();
         if(inpCorreo.value != "" && inpContrasenna.value != ""){
-            iniciarSesion(inpCorreo.value, inpContrasenna.value);
+            await iniciarSesion(inpCorreo.value, inpContrasenna.value);
         }
     }
 });
 
-btnInicioSesion.addEventListener("click", function() {
+btnInicioSesion.addEventListener("click", async function(e) {
     e.preventDefault();
     if(inpCorreo.value != "" && inpContrasenna.value != ""){
-        iniciarSesion(inpCorreo.value, inpContrasenna.value);
+        await iniciarSesion(inpCorreo.value, inpContrasenna.value);
     }
 });

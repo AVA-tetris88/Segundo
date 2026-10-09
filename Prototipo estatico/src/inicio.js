@@ -30,7 +30,7 @@ async function actualizarNombre(nuevoNombre) {
 //   \/\_____\ \ \_____\ \ \_____\ \ \_____\ \ \_____\ \ \_\\"\_\ \ \_____\ \ \_\ \ \_\ \_\ 
 //    \/_____/  \/_____/  \/_____/  \/_____/  \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_/\/_/ 
 
-btnActualizarNombre.addEventListener("click", function() {
+btnActualizarNombre.addEventListener("click", async function(e) {
   e.preventDefault();
-  actualizarNombre(inpNuevoNombre.value);
+  await actualizarNombre(inpNuevoNombre.value);
 })
