@@ -4,7 +4,7 @@
 //   \ \__|   \ \_\ \_\ \ \_\ \_\ \ \_\ \ \_\ \_\ \ \_____\ \ \_____\ \ \_____\ \/\_____\ 
 //    \/_/     \/_/\/_/  \/_/ /_/  \/_/  \/_/\/_/  \/_____/  \/_____/  \/_____/  \/_____/ 
 
-const btnInicioSesion = document.querySelectorAll("#btnInicioSesion");
+const btnInicioSesion = document.querySelector("#btnInicioSesion");
 const inpCorreo = document.getElementById("correo");
 const inpContrasenna = document.getElementById("contrasenna");
 
