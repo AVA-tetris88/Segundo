@@ -68,7 +68,8 @@ if (location.pathname.endsWith("index.html")) {
     iniciarSesion(usuario.value, contrasenna.value);
   });
 }
-
-btnNN.addEventListener("click", function() {
-  actualizarNombre(document.getElementById("nuevoNombre").value);
-})
+if (location.pathname.endsWith("inicio.html")) {
+  btnNN.addEventListener("click", function() {
+    actualizarNombre(document.getElementById("nuevoNombre").value);
+  });
+}
