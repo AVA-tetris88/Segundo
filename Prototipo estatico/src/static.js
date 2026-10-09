@@ -22,6 +22,7 @@ const DE = document.getElementById("datosExt");
 
 //Inicio de sesión
 async function iniciarSesion(usuario, contrasenna) {
+  alert("Iniciando sesión con usuario: " + usuario + " y contraseña: " + contrasenna);
   const { data, error } = await _supabase.auth.signInWithPassword({
     email: usuario,
     password: contrasenna,
@@ -41,13 +42,13 @@ async function actualizarNombre(nuevoNombre) {
     }
   });
 
-  if (error) console.error('Error al actualizar:', error.message);
+  if (error) alert('Error al actualizar:', error.message);
   else console.log('Nombre actualizado:', data.user);
 }
 //Ver actividades de extensión
 async function verExt() {
   const { data, error } = await _supabase
-    .from('Actividades de extension')
+    .from('actividades_de_extension')
     .select('*');
 
   if (error) console.error('Error:', error.message);
