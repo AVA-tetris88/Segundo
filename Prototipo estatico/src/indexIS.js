@@ -4,10 +4,10 @@
 //   \ \__|   \ \_\ \_\ \ \_\ \_\ \ \_\ \ \_\ \_\ \ \_____\ \ \_____\ \ \_____\ \/\_____\ 
 //    \/_/     \/_/\/_/  \/_/ /_/  \/_/  \/_/\/_/  \/_____/  \/_____/  \/_____/  \/_____/ 
 
-const btnInicioSesion = document.querySelector("#btnInicioSesion");
 const inpCorreo = document.getElementById("correo");
 const inpContrasenna = document.getElementById("contrasenna");
-
+const btnInicioSesion = document.querySelector("#btnInicioSesion");
+const frmInicioSesion = document.getElementById("frmInicioSesion");
 //   ______   __  __    __   __    ______    __    ______    __   __    ______    ______    
 //  /\  ___\ /\ \/\ \  /\ "-.\ \  /\  ___\  /\ \  /\  __ \  /\ "-.\ \  /\  ___\  /\  ___\   
 //  \ \  __\ \ \ \_\ \ \ \ \-.  \ \ \ \____ \ \ \ \ \ \/\ \ \ \ \-.  \ \ \  __\  \ \___  \  
@@ -44,7 +44,7 @@ document.addEventListener('keypress', async function(tecla){
     }
 });
 
-btnInicioSesion.addEventListener("click", async function(e) {
+frmInicioSesion.addEventListener("submit", async function(e) {
     e.preventDefault();
     if(inpCorreo.value != "" && inpContrasenna.value != ""){
         await iniciarSesion(inpCorreo.value, inpContrasenna.value);
