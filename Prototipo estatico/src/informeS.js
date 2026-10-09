@@ -19,6 +19,7 @@ async function verExt() {
 
   if (error) console.error('Error:', error.message);
   else {
+    console.log('Datos de extensión:', data);
     pDesglose.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
   }
 }

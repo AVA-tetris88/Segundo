@@ -32,22 +32,46 @@ async function registrarExtension(nProfesor, tActividad, nActividad, tituloP, fe
     else console.log('Nuevo registro de extension:', data);
 }
 
-async function consultaProfesor(nBuscado) {
-    const { data, error } = await _supabase
+async function consultaProfesor(nBuscado, op) {
+    if(op == "nombre"){
+        const { data, error } = await _supabase
         .from('perfiles')
         .select('id, nombre')
         .eq('nombre', nBuscado);
-    if (error) {
-        console.error('Error al buscar ' + nBuscado + ':', error.message);
-        return null;
-    } else if (data.length > 0) {
-        console.log('Usuario encontrado:', data[0]);
-        return data[0];
-    } else {
-        console.log('No se encontraron registros');
-        return null;
+        
+        if (error) {
+            console.error('Error al buscar ' + nBuscado + ':', error.message);
+            return null;
+        }   
+        else if (data.length > 0) {
+            console.log('Usuario encontrado:', data[0]);
+            return data[0];
+        } 
+        else {
+            console.log('No se encontraron registros');
+            return null;
+        }
     }
-}
+    else if(op == "id"){
+        const { data, error } = await _supabase
+        .from('perfiles')
+        .select('id, nombre')
+        .eq('id', nBuscado);
+
+        if (error) {
+            console.error('Error al buscar ' + nBuscado + ':', error.message);
+            return null;
+        }   
+        else if (data.length > 0) {
+            console.log('Usuario encontrado:', data[0]);
+            return data[0];
+        } 
+        else {
+            console.log('No se encontraron registros');
+            return null;
+        }
+    }
+}    
 
 function limpiarFormulario() {
     let Campos = document.querySelectorAll("#formulario input, #formulario select, #formulario textarea");
@@ -62,8 +86,17 @@ function limpiarFormulario() {
 
 btnRegistrarActividad.addEventListener("click", async function(e) {
     e.preventDefault();
-    await registrarExtension(consultaProfesor(inpNombreProfesor.value).id,inpTipoActividad.value,inpNombreActividad.value,inpTituloParticipacion.value,inpFecha.value,inpLugar.value,inpTipoParticipacion.value,inpOrganizadores.value,inpOtraInfo.value);
+    await registrarExtension(consultaProfesor(inpNombreProfesor.value, "nombre").id,inpTipoActividad.value,inpNombreActividad.value,inpTituloParticipacion.value,inpFecha.value,inpLugar.value,inpTipoParticipacion.value,inpOrganizadores.value,inpOtraInfo.value);
     limpiarFormulario();
 })
 
-inpNombreProfesor.value = consultaProfesor(inpNombreProfesor.value).nombre;
+const { data: { user }, error: authError } = await _supabase.auth.getUser();
+
+if (authError || !user) {
+  console.error("No hay un usuario autenticado");
+  return;
+}
+
+const userId = user.id;
+
+inpNombreProfesor.appendChild(document.createElement("option")).textContent = consultaProfesor(userId, "id").nombre;
