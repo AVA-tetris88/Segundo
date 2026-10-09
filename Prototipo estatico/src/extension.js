@@ -90,7 +90,7 @@ async function cargarNombreUsuario() {
         return;
     }
     else{
-        return data[0].nombre;
+        inpNombreProfesor.value = data[0].nombre;
     }
 }
 
@@ -104,6 +104,7 @@ function limpiarFormulario() {
 //  \ \___  \ \ \  __\  \ \ \____ \ \ \_\ \ \ \  __\  \ \ \-.  \ \ \ \____ \ \ \ \ \  __ \  
 //   \/\_____\ \ \_____\ \ \_____\ \ \_____\ \ \_____\ \ \_\\"\_\ \ \_____\ \ \_\ \ \_\ \_\ 
 //    \/_____/  \/_____/  \/_____/  \/_____/  \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_/\/_/ 
+await cargarNombreUsuario();
 
 frmRegistrarActividad.addEventListener("submit", async function(e) {
     e.preventDefault();
@@ -111,4 +112,3 @@ frmRegistrarActividad.addEventListener("submit", async function(e) {
     limpiarFormulario();
 })
 
-inpNombreProfesor.value = String(cargarNombreUsuario());
