@@ -14,6 +14,7 @@ const contrasenna = document.getElementById("contrasenna");
 const btnIS = document.getElementById("btnIS");
 const btnNN = document.getElementById("btnNN");
 const DE = document.getElementById("datosExt");
+
 //   ______   __  __    __   __    ______    __    ______    __   __    ______    ______    
 //  /\  ___\ /\ \/\ \  /\ "-.\ \  /\  ___\  /\ \  /\  __ \  /\ "-.\ \  /\  ___\  /\  ___\   
 //  \ \  __\ \ \ \_\ \ \ \ \-.  \ \ \ \____ \ \ \ \ \ \/\ \ \ \ \-.  \ \ \  __\  \ \___  \  
@@ -21,7 +22,7 @@ const DE = document.getElementById("datosExt");
 //    \/_/     \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_____/  \/_/ \/_/  \/_____/  \/_____/ 
 
 //Inicio de sesión
-async function iniciarSesion(usuario, contrasenna) {
+async function iniciarSesion() {
   try {
     console.log("1. Iniciando llamada a Supabase...");
     
@@ -80,9 +81,10 @@ async function registrarUsuario(email, password) {
     registrarUsuario("nombre@prueba1.com", "123456");
   }
   });
+  /*
   btnIS.addEventListener("click", function() {
-    iniciarSesion("ava@ava.com", "AA1234aa");
-  });
+    iniciarSesion();
+  });*/
 
 if (location.pathname.endsWith("inicio.html")) {
   btnNN.addEventListener("click", function() {
