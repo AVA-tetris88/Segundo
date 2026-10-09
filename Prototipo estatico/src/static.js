@@ -61,11 +61,11 @@ if (location.pathname.endsWith("index.html")) {
   document.addEventListener('keypress', function(tecla){
   if(tecla.key == 'Enter'){
     tecla.preventDefault();
-    iniciarSesion(usuario.value, contrasenna.value);
+    iniciarSesion("a.vega@prueba.com", "123456");
   }
   });
   btnIS.addEventListener("click", function() {
-    iniciarSesion(usuario.value, contrasenna.value);
+    iniciarSesion("ava@ava.com", "AA1234aa");
   });
 }
 if (location.pathname.endsWith("inicio.html")) {
