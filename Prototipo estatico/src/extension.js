@@ -13,7 +13,7 @@ const inpLugar = document.getElementById("lugar");
 const inpTipoParticipacion = document.getElementById("tipoP");
 const inpOrganizadores = document.getElementById("organizadores");
 const inpOtraInfo = document.getElementById("otraInfo");
-const btnRegistrarActividad = document.querySelector("#btnRegistrarActividad");
+const frmRegistrarActividad = document.getElementById("frmRegistrarActividad");
 
 //   ______   __  __    __   __    ______    __    ______    __   __    ______    ______    
 //  /\  ___\ /\ \/\ \  /\ "-.\ \  /\  ___\  /\ \  /\  __ \  /\ "-.\ \  /\  ___\  /\  ___\   
@@ -84,9 +84,9 @@ function limpiarFormulario() {
 //   \/\_____\ \ \_____\ \ \_____\ \ \_____\ \ \_____\ \ \_\\"\_\ \ \_____\ \ \_\ \ \_\ \_\ 
 //    \/_____/  \/_____/  \/_____/  \/_____/  \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_/\/_/ 
 
-btnRegistrarActividad.addEventListener("click", async function(e) {
+frmRegistrarActividad.addEventListener("submit", async function(e) {
     e.preventDefault();
-    await registrarExtension(consultaProfesor(inpNombreProfesor.value, "nombre").id,inpTipoActividad.value,inpNombreActividad.value,inpTituloParticipacion.value,inpFecha.value,inpLugar.value,inpTipoParticipacion.value,inpOrganizadores.value,inpOtraInfo.value);
+    await registrarExtension(await consultaProfesor(inpNombreProfesor.value, "nombre").id,inpTipoActividad.value,inpNombreActividad.value,inpTituloParticipacion.value,inpFecha.value,inpLugar.value,inpTipoParticipacion.value,inpOrganizadores.value,inpOtraInfo.value);
     limpiarFormulario();
 })
 
@@ -99,4 +99,4 @@ if (authError || !user) {
 
 const userId = user.id;
 
-inpNombreProfesor.appendChild(document.createElement("option")).textContent = consultaProfesor(userId, "id").nombre;
+inpNombreProfesor.appendChild(document.createElement("option")).textContent = await consultaProfesor(userId, "id").nombre;

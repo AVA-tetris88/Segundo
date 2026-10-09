@@ -14,7 +14,6 @@ const btnVer = document.querySelector("#Ver");
 
 async function verExt() {
   const { data, error } = await _supabase
-    .from('actividades_de_extension')
     .select('*');
 
   if (error) console.error('Error:', error.message);
