@@ -111,6 +111,4 @@ frmRegistrarActividad.addEventListener("submit", async function(e) {
     limpiarFormulario();
 })
 
-
-
-inpNombreProfesor.value = await cargarNombreUsuario();
+inpNombreProfesor.value = cargarNombreUsuario();
