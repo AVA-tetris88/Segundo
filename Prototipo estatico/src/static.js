@@ -22,16 +22,22 @@ const DE = document.getElementById("datosExt");
 
 //Inicio de sesión
 async function iniciarSesion(usuario, contrasenna) {
-  alert("Iniciando sesión con usuario: " + usuario + " y contraseña: " + contrasenna);
-  const { data, error } = await _supabase.auth.signInWithPassword({
-    email: usuario,
-    password: contrasenna,
-  });
+  try {
+    console.log("1. Iniciando llamada a Supabase...");
+    
+    const { data, error } = await _supabase.auth.signInWithPassword({
+      email: 'ava@ava.com',
+      password: 'AA1234aa'
+    });
 
-  if (error) console.error('Error al iniciar sesión:', error.message);
-  else {
-    console.log('Sesión iniciada correctamente:', data.session);
-    location.href="inicio.html";
+    if (error) {
+      console.error("2. Error de Supabase:", error.message, error);
+      return;
+    }
+
+    console.log("3. Éxito:", data);
+  } catch (err) {
+    console.error("Excepción inesperada:", err);
   }
 }
 //Actualizar nombre
