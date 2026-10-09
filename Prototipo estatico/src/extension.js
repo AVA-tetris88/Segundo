@@ -73,6 +73,27 @@ async function consultaProfesor(nBuscado, op) {
     }
 }    
 
+async function cargarNombreUsuario() {
+    const {data: {user}, error: authError} = await _supabase.auth.getUser();
+
+    if (authError || !user) {
+        console.error("No hay sesión activa:", authError?.message);
+        return;
+    }
+    const { data, error} = await _supabase
+        .from('perfiles')
+        .select('nombre')
+        .eq('id', user.id)
+
+    if (perfilError) {
+        console.error("Error al obtener perfil:", perfilError.message);
+        return;
+    }
+    else{
+        return data[0].nombre;
+    }
+}
+
 function limpiarFormulario() {
     let Campos = document.querySelectorAll("#formulario input, #formulario select, #formulario textarea");
     Campos.forEach(campo => campo.value = "");
@@ -90,13 +111,6 @@ frmRegistrarActividad.addEventListener("submit", async function(e) {
     limpiarFormulario();
 })
 
-const { data: { user }, error: authError } = await _supabase.auth.getUser();
 
-if (authError || !user) {
-  console.error("No hay un usuario autenticado");
-  return;
-}
 
-const userId = user.id;
-
-inpNombreProfesor.appendChild(document.createElement("option")).textContent = await consultaProfesor(userId, "id").nombre;
+inpNombreProfesor.value = await cargarNombreUsuario();
