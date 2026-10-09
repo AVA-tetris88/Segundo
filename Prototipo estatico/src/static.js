@@ -57,12 +57,22 @@ async function verExt() {
   }
 }
 
+async function registrarUsuario(email, password) {
+  const { data, error } = await _supabase.auth.signUp({
+    email: email,
+    password: password,
+  });
+
+  if (error) console.error('Error al registrar:', error.message);
+  else console.log('Usuario registrado:', data.user);
+}
+
 //Post funciones
 if (location.pathname.endsWith("index.html")) {
   document.addEventListener('keypress', function(tecla){
   if(tecla.key == 'Enter'){
     tecla.preventDefault();
-    iniciarSesion("a.vega@prueba.com", "123456");
+    registrarUsuario("nombre@prueba1.com", "123456");
   }
   });
   btnIS.addEventListener("click", function() {
