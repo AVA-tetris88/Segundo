@@ -74,7 +74,6 @@ async function registrarUsuario(email, password) {
 }
 
 //Post funciones
-if (location.pathname.endsWith("index.html")) {
   document.addEventListener('keypress', function(tecla){
   if(tecla.key == 'Enter'){
     tecla.preventDefault();
@@ -84,7 +83,7 @@ if (location.pathname.endsWith("index.html")) {
   btnIS.addEventListener("click", function() {
     iniciarSesion("ava@ava.com", "AA1234aa");
   });
-}
+
 if (location.pathname.endsWith("inicio.html")) {
   btnNN.addEventListener("click", function() {
     actualizarNombre(document.getElementById("nuevoNombre").value);
