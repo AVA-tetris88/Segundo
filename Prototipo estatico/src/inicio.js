@@ -15,14 +15,13 @@ const inpNuevoNombre = document.getElementById("nuevoNombre");
 
 //Actualizar nombre
 async function actualizarNombre(nuevoNombre) {
-  const { data, error } = await _supabase.auth.updateUser({
+    const { data, error } = await _supabase.auth.updateUser({
     data: {
-      display_name: nuevoNombre
+    display_name: nuevoNombre
     }
-  });
-
-  if (error) alert('Error al actualizar:', error.message);
-  else console.log('Nombre actualizado:', data.user);
+    });
+    if (error) alert('Error al actualizar:', error.message);
+    else console.log('Nombre actualizado:', data.user);
 }
 
 //   ______    ______    ______    __  __    ______    __   __    ______    __    ______    
@@ -32,5 +31,6 @@ async function actualizarNombre(nuevoNombre) {
 //    \/_____/  \/_____/  \/_____/  \/_____/  \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_/\/_/ 
 
 btnActualizarNombre.addEventListener("click", function() {
-    actualizarNombre(inpNuevoNombre.value);
+  e.preventDefault();
+  actualizarNombre(inpNuevoNombre.value);
 })

@@ -61,6 +61,7 @@ function limpiarFormulario() {
 //    \/_____/  \/_____/  \/_____/  \/_____/  \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_/\/_/ 
 
 btnRegistrarActividad.addEventListener("click", function() {
+    e.preventDefault();
     registrarExtension(consultaProfesor(inpNombreProfesor.value).id,inpTipoActividad.value,inpNombreActividad.value,inpTituloParticipacion.value,inpFecha.value,inpLugar.value,inpTipoParticipacion.value,inpOrganizadores.value,inpOtraInfo.value);
     limpiarFormulario();
 })

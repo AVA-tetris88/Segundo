@@ -21,13 +21,13 @@ async function iniciarSesion(correo, contrasenna) {
     });
     if (error) {
       console.error(error.message, error);
+      alert("Error: " + error.message);
       return;
+    } else {
+      console.log("Inicio de sesión exitoso:", data);
+      window.location.replace("./inicio.html"); 
     }
-    else{
-        console.log("Inicio de sesión exitoso:", data);
-        location.href = "inicio.html";
-    }
-} 
+}
 
 //   ______    ______    ______    __  __    ______    __   __    ______    __    ______    
 //  /\  ___\  /\  ___\  /\  ___\  /\ \/\ \  /\  ___\  /\ "-.\ \  /\  ___\  /\ \  /\  __ \   
@@ -38,6 +38,7 @@ async function iniciarSesion(correo, contrasenna) {
 document.addEventListener('keypress', function(tecla){
     if(tecla.key == 'Enter'){
         tecla.preventDefault();
+        e.preventDefault();
         if(inpCorreo.value != "" && inpContrasenna.value != ""){
             iniciarSesion(inpCorreo.value, inpContrasenna.value);
         }
@@ -45,5 +46,8 @@ document.addEventListener('keypress', function(tecla){
 });
 
 btnInicioSesion.addEventListener("click", function() {
-    iniciarSesion(inpCorreo.value, inpContrasenna.value);
+    e.preventDefault();
+    if(inpCorreo.value != "" && inpContrasenna.value != ""){
+        iniciarSesion(inpCorreo.value, inpContrasenna.value);
+    }
 });
