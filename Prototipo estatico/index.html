@@ -5,19 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio de sesión</title>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="src/static.js" defer></script>
+    <script src="supabase.js" defer></script>
+    <script src="src/indexIS.js" defer></script>
 </head>
 <body>
     <div>
         <h1>Inicio de sesión</h1>
         <form>
-            <label for="usuario">Nombre de usuario:</label>
-            <input type="text" id="usuario" name="username" required>
+            <label for="correo">Correo electrónico:</label>
+            <input type="text" id="correo" name="username" required>
             <br><br>
             <label for="contrasenna">Contraseña:</label>
             <input type="password" id="contrasenna" name="password" required>
         </form>
-        <button id="btnIS" onclick="iniciarSesion()">Iniciar sesión</button>
+        <button id="btnInicioSesion">Iniciar sesión</button>
     </div>
 </body>
 </html>
