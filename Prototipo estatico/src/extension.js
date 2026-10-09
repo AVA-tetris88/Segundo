@@ -104,7 +104,7 @@ function limpiarFormulario() {
 //  \ \___  \ \ \  __\  \ \ \____ \ \ \_\ \ \ \  __\  \ \ \-.  \ \ \ \____ \ \ \ \ \  __ \  
 //   \/\_____\ \ \_____\ \ \_____\ \ \_____\ \ \_____\ \ \_\\"\_\ \ \_____\ \ \_\ \ \_\ \_\ 
 //    \/_____/  \/_____/  \/_____/  \/_____/  \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_/\/_/ 
-await cargarNombreUsuario();
+cargarNombreUsuario();
 
 frmRegistrarActividad.addEventListener("submit", async function(e) {
     e.preventDefault();
