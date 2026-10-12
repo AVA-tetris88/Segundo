@@ -35,7 +35,7 @@ async function registrarExtension(nProfesor, tActividad, nActividad, tituloP, fe
     };    
 }
 
-async function cargarNombreUsuario() {
+async function cargarInpNombreProfesor() {
     const {data: {user}, error: authError} = await _supabase.auth.getUser();
 
     if (authError || !user) {
@@ -45,19 +45,21 @@ async function cargarNombreUsuario() {
     const { data, error} = await _supabase
         .from('perfiles')
         .select('nombre')
-        .eq('id', user.id)
 
     if (error) {
         console.error("Error al obtener perfil:", error.message);
         return;
     }
     else{
-        inpNombreProfesor.value = data[0].nombre;
+        data.forEach(per => {
+            inpNombreProfesor.innerHTML = inpNombreProfesor.innerHTML + `<option value="${per.nombre}">${per.nombre}</option>`
+        });
     }
 }
 
 function limpiarFormulario() {
-    let Campos = document.querySelectorAll("#formulario input, #formulario select, #formulario textarea");
+    inpFecha.value = "";
+    let Campos = document.querySelectorAll("input, select, textarea");
     Campos.forEach(campo => campo.value = "");
 }
 
@@ -72,4 +74,3 @@ frmRegistrarActividad.addEventListener("submit", async function(e) {
     e.preventDefault();
     await registrarExtension(inpNombreProfesor.value,inpTipoActividad.value,inpNombreActividad.value,inpTituloParticipacion.value,inpFecha.value,inpLugar.value,inpTipoParticipacion.value,inpOrganizadores.value,inpOtraInfo.value);
 })
-
