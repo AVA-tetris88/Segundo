@@ -19,6 +19,7 @@ async function cargarUsuarios(){
 
     if(error) console.error('Error:', error.message);
     else{
+        console.log(data);
         data.forEach(usu => {
            tblUsuarios.innerHTML = tblUsuarios.innerHTML + 
             `<tr>
