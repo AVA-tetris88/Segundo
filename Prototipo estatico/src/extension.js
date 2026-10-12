@@ -29,49 +29,8 @@ async function registrarExtension(nProfesor, tActividad, nActividad, tituloP, fe
     ])
     .select();
     if (error) console.error('Error al insertar extension:', error.message);
-    else console.log('Nuevo registro de extension:', data);
+    else console.log('Nuevo registro de extension:', data);    
 }
-
-async function consultaProfesor(nBuscado, op) {
-    if(op == "nombre"){
-        const { data, error } = await _supabase
-        .from('perfiles')
-        .select('id, nombre')
-        .eq('nombre', nBuscado);
-        
-        if (error) {
-            console.error('Error al buscar ' + nBuscado + ':', error.message);
-            return null;
-        }   
-        else if (data.length > 0) {
-            console.log('Usuario encontrado:', data[0]);
-            return data[0];
-        } 
-        else {
-            console.log('No se encontraron registros');
-            return null;
-        }
-    }
-    else if(op == "id"){
-        const { data, error } = await _supabase
-        .from('perfiles')
-        .select('id, nombre')
-        .eq('id', nBuscado);
-
-        if (error) {
-            console.error('Error al buscar ' + nBuscado + ':', error.message);
-            return null;
-        }   
-        else if (data.length > 0) {
-            console.log('Usuario encontrado:', data[0]);
-            return data[0];
-        } 
-        else {
-            console.log('No se encontraron registros');
-            return null;
-        }
-    }
-}    
 
 async function cargarNombreUsuario() {
     const {data: {user}, error: authError} = await _supabase.auth.getUser();
@@ -108,7 +67,7 @@ cargarNombreUsuario();
 
 frmRegistrarActividad.addEventListener("submit", async function(e) {
     e.preventDefault();
-    await registrarExtension(await consultaProfesor(inpNombreProfesor.value, "nombre").id,inpTipoActividad.value,inpNombreActividad.value,inpTituloParticipacion.value,inpFecha.value,inpLugar.value,inpTipoParticipacion.value,inpOrganizadores.value,inpOtraInfo.value);
+    await registrarExtension(inpNombreProfesor.value,inpTipoActividad.value,inpNombreActividad.value,inpTituloParticipacion.value,inpFecha.value,inpLugar.value,inpTipoParticipacion.value,inpOrganizadores.value,inpOtraInfo.value);
     limpiarFormulario();
 })
 
