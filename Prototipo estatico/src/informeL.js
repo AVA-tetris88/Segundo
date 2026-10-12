@@ -4,17 +4,14 @@
 //   \ \__|   \ \_\ \_\ \ \_\ \_\ \ \_\ \ \_\ \_\ \ \_____\ \ \_____\ \ \_____\ \/\_____\ 
 //    \/_/     \/_/\/_/  \/_/ /_/  \/_/  \/_/\/_/  \/_____/  \/_____/  \/_____/  \/_____/
 
-const { act } = require("react");
-
-const pDesglose = document.getElementById("desglose");
-const btnVer = document.querySelector("#Ver");
+const tblDesglose = document.getElementById("tblDesglose");
 //   ______   __  __    __   __    ______    __    ______    __   __    ______    ______    
 //  /\  ___\ /\ \/\ \  /\ "-.\ \  /\  ___\  /\ \  /\  __ \  /\ "-.\ \  /\  ___\  /\  ___\   
 //  \ \  __\ \ \ \_\ \ \ \ \-.  \ \ \ \____ \ \ \ \ \ \/\ \ \ \ \-.  \ \ \  __\  \ \___  \  
 //   \ \_\    \ \_____\ \ \_\\"\_\ \ \_____\ \ \_\ \ \_____\ \ \_\\"\_\ \ \_____\ \/\_____\ 
 //    \/_/     \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_____/  \/_/ \/_/  \/_____/  \/_____/ 
 
-async function verExt() {
+async function verActividadesExtension() {
     const { data, error } = await _supabase
     .from('actividades_de_extension')
     .select('*');
@@ -26,9 +23,16 @@ async function verExt() {
             pDesglose.innerHTML = 
             `<tr>
             <td>${act.nombre_profesor}</td>
+            <td>${act.tipo_actividad}</td>
+            <td>${act.nombre_actividad}</td>
+            <td>${act.titulo_participacion}</td>
+            <td>${act.fecha}</td>
+            <td>${act.lugar}</td>
+            <td>${act.tipo_participacion}</td>
+            <td>${act.organizadores}</td>
+            <td>${act.comentarios}</td>
             </tr>`;
         });
-        
     }
 }
 
