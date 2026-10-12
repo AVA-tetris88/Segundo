@@ -35,13 +35,8 @@ async function registrarExtension(nProfesor, tActividad, nActividad, tituloP, fe
     };    
 }
 
+//Carga todos los nombres de los profesores en el campo 'Nombre del profesor'
 async function cargarInpNombreProfesor() {
-    const {data: {user}, error: authError} = await _supabase.auth.getUser();
-
-    if (authError || !user) {
-        console.error("No hay sesión activa:", authError?.message);
-        return;
-    }
     const { data, error} = await _supabase
         .from('perfiles')
         .select('nombre')
@@ -55,17 +50,28 @@ async function cargarInpNombreProfesor() {
         data.forEach(per => {
             inpNombreProfesor.innerHTML = inpNombreProfesor.innerHTML + `<option value="${per.nombre}">${per.nombre}</option>`
         });
-        const { usu, err} = await _supabase
+    }
+}
+
+//Pone como predeterminado en el campo 'Nombre del profesor' al profesor que tiene la sesión iniciada
+async function cargarProfesorActual() {
+    const {data: {user}, error: authError} = await _supabase.auth.getUser();
+
+    if (authError || !user) {
+        console.error("No hay sesión activa:", authError?.message);
+        return;
+    }
+
+    const { data, error} = await _supabase
         .from('perfiles')
         .select('nombre')
         .eq('id', user.id)
 
-        if (err) {
+        if (error) {
         console.error("Error al obtener perfil:", error.message);
         return;
         }
-        else inpNombreProfesor.value = usu.nombre;
-    }
+        else inpNombreProfesor.value = data[0].nombre;
 }
 
 function limpiarFormulario() {
