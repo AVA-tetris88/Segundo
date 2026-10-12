@@ -23,10 +23,10 @@ async function cargarUsuarios(){
         data.forEach(usu => {
            tblUsuarios.innerHTML = tblUsuarios.innerHTML + 
             `<tr>
-            <td>${data[usu].id}</td>
-            <td>${data[usu].nombre}</td>
-            <td>${data[usu].correo}</td>
-            <td>${data[usu].tipo}</td>
+            <td>${usu.id}</td>
+            <td>${usu.nombre}</td>
+            <td>${usu.correo}</td>
+            <td>${usu.tipo}</td>
             </tr>` 
         });
     }
