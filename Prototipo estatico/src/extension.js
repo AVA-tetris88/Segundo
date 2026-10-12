@@ -75,9 +75,10 @@ async function cargarProfesorActual() {
 }
 
 function limpiarFormulario() {
-    inpFecha.value = "";
     let Campos = document.querySelectorAll("input, select, textarea");
     Campos.forEach(campo => campo.value = "");
+    cargarInpNombreProfesor();
+    cargarProfesorActual();
 }
 
 //   ______    ______    ______    __  __    ______    __   __    ______    __    ______    
@@ -85,9 +86,10 @@ function limpiarFormulario() {
 //  \ \___  \ \ \  __\  \ \ \____ \ \ \_\ \ \ \  __\  \ \ \-.  \ \ \ \____ \ \ \ \ \  __ \  
 //   \/\_____\ \ \_____\ \ \_____\ \ \_____\ \ \_____\ \ \_\\"\_\ \ \_____\ \ \_\ \ \_\ \_\ 
 //    \/_____/  \/_____/  \/_____/  \/_____/  \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_/\/_/ 
-cargarInpNombreProfesor();
 
 frmRegistrarActividad.addEventListener("submit", async function(e) {
     e.preventDefault();
     await registrarExtension(inpNombreProfesor.value,inpTipoActividad.value,inpNombreActividad.value,inpTituloParticipacion.value,inpFecha.value,inpLugar.value,inpTipoParticipacion.value,inpOrganizadores.value,inpOtraInfo.value);
 })
+
+limpiarFormulario();
