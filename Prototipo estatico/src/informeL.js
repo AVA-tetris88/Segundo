@@ -20,7 +20,7 @@ async function verActividadesExtension() {
     else {
         console.log('Datos de extensión:', data);
         data.forEach(act => {
-            tblDesglose.innerHTML = 
+            tblDesglose.innerHTML = tblDesglose.innerHTML +
             `<tr>
             <td>${act.nombre_profesor}</td>
             <td>${act.tipo_actividad}</td>

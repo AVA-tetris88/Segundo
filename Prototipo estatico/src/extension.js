@@ -29,7 +29,10 @@ async function registrarExtension(nProfesor, tActividad, nActividad, tituloP, fe
     ])
     .select();
     if (error) console.error('Error al insertar extension:', error.message);
-    else console.log('Nuevo registro de extension:', data);    
+    else {
+        console.log('Nuevo registro de extension:', data)
+        limpiarFormulario();
+    };    
 }
 
 async function cargarNombreUsuario() {
@@ -68,6 +71,5 @@ cargarNombreUsuario();
 frmRegistrarActividad.addEventListener("submit", async function(e) {
     e.preventDefault();
     await registrarExtension(inpNombreProfesor.value,inpTipoActividad.value,inpNombreActividad.value,inpTituloParticipacion.value,inpFecha.value,inpLugar.value,inpTipoParticipacion.value,inpOrganizadores.value,inpOtraInfo.value);
-    limpiarFormulario();
 })
 
