@@ -37,7 +37,7 @@ async function registrarExtension(nProfesor, tActividad, nActividad, tituloP, fe
 
 //Carga todos los nombres de los profesores en el campo 'Nombre del profesor'
 async function cargarInpNombreProfesor() {
-    const { data, error} = await _supabase
+    const {data, error} = await _supabase
         .from('perfiles')
         .select('nombre')
         .eq('tipo','Profesor')

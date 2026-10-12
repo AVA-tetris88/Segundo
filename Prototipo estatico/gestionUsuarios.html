@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de usuarios</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase.js" defer></script>
+    <script src="src/gestionU.js" defer></script>
+</head>
+<body>
+    <main>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Tipo</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody id="tblUsuarios">
+            </tbody>
+        </table>
+        <section>
+            <button>Agregar un nuevo usuario</button>
+        </section>
+    </main>
+</body>
+</html>
