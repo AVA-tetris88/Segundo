@@ -4,6 +4,8 @@
 //   \ \__|   \ \_\ \_\ \ \_\ \_\ \ \_\ \ \_\ \_\ \ \_____\ \ \_____\ \ \_____\ \/\_____\ 
 //    \/_/     \/_/\/_/  \/_/ /_/  \/_/  \/_/\/_/  \/_____/  \/_____/  \/_____/  \/_____/
 
+const { act } = require("react");
+
 const pDesglose = document.getElementById("desglose");
 const btnVer = document.querySelector("#Ver");
 //   ______   __  __    __   __    ______    __    ______    __   __    ______    ______    
@@ -17,11 +19,17 @@ async function verExt() {
     .from('actividades_de_extension')
     .select('*');
 
-  if (error) console.error('Error:', error.message);
-  else {
-    console.log('Datos de extensión:', data);
-    pDesglose.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
-  }
+    if (error) console.error('Error:', error.message);
+    else {
+        console.log('Datos de extensión:', data);
+        data.forEach(act => {
+            pDesglose.innerHTML = 
+            `<tr>
+            <td>${act.nombre_profesor}</td>
+            </tr>`;
+        });
+        
+    }
 }
 
 //   ______    ______    ______    __  __    ______    __   __    ______    __    ______    
