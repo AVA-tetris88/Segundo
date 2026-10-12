@@ -45,15 +45,26 @@ async function cargarInpNombreProfesor() {
     const { data, error} = await _supabase
         .from('perfiles')
         .select('nombre')
+        .eq('tipo','Profesor')
 
     if (error) {
-        console.error("Error al obtener perfil:", error.message);
+        console.error("Error al cargar el campo: Nombre del profesor:", error.message);
         return;
     }
     else{
         data.forEach(per => {
             inpNombreProfesor.innerHTML = inpNombreProfesor.innerHTML + `<option value="${per.nombre}">${per.nombre}</option>`
         });
+        const { usu, err} = await _supabase
+        .from('perfiles')
+        .select('nombre')
+        .eq('id', user.id)
+
+        if (err) {
+        console.error("Error al obtener perfil:", error.message);
+        return;
+        }
+        else inpNombreProfesor.value = usu.nombre;
     }
 }
 
