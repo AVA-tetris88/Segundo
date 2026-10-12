@@ -20,7 +20,7 @@ async function verActividadesExtension() {
     else {
         console.log('Datos de extensión:', data);
         data.forEach(act => {
-            pDesglose.innerHTML = 
+            tblDesglose.innerHTML = 
             `<tr>
             <td>${act.nombre_profesor}</td>
             <td>${act.tipo_actividad}</td>
@@ -42,7 +42,4 @@ async function verActividadesExtension() {
 //   \/\_____\ \ \_____\ \ \_____\ \ \_____\ \ \_____\ \ \_\\"\_\ \ \_____\ \ \_\ \ \_\ \_\ 
 //    \/_____/  \/_____/  \/_____/  \/_____/  \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_/\/_/ 
 
-btnVer.addEventListener("click", async function(e) {
-    e.preventDefault();
-    await verExt();
-})
+verActividadesExtension();
