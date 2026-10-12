@@ -54,7 +54,4 @@ async function verificarAdministrador() {
 //   \/\_____\ \ \_____\ \ \_____\ \ \_____\ \ \_____\ \ \_\\"\_\ \ \_____\ \ \_\ \ \_\ \_\ 
 //    \/_____/  \/_____/  \/_____/  \/_____/  \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_/\/_/ 
 
-btnActualizarNombre.addEventListener("click", async function(e) {
-    e.preventDefault();
-    await actualizarNombre(inpNuevoNombre.value);
-})
+verificarAdministrador();
