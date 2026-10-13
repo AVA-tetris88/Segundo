@@ -46,6 +46,7 @@ function mostrarModal(actividad){
     switch (actividad) {
         case 'Ext':
             h1Act.innerHTML = "Actividad de extensión";
+            divModal.style.visibility = "visible";
             btnRegistrarAtc.setAttribute("onclick","clicRegistrar('Ext')")
             btnVerAct.setAttribute("onclick","clicVer('')")
             break;
