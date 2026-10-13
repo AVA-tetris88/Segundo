@@ -10,7 +10,6 @@ const divModal = document.querySelector("#modalAct");
 const h1Act = document.getElementById("h1Act");
 const btnRegistrarAtc = document.getElementById("Registrar");
 const btnVerAct = document.getElementById("VerAct");
-const qe = document.getElementById("qe");
 
 //   ______   __  __    __   __    ______    __    ______    __   __    ______    ______    
 //  /\  ___\ /\ \/\ \  /\ "-.\ \  /\  ___\  /\ \  /\  __ \  /\ "-.\ \  /\  ___\  /\  ___\   
@@ -44,7 +43,6 @@ async function verActividadesExtension() {
 }
 
 function mostrarModal(actividad){
-    qe.innerHTML = `<pollofrito>jode la panza di</pollofrito>`;
     switch (actividad) {
         case 'Ext':
             h1Act.innerHTML = "Actividad de extensión";
