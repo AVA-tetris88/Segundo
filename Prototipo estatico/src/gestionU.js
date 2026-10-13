@@ -50,26 +50,26 @@ async function agregarUsuarios(nombre, correo, contra, tipo) {
     if (error) console.error('Error:', error.message);
     else{
         console.log('Usuario registrado con nombre:', data.user);
-        limpiarFormulario(tipo);
+        agregarTipo(tipo,data.user.id)
+        limpiarFormulario();
     }
 }
 
-async function agregarTipo(tipo) {
+async function agregarTipo(tipo, id) {
     const {data, error} = await _supabase
         .from('perfiles')
-        .update({nombre: 'admin '+tipo})
-        .eq('tipo', 'Administrador')
+        .update({tipo:tipo})
+        .eq('id', id)
         .select();
 
     if(error) console.error('Error al crear tipo:', error.message)
     else console.log('Usuario completado:', data);
 }
 
-function limpiarFormulario(tipo){
+function limpiarFormulario(){
     let Campos = document.querySelectorAll("input, select");
     Campos.forEach(campo => campo.value = "");
     tblUsuarios.innerHTML = "";
-    agregarTipo(tipo);
     cargarUsuarios();
 }
 //   ______    ______    ______    __  __    ______    __   __    ______    __    ______    
