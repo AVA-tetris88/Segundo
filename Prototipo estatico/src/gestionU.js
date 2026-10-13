@@ -59,7 +59,7 @@ async function agregarTipo(tipo) {
     const {data, error} = await _supabase
         .from('perfiles')
         .update({tipo: tipo})
-        .eq('tipo', '')
+        .eq('tipo', 'NULO')
         .select();
 
     if(error) console.error('Error al crear tipo:', error.message)
