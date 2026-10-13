@@ -74,6 +74,6 @@ async function agregarTipo(tipo) {
 cargarUsuarios();
 
 frmAgregarUsuarios.addEventListener("submit", async function(e) {
-    e.preventDefault
+    e.preventDefault();
     await agregarUsuarios(inpNombre.value, inpCorreo.value, inpContrasenna.value, inpTipo.value);
 })
