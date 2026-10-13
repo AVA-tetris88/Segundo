@@ -24,7 +24,6 @@ async function cargarUsuarios(){
 
     if(error) console.error('Error:', error.message);
     else{
-        tblUsuarios.innerHTML = "";
         console.log(data);
         data.forEach(usu => {
            tblUsuarios.innerHTML = tblUsuarios.innerHTML + 
@@ -52,7 +51,7 @@ async function agregarUsuarios(nombre, correo, contra, tipo) {
     else{
         console.log('Usuario registrado con nombre:', data.user);
         agregarTipo(tipo);
-        cargarUsuarios();
+        limpiarFormulario();
     }
 }
 
@@ -65,6 +64,13 @@ async function agregarTipo(tipo) {
 
     if(error) console.error('Error al crear tipo:', error.message)
     else console.log('Usuario completado:', data);
+}
+
+function limpiarFormulario(){
+    let Campos = document.querySelectorAll("input, select");
+    Campos.forEach(campo => campo.value = "");
+    tblUsuarios.innerHTML = "";
+    cargarUsuarios();
 }
 //   ______    ______    ______    __  __    ______    __   __    ______    __    ______    
 //  /\  ___\  /\  ___\  /\  ___\  /\ \/\ \  /\  ___\  /\ "-.\ \  /\  ___\  /\ \  /\  __ \   
