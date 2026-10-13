@@ -41,10 +41,7 @@ async function verificarAdministrador() {
         return;
     }
     else{
-        if(data[0].tipo == "Administrador"){
-            btnGestionUsuarios.style.visibility = 'visible';
-        }
-        else btnGestionUsuarios.style.visibility = 'hidden';
+        if(data[0].tipo == "Administrador") btnGestionUsuarios.style.visibility = 'visible';
     }
 }
 
