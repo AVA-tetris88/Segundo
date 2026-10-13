@@ -47,9 +47,9 @@ async function agregarUsuarios(nombre, correo, contra, tipo) {
         }
         }
   });
-    if (error) console.error('Error:', error.message);
+    if (error) alert('Error: '+ error.message);
     else{
-        console.log('Usuario registrado con nombre:', data.user);
+        alert('Usuario registrado con nombre: '+ data.user);
         agregarTipo(tipo);
         cargarUsuarios();
     }
