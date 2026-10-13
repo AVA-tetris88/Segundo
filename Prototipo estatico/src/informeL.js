@@ -6,7 +6,7 @@
 
 const tblDesglose = document.getElementById("tblDesglose");
 const btnActividad = document.querySelector(".btnActividad");
-const divModal = document.getElementById("modalAct");
+const divModal = document.querySelector(".modalAct");
 const h1Act = document.getElementById("h1Act");
 const btnRegistrarAtc = document.getElementById("Registrar");
 const btnVerAct = document.getElementById("VerAct");
