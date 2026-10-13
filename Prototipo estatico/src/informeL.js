@@ -57,7 +57,7 @@ function mostrarModal(actividad){
     };
 }
 
-function clicRegistar(actividad){
+function clicRegistrar(actividad){
     switch (actividad) {
         case 'Ext':
             window.location.href = "./extension.html"
