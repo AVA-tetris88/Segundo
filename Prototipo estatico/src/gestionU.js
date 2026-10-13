@@ -31,7 +31,6 @@ async function cargarUsuarios(){
             <td>${usu.id}</td>
             <td>${usu.nombre}</td>
             <td>${usu.correo}</td>
-            <td>${usu.password}</td>
             <td>${usu.tipo}</td>
             </tr>` 
         });
