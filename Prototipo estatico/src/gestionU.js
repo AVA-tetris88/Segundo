@@ -43,27 +43,16 @@ async function agregarUsuarios(nombre, correo, contra, tipo) {
         password: contra,
         options: {
         data: {
-            display_name: nombre
+            display_name: nombre,
+            tipo: tipo
         }
         }
   });
     if (error) console.error('Error:', error.message);
     else{
         console.log('Usuario registrado con nombre:', data.user);
-        agregarTipo(tipo,data.user.id)
         limpiarFormulario();
     }
-}
-
-async function agregarTipo(tipo, id) {
-    const {data, error} = await _supabase
-        .from('perfiles')
-        .update({tipo:tipo})
-        .eq('id', id)
-        .select();
-
-    if(error) console.error('Error al crear tipo:', error.message)
-    else console.log('Usuario completado:', data);
 }
 
 function limpiarFormulario(){
