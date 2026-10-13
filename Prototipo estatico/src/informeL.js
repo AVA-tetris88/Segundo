@@ -5,7 +5,11 @@
 //    \/_/     \/_/\/_/  \/_/ /_/  \/_/  \/_/\/_/  \/_____/  \/_____/  \/_____/  \/_____/
 
 const tblDesglose = document.getElementById("tblDesglose");
-const btnActividad = document.querySelectorAll(".btnActividad");
+const btnActividad = document.querySelector(".btnActividad");
+const divModal = document.getElementById("modalAtc");
+const h1Act = document.getElementById("h1Act");
+const btnRegistrarAtc = document.getElementById("Registrar");
+const btnVerAct = document.getElementById("VerAct");
 
 //   ______   __  __    __   __    ______    __    ______    __   __    ______    ______    
 //  /\  ___\ /\ \/\ \  /\ "-.\ \  /\  ___\  /\ \  /\  __ \  /\ "-.\ \  /\  ___\  /\  ___\   
@@ -39,8 +43,33 @@ async function verActividadesExtension() {
 }
 
 function mostrarModal(actividad){
-    
+    switch (actividad) {
+        case 'Ext':
+            h1Act.innerHTML = "Actividad de extensión";
+            btnRegistrarAtc.setAttribute("onclick","clicRegistrar('Ext')")
+            btnVerAct.setAttribute("onclick","clicVer('')")
+            break;
+        case 'Inv':
+            break;
+        default:
+            break;
+    };
 }
+
+function clicRegistar(actividad){
+    switch (actividad) {
+        case 'Ext':
+            window.location.href = "./extension.html"
+            break;
+        default:
+            break;
+    }
+}
+
+function clicVer(){
+    window.location.href = "./reporteriaInformeL"
+}
+
 //   ______    ______    ______    __  __    ______    __   __    ______    __    ______    
 //  /\  ___\  /\  ___\  /\  ___\  /\ \/\ \  /\  ___\  /\ "-.\ \  /\  ___\  /\ \  /\  __ \   
 //  \ \___  \ \ \  __\  \ \ \____ \ \ \_\ \ \ \  __\  \ \ \-.  \ \ \ \____ \ \ \ \ \  __ \  
@@ -48,3 +77,7 @@ function mostrarModal(actividad){
 //    \/_____/  \/_____/  \/_____/  \/_____/  \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_/\/_/ 
 
 verActividadesExtension();
+
+btnActividad.addEventListener("click", function() {
+    mostrarModal(btnActividad.innerHTML);
+})
