@@ -24,6 +24,7 @@ async function cargarUsuarios(){
 
     if(error) console.error('Error:', error.message);
     else{
+        tblUsuarios.innerHTML = "";
         console.log(data);
         data.forEach(usu => {
            tblUsuarios.innerHTML = tblUsuarios.innerHTML + 
@@ -47,9 +48,9 @@ async function agregarUsuarios(nombre, correo, contra, tipo) {
         }
         }
   });
-    if (error) alert('Error: '+ error.message);
+    if (error) console.error('Error:', error.message);
     else{
-        alert('Usuario registrado con nombre: '+ data.user);
+        console.log('Usuario registrado con nombre:', data.user);
         agregarTipo(tipo);
         cargarUsuarios();
     }
