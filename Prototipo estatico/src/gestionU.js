@@ -50,8 +50,7 @@ async function agregarUsuarios(nombre, correo, contra, tipo) {
     if (error) console.error('Error:', error.message);
     else{
         console.log('Usuario registrado con nombre:', data.user);
-        agregarTipo(tipo);
-        limpiarFormulario();
+        limpiarFormulario(tipo);
     }
 }
 
@@ -66,10 +65,11 @@ async function agregarTipo(tipo) {
     else console.log('Usuario completado:', data);
 }
 
-function limpiarFormulario(){
+function limpiarFormulario(tipo){
     let Campos = document.querySelectorAll("input, select");
     Campos.forEach(campo => campo.value = "");
     tblUsuarios.innerHTML = "";
+    agregarTipo(tipo);
     cargarUsuarios();
 }
 //   ______    ______    ______    __  __    ______    __   __    ______    __    ______    
