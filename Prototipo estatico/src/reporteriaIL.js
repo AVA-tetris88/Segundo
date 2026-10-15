@@ -15,7 +15,25 @@ const sctFiltros = document.getElementById("filtros");
 //   \ \_\    \ \_____\ \ \_\\"\_\ \ \_____\ \ \_\ \ \_____\ \ \_\\"\_\ \ \_____\ \/\_____\ 
 //    \/_/     \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_____/  \/_/ \/_/  \/_____/  \/_____/ 
 
-function cargarActividad(datos, actividad) {
+async function cargarActividad(datos, actividad) {
+    const {data, error} = await _supabase
+        .from('perfiles')
+        .select('nombre')
+        .eq('tipo','Profesor')
+    
+    if(error)console.error('Error al cargar los profes:',error)
+    else{
+        let opProfesores = ``;
+        let opTipoA = ``;
+        let opTituloP = ``;
+        let opTipoP = ``;
+        data.forEach(prof => {
+            opProfesores = opProfesores + `<option value="${prof.nombre}">${prof.nom}</option>` 
+        });
+        opTipoA = `<option value="Charla">Charla</option><option value="Proyecto">Proyecto</option><option value="Seminario">Seminario</option>`
+        opTituloP = `<option value="Ponente">Ponente</option><option value="Asistente">Asistente</option>`
+        opTipoP = `<option value="Ponente">Ponente</option><option value="Charlista">Charlista</option>`
+    }
     switch (actividad) {
         case 'actividades_de_extension':
             tblCabeza.innerHTML = 
@@ -31,19 +49,19 @@ function cargarActividad(datos, actividad) {
 
             sctFiltros.innerHTML = sctFiltros.innerHTML +
             `<label for="nProfesor">Nombre del profesor:</label>
-            <select name="nombre" class="inpFiltro" id="nProfesor" onchange="cargarFiltro('nombre_profesor',0)"></select>
+            <select name="nombre" class="inpFiltro" id="nProfesor" onchange="cargarFiltro('nombre_profesor',0)">${opProfesores}</select>
             <label for="nActividad">Nombre de la actividad:</label>
             <input type="text" name="nActividad" class="inpFiltro" id="nActividad" onchange="cargarFiltro('nombre_actividad',1)">
             <label for="tipo">Tipo de actividad:</label>
-            <select name="tipo" class="inpFiltro" id="tipo" onchange="cargarFiltro('tipo',2)"></select>
+            <select name="tipo" class="inpFiltro" id="tipo" onchange="cargarFiltro('tipo',2)">${opTipoA}</select>
             <label for="tituloP">Título de la participación:</label>
-            <select name="tituloP" class="inpFiltro" id="tituloP" onchange="cargarFiltro('titulo_participacion',3)"></select>
+            <select name="tituloP" class="inpFiltro" id="tituloP" onchange="cargarFiltro('titulo_participacion',3)">${opTituloP}</select>
             <label for="fecha">Fecha:</label>
             <input type="date" name="fecha" class="inpFiltro"id="fecha" onchange="cargarFiltro('fecha',4)">
             <label for="lugar">Lugar:</label>
             <input type="text" name="lugar" class="inpFiltro" id="lugar" onchange="cargarFiltro('lugar',5)">
             <label for="tipoP">Tipo de participación:</label>
-            <select name="tipoP" class="inpFiltro" id="tipoP" onchange="cargarFiltro('tipo_participacion',6)"></select>
+            <select name="tipoP" class="inpFiltro" id="tipoP" onchange="cargarFiltro('tipo_participacion',6)">${opTipoP}</select>
             <label for="organizadores">Organizador(es):</label>
             <input type="text" name="organizadores" class="inpFiltro" id="organizadores" onchange="cargarFiltro('organizadores',7)">
             <label for="otraInfo">Otra información:</label>
@@ -67,24 +85,6 @@ function cargarActividad(datos, actividad) {
     
         default:
             break;
-    }
-}
-
-async function cargarCampos() {
-    const inpFiltro = document.querySelectorAll(".inpFiltro");
-    const {data, error} = await _supabase
-        .from('perfiles')
-        .select('nombre')
-        .eq('tipo','Profesor')
-    
-    if(error)console.error('Error al cargar los profes:',error)
-    else{
-        data.forEach(prof => {
-            inpFiltro[0].innerHTML = inpFiltro[0].innerHTML + `<option value="${prof.nombre}">${prof.nom}</option>` 
-        });
-        inpFiltro[2].innerHTML = `<option value="Charla">Charla</option><option value="Proyecto">Proyecto</option><option value="Seminario">Seminario</option>`
-        inpFiltro[3].innerHTML = `<option value="Ponente">Ponente</option><option value="Asistente">Asistente</option>`
-        inpFiltro[6].innerHTML = `<option value="Ponente">Ponente</option><option value="Charlista">Charlista</option>`
     }
 }
 
