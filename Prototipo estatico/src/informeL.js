@@ -42,7 +42,14 @@ function clicRegistrar(actividad){
 }
 
 function clicVer(actividad){
-    sessionStorage.setItem('actividad', actividad);
+    switch (actividad) {
+        case 'Ext':
+            sessionStorage.setItem('actividad', 'actividades_de_extension');
+            break;
+    
+        default:
+            break;
+    }
     window.location.href = "./reporteriaInformeL"
 }
 
@@ -51,8 +58,6 @@ function clicVer(actividad){
 //  \ \___  \ \ \  __\  \ \ \____ \ \ \_\ \ \ \  __\  \ \ \-.  \ \ \ \____ \ \ \ \ \  __ \  
 //   \/\_____\ \ \_____\ \ \_____\ \ \_____\ \ \_____\ \ \_\\"\_\ \ \_____\ \ \_\ \ \_\ \_\ 
 //    \/_____/  \/_____/  \/_____/  \/_____/  \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_/\/_/ 
-
-verActividadesExtension();
 
 btnActividad.addEventListener("click", function() {
     mostrarModal(btnActividad.innerHTML);
