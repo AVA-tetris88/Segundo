@@ -30,7 +30,7 @@ async function cargarActividad(datos, actividad) {
                 let opTituloP = ``;
                 let opTipoP = ``;
                 data.forEach(prof => {
-                    opProfesores = opProfesores + `<option value="${prof.nombre}">${prof.nom}</option>` 
+                    opProfesores = opProfesores + `<option value="${prof.nombre}">${prof.nombre}</option>` 
                 });
                 opTipoA = `<option value="Charla">Charla</option><option value="Proyecto">Proyecto</option><option value="Seminario">Seminario</option>`
                 opTituloP = `<option value="Ponente">Ponente</option><option value="Asistente">Asistente</option>`
@@ -95,7 +95,7 @@ async function cargarFiltro(filtro, inp) {
         .from(inpMostrarActividad.value)
         .select('*')
         .eq(filtro, inpFiltro[inp].value)
-
+    
     if(error) console.error('Error al aplicar el filtro');
     else cargarActividad(data, inpMostrarActividad.value);
 }
@@ -107,10 +107,11 @@ async function cargarMostrarActividad(actividad) {
 
     if(error) console.error('Error al cargar los datos:',error);
     else{
-        cargarActividad(data, actividad);
         inpMostrarActividad.value = actividad;
+        cargarActividad(data, actividad);
     }
 }
+
 //   ______    ______    ______    __  __    ______    __   __    ______    __    ______    
 //  /\  ___\  /\  ___\  /\  ___\  /\ \/\ \  /\  ___\  /\ "-.\ \  /\  ___\  /\ \  /\  __ \   
 //  \ \___  \ \ \  __\  \ \ \____ \ \ \_\ \ \ \  __\  \ \ \-.  \ \ \ \____ \ \ \ \ \  __ \  

@@ -62,7 +62,7 @@ async function cargarProfesorActual() {
         return;
     }
 
-    const { data, error} = await _supabase
+    const {data, error} = await _supabase
         .from('perfiles')
         .select('nombre')
         .eq('id', user.id)
