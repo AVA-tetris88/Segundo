@@ -5,20 +5,17 @@
 //    \/_/     \/_/\/_/  \/_/ /_/  \/_/  \/_/\/_/  \/_____/  \/_____/  \/_____/  \/_____/
 
 const inpMostrarActividad = document.getElementById("actividad");
-const inpFiltro = document.querySelectorAll(".inpFiltro");
 const tblCabeza = document.getElementById("tblCabeza");
 const tblCuerpo = document.getElementById("tblCuerpo");
 const sctFiltros = document.getElementById("filtros");
 
-console.log(inpFiltro);
-console.log(inpFiltro[1]);
 //   ______   __  __    __   __    ______    __    ______    __   __    ______    ______    
 //  /\  ___\ /\ \/\ \  /\ "-.\ \  /\  ___\  /\ \  /\  __ \  /\ "-.\ \  /\  ___\  /\  ___\   
 //  \ \  __\ \ \ \_\ \ \ \ \-.  \ \ \ \____ \ \ \ \ \ \/\ \ \ \ \-.  \ \ \  __\  \ \___  \  
 //   \ \_\    \ \_____\ \ \_\\"\_\ \ \_____\ \ \_\ \ \_____\ \ \_\\"\_\ \ \_____\ \/\_____\ 
 //    \/_/     \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_____/  \/_/ \/_/  \/_____/  \/_____/ 
 
-function cargarActividad(data, actividad) {
+function cargarActividad(datos, actividad) {
     switch (actividad) {
         case 'actividades_de_extension':
             tblCabeza.innerHTML = 
@@ -52,7 +49,7 @@ function cargarActividad(data, actividad) {
             <label for="otraInfo">Otra información:</label>
             <input type="text" name="otraInfo" class="inpFiltro">`
 
-            data.forEach(inf => {
+            datos.forEach(inf => {
                 tblCuerpo.innerHTML = tblCuerpo.innerHTML + 
                 `<tr>
                 <td>${inf.nombre_profesor}</td>
@@ -73,26 +70,37 @@ function cargarActividad(data, actividad) {
     }
 }
 
-
 async function cargarFiltro(filtro, inp) {
+    const inpFiltro = document.querySelectorAll('.inpFiltro');
     const {data, error} = await _supabase
-    .from('perfiles')
+    .from(inpMostrarActividad.value)
     .select('*')
     .eq(filtro, inpFiltro[inp].value)
 
-    if(error) console.error('Error al aplicar el filtro')
-    else cargarActividad(data, inpMostrarActividad.value)
+    if(error) console.error('Error al aplicar el filtro');
+    else cargarActividad(data, inpMostrarActividad.value);
 }
 
+async function cargarMostrarActividad(actividad) {
+    const {data, error} = await _supabase
+    .from(actividad)
+    .select('*')
+
+    if(error) console.error('Error al cargar los datos:',error);
+    else{
+        cargarActividad(data, actividad);
+        inpMostrarActividad.value = actividad;
+    }
+}
 //   ______    ______    ______    __  __    ______    __   __    ______    __    ______    
 //  /\  ___\  /\  ___\  /\  ___\  /\ \/\ \  /\  ___\  /\ "-.\ \  /\  ___\  /\ \  /\  __ \   
 //  \ \___  \ \ \  __\  \ \ \____ \ \ \_\ \ \ \  __\  \ \ \-.  \ \ \ \____ \ \ \ \ \  __ \  
 //   \/\_____\ \ \_____\ \ \_____\ \ \_____\ \ \_____\ \ \_\\"\_\ \ \_____\ \ \_\ \ \_\ \_\ 
 //    \/_____/  \/_____/  \/_____/  \/_____/  \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_/\/_/ 
 
-cargarActividad(sessionStorage.getItem('actividad'));
-
 inpMostrarActividad.addEventListener("change", function(e){
     e.preventDefault();
     cargarActividad(inpMostrarActividad.value);
 })
+
+cargarMostrarActividad(sessionStorage.getItem('actividad'));
