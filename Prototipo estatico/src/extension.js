@@ -93,3 +93,5 @@ frmRegistrarActividad.addEventListener("submit", async function(e) {
 })
 
 limpiarFormulario();
+
+window._cargarNombreProfesor = cargarInpNombreProfesor();

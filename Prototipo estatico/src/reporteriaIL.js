@@ -68,6 +68,22 @@ function cargarActividad(datos, actividad) {
         default:
             break;
     }
+    cargarCampos();
+}
+
+async function cargarCampos() {
+    const inpFiltro = document.querySelectorAll('.inpFiltro')
+    const {profes, error} = await _supabase
+    .from('perfiles')
+    .select('nombre')
+    .eq('tipo','Profesor')
+    
+    if(error)console.error('Error al cargar los profes:',error)
+    else{
+        profes.forEach(nom =>{
+            inpFiltro[0].innerHTML = inpFiltro[0].innerHTML + `<option value="${nom}">${nom}</option>`
+        });
+    }
 }
 
 async function cargarFiltro(filtro, inp) {
