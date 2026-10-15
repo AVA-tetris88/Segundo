@@ -35,7 +35,6 @@ async function cargarActividad(datos, actividad) {
                 opTipoA = `<option value="Charla">Charla</option><option value="Proyecto">Proyecto</option><option value="Seminario">Seminario</option>`
                 opTituloP = `<option value="Ponente">Ponente</option><option value="Asistente">Asistente</option>`
                 opTipoP = `<option value="Ponente">Ponente</option><option value="Charlista">Charlista</option>`
-
                 tblCabeza.innerHTML = 
                 `<th>Nombre del profesor</th>
                 <th>Tipo de actividad</th>
@@ -47,7 +46,7 @@ async function cargarActividad(datos, actividad) {
                 <th>Organizador(es)</th>
                 <th>Otra información</th>`;
 
-                sctFiltros.innerHTML = sctFiltros.innerHTML +
+                sctFiltros.innerHTML = 
                 `<label for="nProfesor">Nombre del profesor:</label>
                 <select name="nombre" class="inpFiltro" id="nProfesor" onchange="cargarFiltro('nombre_profesor',0)">${opProfesores}</select>
                 <label for="nActividad">Nombre de la actividad:</label>
@@ -67,6 +66,8 @@ async function cargarActividad(datos, actividad) {
                 <label for="otraInfo">Otra información:</label>
                 <input type="text" name="otraInfo" class="inpFiltro" id="otraInfo" onchange="cargarFiltro('comentarios',8)">`
 
+                tblCuerpo.innerHTML = ``;
+                
                 datos.forEach(inf => {
                     tblCuerpo.innerHTML = tblCuerpo.innerHTML + 
                     `<tr>
@@ -125,7 +126,7 @@ function limpiarTodo(){
 //   \/\_____\ \ \_____\ \ \_____\ \ \_____\ \ \_____\ \ \_\\"\_\ \ \_____\ \ \_\ \ \_\ \_\ 
 //    \/_____/  \/_____/  \/_____/  \/_____/  \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_/\/_/ 
 
-inpMostrarActividad.addEventListener("onchange", function(e){
+inpMostrarActividad.addEventListener("change", function(e){
     e.preventDefault();
     sessionStorage.setItem('actividad',inpMostrarActividad.value)
     limpiarTodo();
