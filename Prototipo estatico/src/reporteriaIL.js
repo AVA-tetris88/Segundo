@@ -118,9 +118,10 @@ async function cargarMostrarActividad(actividad) {
 //   \/\_____\ \ \_____\ \ \_____\ \ \_____\ \ \_____\ \ \_\\"\_\ \ \_____\ \ \_\ \ \_\ \_\ 
 //    \/_____/  \/_____/  \/_____/  \/_____/  \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_/\/_/ 
 
-inpMostrarActividad.addEventListener("change", function(e){
+inpMostrarActividad.addEventListener("onchange", function(e){
     e.preventDefault();
-    cargarActividad(inpMostrarActividad.value);
+    sessionStorage.setItem('actividad',inpMostrarActividad.value)
+    cargarMostrarActividad(inpMostrarActividad.value);
 })
 
 cargarMostrarActividad(sessionStorage.getItem('actividad'));
