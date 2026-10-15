@@ -33,21 +33,21 @@ function cargarActividad(datos, actividad) {
             `<label for="nProfesor">Nombre del profesor:</label>
             <select name="nombre" class="inpFiltro" id="nProfesor" onchange="cargarFiltro('nombre_profesor',0)">${cargarCampos(0)}</select>
             <label for="tipo">Tipo de actividad:</label>
-            <select name="tipo" class="inpFiltro" id="tipo" onchange="cargarFiltro('tipo',1)>${cargarCampos(1)}</select>
+            <select name="tipo" class="inpFiltro" id="tipo" onchange="cargarFiltro('tipo',1)"></select>
             <label for="nActividad">Nombre de la actividad:</label>
-            <input type="text" name="nActividad" class="inpFiltro" id="nActividad" onchange="cargarFiltro('nombre_actividad',2)>
+            <input type="text" name="nActividad" class="inpFiltro" id="nActividad" onchange="cargarFiltro('nombre_actividad',2)">
             <label for="tituloP">Título de la participación:</label>
-            <select name="tituloP" class="inpFiltro" id="tituloP" onchange="cargarFiltro('titulo_participacion',3)>${cargarCampos(2)}</select>
+            <select name="tituloP" class="inpFiltro" id="tituloP" onchange="cargarFiltro('titulo_participacion',3)">${cargarCampos(2)}</select>
             <label for="fecha">Fecha:</label>
-            <input type="date" name="fecha" class="inpFiltro"id="fecha" onchange="cargarFiltro('fecha',4)>
+            <input type="date" name="fecha" class="inpFiltro"id="fecha" onchange="cargarFiltro('fecha',4)">
             <label for="lugar">Lugar:</label>
-            <input type="text" name="lugar" class="inpFiltro" id="lugar" onchange="cargarFiltro('lugar',5)>
+            <input type="text" name="lugar" class="inpFiltro" id="lugar" onchange="cargarFiltro('lugar',5)">
             <label for="tipoP">Tipo de participación:</label>
-            <select name="tipoP" class="inpFiltro" id="tipoP" onchange="cargarFiltro('tipo_participacion',6)>${cargarCampos(3)}</select>
+            <select name="tipoP" class="inpFiltro" id="tipoP" onchange="cargarFiltro('tipo_participacion',6)">${cargarCampos(3)}</select>
             <label for="organizadores">Organizador(es):</label>
-            <input type="text" name="organizadores" class="inpFiltro" id="organizadores" onchange="cargarFiltro('organizadores',7)>
+            <input type="text" name="organizadores" class="inpFiltro" id="organizadores" onchange="cargarFiltro('organizadores',7)">
             <label for="otraInfo">Otra información:</label>
-            <input type="text" name="otraInfo" class="inpFiltro" id="otraInfo" onchange="cargarFiltro('comentarios',8)>`
+            <input type="text" name="otraInfo" class="inpFiltro" id="otraInfo" onchange="cargarFiltro('comentarios',8)">`
 
             datos.forEach(inf => {
                 tblCuerpo.innerHTML = tblCuerpo.innerHTML + 
