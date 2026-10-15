@@ -5,55 +5,83 @@
 //    \/_/     \/_/\/_/  \/_/ /_/  \/_/  \/_/\/_/  \/_____/  \/_____/  \/_____/  \/_____/
 
 const inpMostrarActividad = document.getElementById("actividad");
+const inpFiltro = document.querySelectorAll(".inpFiltro");
 const tblCabeza = document.getElementById("tblCabeza");
 const tblCuerpo = document.getElementById("tblCuerpo");
+const sctFiltros = document.getElementById("filtros");
 
+console.log(inpFiltro);
+console.log(inpFiltro[1]);
 //   ______   __  __    __   __    ______    __    ______    __   __    ______    ______    
 //  /\  ___\ /\ \/\ \  /\ "-.\ \  /\  ___\  /\ \  /\  __ \  /\ "-.\ \  /\  ___\  /\  ___\   
 //  \ \  __\ \ \ \_\ \ \ \ \-.  \ \ \ \____ \ \ \ \ \ \/\ \ \ \ \-.  \ \ \  __\  \ \___  \  
 //   \ \_\    \ \_____\ \ \_\\"\_\ \ \_____\ \ \_\ \ \_____\ \ \_\\"\_\ \ \_____\ \/\_____\ 
 //    \/_/     \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_____/  \/_/ \/_/  \/_____/  \/_____/ 
 
-async function cargarActividad(actividad) {
-    const {data, error} = await _supabase
-    .from(actividad)
-    .select('*')
+function cargarActividad(data, actividad) {
+    switch (actividad) {
+        case 'actividades_de_extension':
+            tblCabeza.innerHTML = 
+            `<th>Nombre del profesor</th>
+            <th>Tipo de actividad</th>
+            <th>Nombre de la actividad</th>
+            <th>Título de participación</th>
+            <th>Fecha</th>
+            <th>Lugar</th>
+            <th>Tipo de participación</th>
+            <th>Organizador(es)</th>
+            <th>Otra información</th>`;
 
-    if(error) console.error('Error al cargar la actividad:', error)
-    else{
-        switch (actividad) {
-            case 'actividades_de_extension':
-                tblCabeza.innerHTML = 
-                `<th>Nombre del profesor</th>
-                <th>Tipo de actividad</th>
-                <th>Nombre de la actividad</th>
-                <th>Título de participación</th>
-                <th>Fecha</th>
-                <th>Lugar</th>
-                <th>Tipo de participación</th>
-                <th>Organizador(es)</th>
-                <th>Otra información</th>`;
+            sctFiltros.innerHTML = sctFiltros.innerHTML +
+            `<label for="nProfesor">Nombre del profesor:</label>
+            <select name="nombre" class="inpFiltro" id="nProfesor" onchange="cargarFiltro('nombre_profesor',0)"></select>
+            <label for="tipo">Tipo de actividad:</label>
+            <select name="tipo" class="inpFiltro" id="tipo"></select>
+            <label for="nActividad">Nombre de la actividad:</label>
+            <input type="text" name="nActividad" class="inpFiltro">
+            <label for="tituloP">Título de la participación:</label>
+            <select name="tituloP" class="inpFiltro" id="tituloP"></select>
+            <label for="fecha">Fecha:</label>
+            <input type="date" name="fecha" class="inpFiltro">
+            <label for="lugar">Lugar:</label>
+            <input type="text" name="lugar" class="inpFiltro">
+            <label for="tipoP">Tipo de participación:</label>
+            <select name="tipoP" class="inpFiltro" id="tipoP"></select>
+            <label for="organizadores">Organizador(es):</label>
+            <input type="text" name="organizadores" class="inpFiltro">
+            <label for="otraInfo">Otra información:</label>
+            <input type="text" name="otraInfo" class="inpFiltro">`
 
-                data.forEach(inf => {
-                    tblCuerpo.innerHTML = tblCuerpo.innerHTML + 
-                    `<tr>
-                    <td>${inf.nombre_profesor}</td>
-                    <td>${inf.tipo_actividad}</td>
-                    <td>${inf.nombre_actividad}</td>
-                    <td>${inf.titulo_participacion}</td>
-                    <td>${inf.fecha}</td>
-                    <td>${inf.lugar}</td>
-                    <td>${inf.tipo_participacion}</td>
-                    <td>${inf.organizadores}</td>
-                    <td>${inf.comentarios}</td>
-                    </tr>`;
-                });
-                break;
-        
-            default:
-                break;
-        }
+            data.forEach(inf => {
+                tblCuerpo.innerHTML = tblCuerpo.innerHTML + 
+                `<tr>
+                <td>${inf.nombre_profesor}</td>
+                <td>${inf.tipo_actividad}</td>
+                <td>${inf.nombre_actividad}</td>
+                <td>${inf.titulo_participacion}</td>
+                <td>${inf.fecha}</td>
+                <td>${inf.lugar}</td>
+                <td>${inf.tipo_participacion}</td>
+                <td>${inf.organizadores}</td>
+                <td>${inf.comentarios}</td>
+                </tr>`;
+            });
+            break;
+    
+        default:
+            break;
     }
+}
+
+
+async function cargarFiltro(filtro, inp) {
+    const {data, error} = await _supabase
+    .from('perfiles')
+    .select('*')
+    .eq(filtro, inpFiltro[inp].value)
+
+    if(error) console.error('Error al aplicar el filtro')
+    else cargarActividad(data, inpMostrarActividad.value)
 }
 
 //   ______    ______    ______    __  __    ______    __   __    ______    __    ______    
