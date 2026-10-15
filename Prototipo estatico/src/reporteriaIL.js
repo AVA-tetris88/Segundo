@@ -31,7 +31,7 @@ function cargarActividad(datos, actividad) {
 
             sctFiltros.innerHTML = sctFiltros.innerHTML +
             `<label for="nProfesor">Nombre del profesor:</label>
-            <select name="nombre" class="inpFiltro" id="nProfesor" onchange="cargarFiltro('nombre_profesor',0)">${cargarCampos(0)}select>
+            <select name="nombre" class="inpFiltro" id="nProfesor" onchange="cargarFiltro('nombre_profesor',0)">${cargarCampos(0)}</select>
             <label for="tipo">Tipo de actividad:</label>
             <select name="tipo" class="inpFiltro" id="tipo" onchange="cargarFiltro('tipo',1)>${cargarCampos(1)}</select>
             <label for="nActividad">Nombre de la actividad:</label>
