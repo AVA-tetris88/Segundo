@@ -31,23 +31,23 @@ function cargarActividad(datos, actividad) {
 
             sctFiltros.innerHTML = sctFiltros.innerHTML +
             `<label for="nProfesor">Nombre del profesor:</label>
-            <select name="nombre" class="inpFiltro" id="nProfesor" onchange="cargarFiltro('nombre_profesor',0)"></select>
+            <select name="nombre" class="inpFiltro" id="nProfesor" onchange="cargarFiltro('nombre_profesor',0)">${cargarCampos(0)}select>
             <label for="tipo">Tipo de actividad:</label>
-            <select name="tipo" class="inpFiltro" id="tipo"></select>
+            <select name="tipo" class="inpFiltro" id="tipo" onchange="cargarFiltro('tipo',1)>${cargarCampos(1)}</select>
             <label for="nActividad">Nombre de la actividad:</label>
-            <input type="text" name="nActividad" class="inpFiltro">
+            <input type="text" name="nActividad" class="inpFiltro" id="nActividad" onchange="cargarFiltro('nombre_actividad',2)>
             <label for="tituloP">Título de la participación:</label>
-            <select name="tituloP" class="inpFiltro" id="tituloP"></select>
+            <select name="tituloP" class="inpFiltro" id="tituloP" onchange="cargarFiltro('titulo_participacion',3)>${cargarCampos(2)}</select>
             <label for="fecha">Fecha:</label>
-            <input type="date" name="fecha" class="inpFiltro">
+            <input type="date" name="fecha" class="inpFiltro"id="fecha" onchange="cargarFiltro('fecha',4)>
             <label for="lugar">Lugar:</label>
-            <input type="text" name="lugar" class="inpFiltro">
+            <input type="text" name="lugar" class="inpFiltro" id="lugar" onchange="cargarFiltro('lugar',5)>
             <label for="tipoP">Tipo de participación:</label>
-            <select name="tipoP" class="inpFiltro" id="tipoP"></select>
+            <select name="tipoP" class="inpFiltro" id="tipoP" onchange="cargarFiltro('tipo_participacion',6)>${cargarCampos(3)}</select>
             <label for="organizadores">Organizador(es):</label>
-            <input type="text" name="organizadores" class="inpFiltro">
+            <input type="text" name="organizadores" class="inpFiltro" id="organizadores" onchange="cargarFiltro('organizadores',7)>
             <label for="otraInfo">Otra información:</label>
-            <input type="text" name="otraInfo" class="inpFiltro">`
+            <input type="text" name="otraInfo" class="inpFiltro" id="otraInfo" onchange="cargarFiltro('comentarios',8)>`
 
             datos.forEach(inf => {
                 tblCuerpo.innerHTML = tblCuerpo.innerHTML + 
@@ -71,27 +71,40 @@ function cargarActividad(datos, actividad) {
     cargarCampos();
 }
 
-async function cargarCampos() {
-    const inpFiltro = document.querySelectorAll('.inpFiltro')
-    const {profes, error} = await _supabase
-    .from('perfiles')
-    .select('nombre')
-    .eq('tipo','Profesor')
+async function cargarCampos(op) {
+    const {data, error} = await _supabase
+        .from('perfiles')
+        .select('nombre')
+        .eq('tipo','Profesor')
     
     if(error)console.error('Error al cargar los profes:',error)
     else{
-        profes.forEach(nom =>{
-            inpFiltro[0].innerHTML = inpFiltro[0].innerHTML + `<option value="${nom}">${nom}</option>`
-        });
+        let opciones = ``;
+        switch (op) {
+            case 0:
+                data.forEach(nom =>{
+                    opciones = opciones + `<option value="${nom}">${nom}</option>`;
+                });
+                return opciones;
+            case 1:
+                opciones = `<option value="Charla">Charla</option><option value="Proyecto">Proyecto</option><option value="Seminario">Seminario</option>`
+                return opciones;
+            case 2:
+                opciones = `<option value="Ponente">Ponente</option><option value="Asistente">Asistente</option>`
+                return opciones;
+            case 3:
+                opciones = `<option value="Ponente">Ponente</option><option value="Charlista">Charlista</option>`
+                return opciones;
+        }
     }
 }
 
 async function cargarFiltro(filtro, inp) {
     const inpFiltro = document.querySelectorAll('.inpFiltro');
     const {data, error} = await _supabase
-    .from(inpMostrarActividad.value)
-    .select('*')
-    .eq(filtro, inpFiltro[inp].value)
+        .from(inpMostrarActividad.value)
+        .select('*')
+        .eq(filtro, inpFiltro[inp].value)
 
     if(error) console.error('Error al aplicar el filtro');
     else cargarActividad(data, inpMostrarActividad.value);
@@ -99,8 +112,8 @@ async function cargarFiltro(filtro, inp) {
 
 async function cargarMostrarActividad(actividad) {
     const {data, error} = await _supabase
-    .from(actividad)
-    .select('*')
+        .from(actividad)
+        .select('*')
 
     if(error) console.error('Error al cargar los datos:',error);
     else{
