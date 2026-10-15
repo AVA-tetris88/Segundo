@@ -13,7 +13,7 @@ const inpLugar = document.getElementById("lugar");
 const inpTipoParticipacion = document.getElementById("tipoP");
 const inpOrganizadores = document.getElementById("organizadores");
 const inpOtraInfo = document.getElementById("otraInfo");
-const frmRegistrarActividad = document.getElementById("frmRegistrarActividad");
+const frmRegistrarExtension = document.getElementById("frmRegistrarExtension");
 
 //   ______   __  __    __   __    ______    __    ______    __   __    ______    ______    
 //  /\  ___\ /\ \/\ \  /\ "-.\ \  /\  ___\  /\ \  /\  __ \  /\ "-.\ \  /\  ___\  /\  ___\   

@@ -4,9 +4,8 @@
 //   \ \__|   \ \_\ \_\ \ \_\ \_\ \ \_\ \ \_\ \_\ \ \_____\ \ \_____\ \ \_____\ \/\_____\ 
 //    \/_/     \/_/\/_/  \/_/ /_/  \/_/  \/_/\/_/  \/_____/  \/_____/  \/_____/  \/_____/
 
-const tblDesglose = document.getElementById("tblDesglose");
 const btnActividad = document.querySelector(".btnActividad");
-const divModal = document.querySelector("#modalAct");
+const divModalAct = document.querySelector("#modalAct");
 const h1Act = document.getElementById("h1Act");
 const btnRegistrarAtc = document.getElementById("Registrar");
 const btnVerAct = document.getElementById("VerAct");
@@ -17,38 +16,13 @@ const btnVerAct = document.getElementById("VerAct");
 //   \ \_\    \ \_____\ \ \_\\"\_\ \ \_____\ \ \_\ \ \_____\ \ \_\\"\_\ \ \_____\ \/\_____\ 
 //    \/_/     \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_____/  \/_/ \/_/  \/_____/  \/_____/ 
 
-async function verActividadesExtension() {
-    const { data, error } = await _supabase
-    .from('actividades_de_extension')
-    .select('*');
-
-    if (error) console.error('Error:', error.message);
-    else {
-        console.log('Datos de extensión:', data);
-        data.forEach(act => {
-            tblDesglose.innerHTML = tblDesglose.innerHTML +
-            `<tr>
-            <td>${act.nombre_profesor}</td>
-            <td>${act.tipo_actividad}</td>
-            <td>${act.nombre_actividad}</td>
-            <td>${act.titulo_participacion}</td>
-            <td>${act.fecha}</td>
-            <td>${act.lugar}</td>
-            <td>${act.tipo_participacion}</td>
-            <td>${act.organizadores}</td>
-            <td>${act.comentarios}</td>
-            </tr>`;
-        });
-    }
-}
-
 function mostrarModal(actividad){
     switch (actividad) {
         case 'Ext':
             h1Act.innerHTML = "Actividad de extensión";
-            divModal.style.visibility = "visible";
+            divModalAct.style.visibility = "visible";
             btnRegistrarAtc.setAttribute("onclick","clicRegistrar('Ext')")
-            btnVerAct.setAttribute("onclick","clicVer('')")
+            btnVerAct.setAttribute("onclick","clicVer('Ext')")
             break;
         case 'Inv':
             break;
@@ -67,7 +41,8 @@ function clicRegistrar(actividad){
     }
 }
 
-function clicVer(){
+function clicVer(actividad){
+    sessionStorage.setItem('actividad', actividad);
     window.location.href = "./reporteriaInformeL"
 }
 
