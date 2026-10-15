@@ -67,7 +67,7 @@ async function cargarActividad(datos, actividad) {
                 <input type="text" name="otraInfo" class="inpFiltro" id="otraInfo" onchange="cargarFiltro('comentarios',8)">`
 
                 tblCuerpo.innerHTML = ``;
-                
+
                 datos.forEach(inf => {
                     tblCuerpo.innerHTML = tblCuerpo.innerHTML + 
                     `<tr>
@@ -109,16 +109,10 @@ async function cargarMostrarActividad(actividad) {
     if(error) console.error('Error al cargar los datos:',error);
     else{
         inpMostrarActividad.value = actividad;
-        limpiarTodo();
         cargarActividad(data, actividad);
     }
 }
 
-function limpiarTodo(){
-    sctFiltros.innerHTML = ``;
-    tblCabeza.innerHTML = ``;
-    tblCuerpo.innerHTML = ``;
-}
 
 //   ______    ______    ______    __  __    ______    __   __    ______    __    ______    
 //  /\  ___\  /\  ___\  /\  ___\  /\ \/\ \  /\  ___\  /\ "-.\ \  /\  ___\  /\ \  /\  __ \   
@@ -129,7 +123,6 @@ function limpiarTodo(){
 inpMostrarActividad.addEventListener("change", function(e){
     e.preventDefault();
     sessionStorage.setItem('actividad',inpMostrarActividad.value)
-    limpiarTodo();
     cargarMostrarActividad(inpMostrarActividad.value);
 })
 
