@@ -23,6 +23,9 @@ async function cargarActividad(datos, actividad) {
     
     if(error)console.error('Error al cargar los profes:',error)
     else{
+        tblCabeza.innerHTML = ``;
+        tblCuerpo.innerHTML = ``;
+        sctFiltros.innerHTML = ``;
         switch (actividad) {
             case 'actividades_de_extension':
                 let opProfesores = ``;
