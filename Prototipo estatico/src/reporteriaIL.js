@@ -20,12 +20,9 @@ async function cargarActividad(datos, actividad) {
         .from('perfiles')
         .select('nombre')
         .eq('tipo','Profesor')
-    
+
     if(error)console.error('Error al cargar los profes:',error)
     else{
-        tblCabeza.innerHTML = ``;
-        tblCuerpo.innerHTML = ``;
-        sctFiltros.innerHTML = ``;
         switch (actividad) {
             case 'actividades_de_extension':
                 let opProfesores = ``;
@@ -99,7 +96,7 @@ async function cargarFiltro(filtro, inp) {
         .select('*')
         .eq(filtro, inpFiltro[inp].value)
     
-    if(error) console.error('Error al aplicar el filtro');
+    if(error) console.error('Error al aplicar el filtro', error);
     else cargarActividad(data, inpMostrarActividad.value);
 }
 
@@ -111,8 +108,15 @@ async function cargarMostrarActividad(actividad) {
     if(error) console.error('Error al cargar los datos:',error);
     else{
         inpMostrarActividad.value = actividad;
+        limpiarTodo();
         cargarActividad(data, actividad);
     }
+}
+
+function limpiarTodo(){
+    sctFiltros.innerHTML = ``;
+    tblCabeza.innerHTML = ``;
+    tblCuerpo.innerHTML = ``;
 }
 
 //   ______    ______    ______    __  __    ______    __   __    ______    __    ______    
@@ -124,6 +128,7 @@ async function cargarMostrarActividad(actividad) {
 inpMostrarActividad.addEventListener("onchange", function(e){
     e.preventDefault();
     sessionStorage.setItem('actividad',inpMostrarActividad.value)
+    limpiarTodo();
     cargarMostrarActividad(inpMostrarActividad.value);
 })
 
