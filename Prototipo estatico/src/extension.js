@@ -21,31 +21,31 @@ const frmRegistrarExtension = document.getElementById("frmRegistrarExtension");
 //   \ \_\    \ \_____\ \ \_\\"\_\ \ \_____\ \ \_\ \ \_____\ \ \_\\"\_\ \ \_____\ \/\_____\ 
 //    \/_/     \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_____/  \/_/ \/_/  \/_____/  \/_____/ 
 
+//Función que registra una nueva actividad de extensión
 async function registrarExtension(nProfesor, tActividad, nActividad, tituloP, fecha, lugar, tipoP, organizadores, otraInfo) {
-     const { data, error } = await _supabase
+//Inserta en la tabla 'actividades_de_extension' los datos brindados
+    const { data, error } = await _supabase
     .from('actividades_de_extension')
-     .insert([
+    .insert([
     {nombre_profesor: nProfesor, tipo_actividad: tActividad, nombre_actividad: nActividad, titulo_participacion: tituloP, fecha: fecha, lugar: lugar, tipo_participacion: tipoP, organizadores: organizadores, comentarios: otraInfo}
     ])
     .select();
-    if (error) console.error('Error al insertar extension:', error.message);
-    else {
-        console.log('Nuevo registro de extension:', data)
-        limpiarFormulario();
-    };    
+//Si hay algún error lo imprime
+    if (error) console.error('Error al insertar extension:', error.message)
+//Sino ejecuta la función 'limpiarFormulario'
+    else limpiarFormulario();    
 }
 
-//Carga todos los nombres de los profesores en el campo 'Nombre del profesor'
+//Función para escribir todos los nombres de los profesores en el campo 'Nombre del profesor'
 async function cargarInpNombreProfesor() {
+//Obtiene 'nombre' de los usuarios que son 'tipo' igual a 'Profesor'
     const {data, error} = await _supabase
         .from('perfiles')
         .select('nombre')
         .eq('tipo','Profesor')
-
-    if (error) {
-        console.error("Error al cargar el campo: Nombre del profesor:", error.message);
-        return;
-    }
+//Si hay algún error lo imprime
+    if (error) console.error("Error al cargar el campo: Nombre del profesor:", error.message);
+//Sino escribe opciones en el input de profesores con 'nombre' de cada profesor
     else{
         data.forEach(per => {
             inpNombreProfesor.innerHTML = inpNombreProfesor.innerHTML + `<option value="${per.nombre}">${per.nombre}</option>`
@@ -53,28 +53,28 @@ async function cargarInpNombreProfesor() {
     }
 }
 
-//Pone como predeterminado en el campo 'Nombre del profesor' al profesor que tiene la sesión iniciada
+//Función que pone como predeterminado en el campo 'Nombre del profesor' al profesor que tiene la sesión iniciada
 async function cargarProfesorActual() {
+//Obtine el usuario que tiene la sesión iniciada
     const {data: {user}, error: authError} = await _supabase.auth.getUser();
-
-    if (authError || !user) {
-        console.error("No hay sesión activa:", authError?.message);
-        return;
+//Si no encuentra una sesión iniciada imprime el problema
+    if (authError || !user) console.error("No hay sesión activa:", authError?.message);
+//Sino obtine 'nombre' de todos los usuarios con 'id' igual al usuario con la sesión iniada
+    else{
+        const {data, error} = await _supabase
+            .from('perfiles')
+            .select('nombre')
+            .eq('id', user.id)
+//Si hay algún error lo imprime
+            if (error) console.error("Error al obtener perfil:", error.message);
+//Sino cambia la opción del input de profesores por 'nombre'
+            else inpNombreProfesor.value = data[0].nombre;
     }
-
-    const {data, error} = await _supabase
-        .from('perfiles')
-        .select('nombre')
-        .eq('id', user.id)
-
-        if (error) {
-        console.error("Error al obtener perfil:", error.message);
-        return;
-        }
-        else inpNombreProfesor.value = data[0].nombre;
 }
 
+//Función para limpiar el formulario de registro
 function limpiarFormulario() {
+//Selecciona todos los campos del formulario y los limpia
     let Campos = document.querySelectorAll("input, select, textarea");
     Campos.forEach(campo => campo.value = "");
     cargarInpNombreProfesor();
@@ -87,11 +87,11 @@ function limpiarFormulario() {
 //   \/\_____\ \ \_____\ \ \_____\ \ \_____\ \ \_____\ \ \_\\"\_\ \ \_____\ \ \_\ \ \_\ \_\ 
 //    \/_____/  \/_____/  \/_____/  \/_____/  \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_/\/_/ 
 
-frmRegistrarActividad.addEventListener("submit", async function(e) {
+//Evento que ejecuta la función 'registrarExtension' cada vez que se aprieta el botón
+frmRegistrarExtension.addEventListener("submit", async function(e) {
     e.preventDefault();
+//Ejecuta la función 'registrarExtension' con los los datos del formulario como variables
     await registrarExtension(inpNombreProfesor.value,inpTipoActividad.value,inpNombreActividad.value,inpTituloParticipacion.value,inpFecha.value,inpLugar.value,inpTipoParticipacion.value,inpOrganizadores.value,inpOtraInfo.value);
 })
 
 limpiarFormulario();
-
-window._cargarNombreProfesor = cargarInpNombreProfesor();

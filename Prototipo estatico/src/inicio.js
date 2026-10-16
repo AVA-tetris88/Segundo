@@ -12,7 +12,7 @@ const btnGestionUsuarios = document.querySelector("#btnGestionUsuarios");
 //   \ \_\    \ \_____\ \ \_\\"\_\ \ \_____\ \ \_\ \ \_____\ \ \_\\"\_\ \ \_____\ \/\_____\ 
 //    \/_/     \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_____/  \/_/ \/_/  \/_____/  \/_____/ 
 
-//Actualizar nombre
+//Función para cambiar la propiedad 'display_name' en cualquier usuario
 async function actualizarNombre(nuevoNombre) {
     const { data, error } = await _supabase.auth.updateUser({
     data: {
@@ -23,23 +23,25 @@ async function actualizarNombre(nuevoNombre) {
     else console.log('Nombre actualizado:', data.user);
 }
 
+//Función que verifica que el usuario sea administrador
 async function verificarAdministrador() {
     const {data: {user}, error: authError} = await _supabase.auth.getUser();
-    
+//Si no hay una sesión activa lo imprime
     if (authError || !user) {
         console.error("No hay sesión activa:", authError?.message);
         return;
     }
-
+//Agarra la propiedad 'tipo' únicamente con del usuario que comparte 'id' con el que tiene la sesión activa
     const {data, error} = await _supabase
         .from('perfiles')
         .select('tipo')
         .eq('id', user.id)
-
+//Si hay algún error a momento de obtener 'tipo' lo imprime
     if (error) {
         console.error("Error al obtener tipo:", error.message);
         return;
     }
+//Sino vuelve visible un botón para entrar a la página 'gestionUsuarios'
     else{
         if(data[0].tipo == "Administrador") btnGestionUsuarios.style.visibility = 'visible';
     }
@@ -51,4 +53,5 @@ async function verificarAdministrador() {
 //   \/\_____\ \ \_____\ \ \_____\ \ \_____\ \ \_____\ \ \_\\"\_\ \ \_____\ \ \_\ \ \_\ \_\ 
 //    \/_____/  \/_____/  \/_____/  \/_____/  \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_/\/_/ 
 
+//Ejecuta la funcón 'verificarAdministrador'
 verificarAdministrador();

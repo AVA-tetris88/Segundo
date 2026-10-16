@@ -15,26 +15,31 @@ const sctFiltros = document.getElementById("filtros");
 //   \ \_\    \ \_____\ \ \_\\"\_\ \ \_____\ \ \_\ \ \_____\ \ \_\\"\_\ \ \_____\ \/\_____\ 
 //    \/_/     \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_____/  \/_/ \/_/  \/_____/  \/_____/ 
 
+//Función para mostrar toda la información de las actividades en una tabla
 async function cargarActividad(datos, actividad) {
+//Obtiene la información con los con 'tipo' igual a 'Profesor'
     const {data, error} = await _supabase
         .from('perfiles')
         .select('nombre')
         .eq('tipo','Profesor')
-
+//Si hay algún error lo imprime
     if(error)console.error('Error al cargar los profes:',error)
+//Sino modifica todo el documento según la actividad
     else{
+//Pregunta por la variable 'activiad'
         switch (actividad) {
+//Si es igual a 'actividades_de_extension'
             case 'actividades_de_extension':
+//Define variables de texto que serán opciones de filtros
                 let opProfesores = ``;
-                let opTipoA = ``;
-                let opTituloP = ``;
-                let opTipoP = ``;
+                let opTipoA = `<option value="Charla">Charla</option><option value="Proyecto">Proyecto</option><option value="Seminario">Seminario</option>`
+                let opTituloP = `<option value="Ponente">Ponente</option><option value="Asistente">Asistente</option>`
+                let opTipoP = `<option value="Ponente">Ponente</option><option value="Charlista">Charlista</option>`    
+//Busca y guarda los nombre de profesores como opciones de filtros
                 data.forEach(prof => {
                     opProfesores = opProfesores + `<option value="${prof.nombre}">${prof.nombre}</option>` 
                 });
-                opTipoA = `<option value="Charla">Charla</option><option value="Proyecto">Proyecto</option><option value="Seminario">Seminario</option>`
-                opTituloP = `<option value="Ponente">Ponente</option><option value="Asistente">Asistente</option>`
-                opTipoP = `<option value="Ponente">Ponente</option><option value="Charlista">Charlista</option>`
+//Escribe las columnas de la tabla 'actividades_de_extension' de la base de datos
                 tblCabeza.innerHTML = 
                 `<th>Nombre del profesor</th>
                 <th>Tipo de actividad</th>
@@ -45,7 +50,7 @@ async function cargarActividad(datos, actividad) {
                 <th>Tipo de participación</th>
                 <th>Organizador(es)</th>
                 <th>Otra información</th>`;
-
+//Escribe todos los filtros de las actividades de extensión junto con sus opciones
                 sctFiltros.innerHTML = 
                 `<label for="nProfesor">Nombre del profesor:</label>
                 <select name="nombre" class="inpFiltro" id="nProfesor" onchange="cargarFiltro('nombre_profesor',0)">${opProfesores}</select>
@@ -65,9 +70,9 @@ async function cargarActividad(datos, actividad) {
                 <input type="text" name="organizadores" class="inpFiltro" id="organizadores" onchange="cargarFiltro('organizadores',7)">
                 <label for="otraInfo">Otra información:</label>
                 <input type="text" name="otraInfo" class="inpFiltro" id="otraInfo" onchange="cargarFiltro('comentarios',8)">`
-
+//Limpia el contenido en las filas de la tabla
                 tblCuerpo.innerHTML = ``;
-
+//Escribe la información de la tabla 'actividades_de_extension' en las filas de la tabla
                 datos.forEach(inf => {
                     tblCuerpo.innerHTML = tblCuerpo.innerHTML + 
                     `<tr>
@@ -90,29 +95,35 @@ async function cargarActividad(datos, actividad) {
     }
 }
 
+//Función que busca la información según el filtro seleccionado
 async function cargarFiltro(filtro, inp) {
+//Obtiene la información de todos los filtros
     const inpFiltro = document.querySelectorAll('.inpFiltro');
+//Selecciona todo de la tabla de la base de datos solicitada donde cuente con el valor del filtro colocado
     const {data, error} = await _supabase
         .from(inpMostrarActividad.value)
         .select('*')
         .eq(filtro, inpFiltro[inp].value)
-    
+//Si hay algún error lo imprime
     if(error) console.error('Error al aplicar el filtro', error);
+//Sino ejecuta la función 'cargarActividad' con la información recolectada de la base de datos y la tabla que se buscó como variables
     else cargarActividad(data, inpMostrarActividad.value);
 }
 
+//Función que ejecuta la función 'cargarActividad'
 async function cargarMostrarActividad(actividad) {
+//Obtiene la toda la información de la tabla seleccionada
     const {data, error} = await _supabase
         .from(actividad)
         .select('*')
-
+//Si hay algún error lo imprime
     if(error) console.error('Error al cargar los datos:',error);
+//Sino selecciona la opción correspondiente a la actividad seleccionada en el input para seleccionar actividades y ejecuta la función 'cargarActividad' con la información de la tabla y la actividad como variables
     else{
         inpMostrarActividad.value = actividad;
         cargarActividad(data, actividad);
     }
 }
-
 
 //   ______    ______    ______    __  __    ______    __   __    ______    __    ______    
 //  /\  ___\  /\  ___\  /\  ___\  /\ \/\ \  /\  ___\  /\ "-.\ \  /\  ___\  /\ \  /\  __ \   
@@ -120,10 +131,14 @@ async function cargarMostrarActividad(actividad) {
 //   \/\_____\ \ \_____\ \ \_____\ \ \_____\ \ \_____\ \ \_\\"\_\ \ \_____\ \ \_\ \ \_\ \_\ 
 //    \/_____/  \/_____/  \/_____/  \/_____/  \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_/\/_/ 
 
+//Evento que ejecuta la función 'cargarMostrarActividad' cada vez que se cambie la opción del input para seleccionar actividades
 inpMostrarActividad.addEventListener("change", function(e){
     e.preventDefault();
+//Guarda en 'sessionStorage' la variable 'actividad' como el valor del input para seleccionar actividades
     sessionStorage.setItem('actividad',inpMostrarActividad.value)
+//Ejecuta la función 'cargarMostrarActividad' con el valor del input para seleccionar actividad como variable
     cargarMostrarActividad(inpMostrarActividad.value);
 })
 
+//Ejecuta la función 'cargarMostrarActividad' con la variable 'actividad' de 'sessionStorage'
 cargarMostrarActividad(sessionStorage.getItem('actividad'));

@@ -17,14 +17,16 @@ const frmAgregarUsuarios = document.getElementById("AgregarUsuarios");
 //   \ \_\    \ \_____\ \ \_\\"\_\ \ \_____\ \ \_\ \ \_____\ \ \_\\"\_\ \ \_____\ \/\_____\ 
 //    \/_/     \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_____/  \/_/ \/_/  \/_____/  \/_____/
 
+//Función para mostrar todos los datos de los usuarios en una tabla
 async function cargarUsuarios(){
+//Selecciona todos los datos de los usuarios
     const {data, error} = await _supabase
         .from('perfiles')
         .select('*')
-
+//Si hay algún error lo imprime
     if(error) console.error('Error:', error.message);
+//Sino escribe los datos dentro de la tabla
     else{
-        console.log(data);
         data.forEach(usu => {
            tblUsuarios.innerHTML = tblUsuarios.innerHTML + 
             `<tr>
@@ -37,7 +39,9 @@ async function cargarUsuarios(){
     }
 }
 
+//Función para agregar un nuevo usuario al sistema
 async function agregarUsuarios(nombre, correo, contra, tipo) {
+//Registra un usuario en la base de datos con los datos ingresados
     const {data, error} = await _supabase.auth.signUp({
         email: correo,
         password: contra,
@@ -48,17 +52,20 @@ async function agregarUsuarios(nombre, correo, contra, tipo) {
         }
         }
   });
+//Si hay algún error lo imprime
     if (error) console.error('Error:', error.message);
+//Sino ejecuta la función 'limpiarFormulairo'
     else{
-        console.log('Usuario registrado con nombre:', data.user);
         limpiarFormulario();
     }
 }
 
+//Función que limpia toda la información que se encuentre en los inputs
 function limpiarFormulario(){
     let Campos = document.querySelectorAll("input, select");
     Campos.forEach(campo => campo.value = "");
     tblUsuarios.innerHTML = "";
+//Ejecuta la función 'cargarUsuarios'
     cargarUsuarios();
 }
 //   ______    ______    ______    __  __    ______    __   __    ______    __    ______    
@@ -67,8 +74,10 @@ function limpiarFormulario(){
 //   \/\_____\ \ \_____\ \ \_____\ \ \_____\ \ \_____\ \ \_\\"\_\ \ \_____\ \ \_\ \ \_\ \_\ 
 //    \/_____/  \/_____/  \/_____/  \/_____/  \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_/\/_/ 
 
+//Ejecuta la función 'cargarUsuarios'
 cargarUsuarios();
 
+//Evento que ejecuta la función 'agregarUsuarios' al apretar el botón
 frmAgregarUsuarios.addEventListener("submit", async function(e) {
     e.preventDefault();
     await agregarUsuarios(inpNombre.value, inpCorreo.value, inpContrasenna.value, inpTipo.value);

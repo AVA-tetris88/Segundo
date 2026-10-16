@@ -16,41 +16,48 @@ const btnVerAct = document.getElementById("VerAct");
 //   \ \_\    \ \_____\ \ \_\\"\_\ \ \_____\ \ \_\ \ \_____\ \ \_\\"\_\ \ \_____\ \/\_____\ 
 //    \/_/     \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_____/  \/_/ \/_/  \/_____/  \/_____/ 
 
+//Función que vuelve visible el modal
 function mostrarModal(actividad){
+//Pregunta por la variable actividad
     switch (actividad) {
+//Si es igual a 'Ext' muestra la información para las actividades de extensión
         case 'Ext':
             h1Act.innerHTML = "Actividad de extensión";
             divModalAct.style.visibility = "visible";
             btnRegistrarAtc.setAttribute("onclick","clicRegistrar('Ext')")
             btnVerAct.setAttribute("onclick","clicVer('Ext')")
             break;
-        case 'Inv':
-            break;
         default:
             break;
     };
 }
 
+//Función que dirige a las distintas páginas para registrar actividades
 function clicRegistrar(actividad){
+//Pregunta por la variable 'actividad'
     switch (actividad) {
+//Si es igual a 'Ext' redirige a la página 'extensiones'
         case 'Ext':
-            window.location.href = "./extension.html"
+            window.location.replace = "./extension.html"
             break;
         default:
             break;
     }
 }
 
+//Función que dirige a la página 'reporteriaInformeL'
 function clicVer(actividad){
+//Pregunta por la variable 'actividad'
     switch (actividad) {
+//Si es igual a 'Ext' guarda en 'sessionStorage' la variable 'actividad' como 'activdades_de_extension'
         case 'Ext':
             sessionStorage.setItem('actividad', 'actividades_de_extension');
             break;
-    
         default:
             break;
     }
-    window.location.href = "./reporteriaInformeL"
+//Redirige a la página 'reporteriaInformeL'
+    window.location.replace = "./reporteriaInformeL"
 }
 
 //   ______    ______    ______    __  __    ______    __   __    ______    __    ______    
@@ -59,6 +66,8 @@ function clicVer(actividad){
 //   \/\_____\ \ \_____\ \ \_____\ \ \_____\ \ \_____\ \ \_\\"\_\ \ \_____\ \ \_\ \ \_\ \_\ 
 //    \/_____/  \/_____/  \/_____/  \/_____/  \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_/\/_/ 
 
+//Evento que ejecuta la funci´´on 'mostrarModal' al apretar algún botón de actividad
 btnActividad.addEventListener("click", function() {
+//Ejecuta la función 'mostrarModal' con el texto dentro del botón como variable
     mostrarModal(btnActividad.innerHTML);
 })
