@@ -8,7 +8,7 @@ const btnActividad = document.querySelector(".btnActividad");
 const divModalAct = document.querySelector("#modalAct");
 const h1Act = document.getElementById("h1Act");
 const btnRegistrarAtc = document.getElementById("Registrar");
-const btnVerAct = document.getElementById("VerAct");
+const btnVerAct = document.querySelector(".VerAct");
 
 //   ______   __  __    __   __    ______    __    ______    __   __    ______    ______    
 //  /\  ___\ /\ \/\ \  /\ "-.\ \  /\  ___\  /\ \  /\  __ \  /\ "-.\ \  /\  ___\  /\  ___\   
