@@ -24,8 +24,10 @@
             <tbody id="tblUsuarios">
             </tbody>
         </table>
-        <section>
+        <button onclick="mostrarModal('Agr')">Agregar un nuevo usuario</button>
+        <section id="modalAct">
             <form id="AgregarUsuarios">
+                <h1 id="h1Modal"></h1>
                 <label for="nombre">Nombre</label>
                 <input type="text" name="nombre" id="nombre" required>
                 <br>
@@ -42,7 +44,7 @@
                     <option value="Direccion">Dirección</option>
                 </select>
                 <br>
-                <button type="submit">Agregar un nuevo usuario</button>
+                <button type="submit" id="btnModal"></button>
             </form>
         </section>
     </main>

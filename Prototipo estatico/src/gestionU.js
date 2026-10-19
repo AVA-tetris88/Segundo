@@ -10,6 +10,9 @@ const inpContrasenna = document.getElementById("contra");
 const inpCorreo = document.getElementById("correo");
 const inpTipo = document.getElementById("tipo");
 const frmAgregarUsuarios = document.getElementById("AgregarUsuarios");
+const modalAct = document.getElementById("modalAct");
+const h1Modal = document.getElementById("h1Modal");
+const btnModal = document.getElementById("btnModal");
 
 //   ______   __  __    __   __    ______    __    ______    __   __    ______    ______    
 //  /\  ___\ /\ \/\ \  /\ "-.\ \  /\  ___\  /\ \  /\  __ \  /\ "-.\ \  /\  ___\  /\  ___\   
@@ -60,11 +63,24 @@ async function agregarUsuarios(nombre, correo, contra, tipo) {
     }
 }
 
-//Función que limpia toda la información que se encuentre en los inputs
+function mostrarModal(op){
+    modalAct.style.visibility = 'visible';
+    if(op == 'Agr'){
+        h1Modal.innerHTML = 'Registro de un nuevo usuario';
+        btnModal.innerHTML = 'Agregar';
+    }
+    else if(op == 'Edi'){
+        h1Modal.innerHTML = 'Edición de un usuario existente';
+        btnModal.innerHTML = 'Agregar';
+    }
+}
+
+//Función que limpia toda la información que se encuentre en los inputs y la tabla y esconde el modal
 function limpiarFormulario(){
     let Campos = document.querySelectorAll("input, select");
     Campos.forEach(campo => campo.value = "");
     tblUsuarios.innerHTML = "";
+    modalAct.style.visibility = 'hidden';
 //Ejecuta la función 'cargarUsuarios'
     cargarUsuarios();
 }
