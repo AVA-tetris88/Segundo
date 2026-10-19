@@ -38,7 +38,7 @@ function clicRegistrar(actividad){
     switch (actividad) {
 //Si es igual a 'Ext' redirige a la página 'extensiones'
         case 'Ext':
-            window.location.replace = "./extension.html";
+            window.location.replace("./extension.html");
             break;
         default:
             break;
@@ -57,7 +57,7 @@ function clicVer(actividad){
             break;
     }
 //Redirige a la página 'reporteriaInformeL'
-    window.location.replace = "./reporteriaInformeL";
+    window.location.replace("./reporteriaInformeL");
 }
 
 //   ______    ______    ______    __  __    ______    __   __    ______    __    ______    
