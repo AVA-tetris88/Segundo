@@ -38,7 +38,7 @@ function clicRegistrar(actividad){
     switch (actividad) {
 //Si es igual a 'Ext' redirige a la página 'extensiones'
         case 'Ext':
-            window.location.replace = "./extension.html"
+            window.location.replace = "./extension.html";
             break;
         default:
             break;
@@ -52,15 +52,12 @@ function clicVer(actividad){
 //Si es igual a 'Ext' guarda en 'sessionStorage' la variable 'actividad' como 'activdades_de_extension'
         case 'Ext':
             sessionStorage.setItem('actividad', 'actividades_de_extension');
-            alert('hizo algo');
             break;
         default:
-            alert('nada');
             break;
     }
-    alert('Noomeo0fne0i ');
 //Redirige a la página 'reporteriaInformeL'
-    window.location.replace = "./reporteriaInformeL"
+    window.location.replace = "./reporteriaInformeL";
 }
 
 //   ______    ______    ______    __  __    ______    __   __    ______    __    ______    
@@ -73,10 +70,4 @@ function clicVer(actividad){
 btnActividad.addEventListener("click", function() {
 //Ejecuta la función 'mostrarModal' con el texto dentro del botón como variable
     mostrarModal(btnActividad.innerHTML);
-})
-
-//Evento que ejecuta la funci´´on 'mostrarModal' al apretar algún botón de actividad
-btnRegistrarAtc.addEventListener("click", function() {
-//Ejecuta la función 'mostrarModal' con el texto dentro del botón como variable
-    clicRegistrar('Ext');
 })
