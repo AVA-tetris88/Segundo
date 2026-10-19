@@ -71,3 +71,9 @@ btnActividad.addEventListener("click", function() {
 //Ejecuta la función 'mostrarModal' con el texto dentro del botón como variable
     mostrarModal(btnActividad.innerHTML);
 })
+
+//Evento que ejecuta la funci´´on 'mostrarModal' al apretar algún botón de actividad
+btnRegistrarAtc.addEventListener("click", function() {
+//Ejecuta la función 'mostrarModal' con el texto dentro del botón como variable
+    clicRegistrar('Ext');
+})
