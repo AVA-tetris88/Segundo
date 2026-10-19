@@ -52,10 +52,13 @@ function clicVer(actividad){
 //Si es igual a 'Ext' guarda en 'sessionStorage' la variable 'actividad' como 'activdades_de_extension'
         case 'Ext':
             sessionStorage.setItem('actividad', 'actividades_de_extension');
+            alert('hizo algo');
             break;
         default:
+            alert('nada');
             break;
     }
+    alert('Noomeo0fne0i ');
 //Redirige a la página 'reporteriaInformeL'
     window.location.replace = "./reporteriaInformeL"
 }
