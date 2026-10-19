@@ -10,7 +10,7 @@ const inpContrasenna = document.getElementById("contra");
 const inpCorreo = document.getElementById("correo");
 const inpTipo = document.getElementById("tipo");
 const frmAgregarUsuarios = document.getElementById("AgregarUsuarios");
-const modalAct = document.getElementById("modalAct");
+const modalAct = document.querySelector(".modalAct");
 const h1Modal = document.getElementById("h1Modal");
 const btnModal = document.getElementById("btnModal");
 
