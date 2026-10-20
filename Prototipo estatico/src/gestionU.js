@@ -64,7 +64,7 @@ async function agregarUsuarios(nombre, correo, contra, tipo) {
     }
 }
 
-async function EditarUsuarios(nuevoCorreo, nuevaContrasenna, nuevoNombre) {
+async function editarUsuarios(nuevoNombre, nuevoCorreo, nuevoTipo) {
     const {data, error} = await _supabase.auth.updateUser({
         email: nuevoCorreo,
         data: {
@@ -74,8 +74,10 @@ async function EditarUsuarios(nuevoCorreo, nuevaContrasenna, nuevoNombre) {
     });
 
     if (error)console.error("Error al actualizar usuario en Auth:", error.message);
-    else console.log("Usuario de Auth actualizado con éxito:", data.user);
-
+    else{
+        console.log("Usuario actualizado con éxito:", data.user);
+        limpiarFormulario();
+    }
 }
 
 async function mostrarModal(op, id){
@@ -83,6 +85,10 @@ async function mostrarModal(op, id){
     if(op == 'Agr'){
         h1Modal.innerHTML = 'Registro de un nuevo usuario';
         btnModal.innerHTML = 'Agregar';
+        frmAgregarUsuarios.addEventListener('click', function(e){
+            e.preventDefault
+            agregarUsuarios(inpNombre.value,inpCorreo.value,inpContrasenna.value,inpTipo.value);
+        });    
     }
     else if(op == 'Edi'){
         const {data, error} = await _supabase
@@ -99,8 +105,13 @@ async function mostrarModal(op, id){
             document.getElementById('lblcontra').style.visibility = 'hidden';
             h1Modal.innerHTML = 'Edición de un usuario existente';
             btnModal.innerHTML = 'Editar';
+            frmAgregarUsuarios.addEventListener('click', function(e){
+            e.preventDefault
+            editarUsuarios(inpNombre.value,inpCorreo.value,inpTipo.value);
+            });  
         }
     }
+    divModalAct.style.visibility = 'hidden';
 }
 
 //Función que limpia toda la información que se encuentre en los inputs y la tabla y esconde el modal
