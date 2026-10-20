@@ -37,7 +37,7 @@ async function cargarUsuarios(){
             <td>${usu.nombre}</td>
             <td>${usu.correo}</td>
             <td>${usu.tipo}</td>
-            <td><button onclick="mostrarModal('Edi',${usu.id})">Editar</button><button onclick="mostrarModal('Bor',${usu.id})">Eliminar</button></td>
+            <td><button onclick="mostrarModal('Edi','${usu.id}')">Editar</button><button onclick="mostrarModal('Bor',${usu.id})">Eliminar</button></td>
             </tr>` 
         });
     }
@@ -92,9 +92,9 @@ async function mostrarModal(op, id){
         if(error) console.error('Error al cargar la información del usuario', error);
         else{
             let Campos = document.querySelectorAll('input, select');
-            Campos.forEach(campo => {
-                campo.value = data[0][0];
-            })    
+            Campos[0].value = data[0].nombre;
+            Campos[2].value = data[0].correo;
+            Campos[3].value = data[0].tipo;
             document.getElementById('contra').style.visibility = 'hidden';
             document.getElementById('lblcontra').style.visibility = 'hidden';
             h1Modal.innerHTML = 'Edición de un usuario existente';
