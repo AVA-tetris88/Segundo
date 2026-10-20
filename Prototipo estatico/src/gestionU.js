@@ -37,6 +37,7 @@ async function cargarUsuarios(){
             <td>${usu.nombre}</td>
             <td>${usu.correo}</td>
             <td>${usu.tipo}</td>
+            <td><button onclick="mostrarModal('Edi',${usu.id})">Editar</button><button onclick="mostrarModal('Bor',${usu.id})">Eliminar</button></td>
             </tr>` 
         });
     }
@@ -63,15 +64,42 @@ async function agregarUsuarios(nombre, correo, contra, tipo) {
     }
 }
 
-function mostrarModal(op){
+async function EditarUsuarios(nuevoCorreo, nuevaContrasenna, nuevoNombre) {
+    const {data, error} = await _supabase.auth.updateUser({
+        email: nuevoCorreo,
+        data: {
+            display_name: nuevoNombre,
+            tipo: nuevoTipo
+        }
+    });
+
+    if (error)console.error("Error al actualizar usuario en Auth:", error.message);
+    else console.log("Usuario de Auth actualizado con éxito:", data.user);
+
+}
+
+async function mostrarModal(op, id){
     modalAct.style.visibility = 'visible';
     if(op == 'Agr'){
         h1Modal.innerHTML = 'Registro de un nuevo usuario';
         btnModal.innerHTML = 'Agregar';
     }
     else if(op == 'Edi'){
-        h1Modal.innerHTML = 'Edición de un usuario existente';
-        btnModal.innerHTML = 'Agregar';
+        const {data, error} = await _supabase
+        .from('perfiles')
+        .select('*')
+        .eq('id',id)
+        if(error) console.error('Error al cargar la información del usuario', error);
+        else{
+            let Campos = document.querySelectorAll('input, select');
+            Campos.forEach(campo => {
+                campo.value = data[0][0];
+            })    
+            document.getElementById('contra').style.visibility = 'hidden';
+            document.getElementById('lblcontra').style.visibility = 'hidden';
+            h1Modal.innerHTML = 'Edición de un usuario existente';
+            btnModal.innerHTML = 'Editar';
+        }
     }
 }
 
@@ -84,6 +112,7 @@ function limpiarFormulario(){
 //Ejecuta la función 'cargarUsuarios'
     cargarUsuarios();
 }
+
 //   ______    ______    ______    __  __    ______    __   __    ______    __    ______    
 //  /\  ___\  /\  ___\  /\  ___\  /\ \/\ \  /\  ___\  /\ "-.\ \  /\  ___\  /\ \  /\  __ \   
 //  \ \___  \ \ \  __\  \ \ \____ \ \ \_\ \ \ \  __\  \ \ \-.  \ \ \ \____ \ \ \ \ \  __ \  
@@ -92,9 +121,3 @@ function limpiarFormulario(){
 
 //Ejecuta la función 'cargarUsuarios'
 cargarUsuarios();
-
-//Evento que ejecuta la función 'agregarUsuarios' al apretar el botón
-frmAgregarUsuarios.addEventListener("submit", async function(e) {
-    e.preventDefault();
-    await agregarUsuarios(inpNombre.value, inpCorreo.value, inpContrasenna.value, inpTipo.value);
-})
