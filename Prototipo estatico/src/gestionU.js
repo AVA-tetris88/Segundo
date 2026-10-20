@@ -10,7 +10,7 @@ const inpContrasenna = document.getElementById("contra");
 const inpCorreo = document.getElementById("correo");
 const inpTipo = document.getElementById("tipo");
 const frmAgregarUsuarios = document.getElementById("AgregarUsuarios");
-const modalAct = document.querySelector(".modalAct");
+const divModalAct = document.querySelector(".modalAct");
 const h1Modal = document.getElementById("h1Modal");
 const btnModal = document.getElementById("btnModal");
 
@@ -81,7 +81,7 @@ async function editarUsuarios(nuevoNombre, nuevoCorreo, nuevoTipo) {
 }
 
 async function mostrarModal(op, id){
-    modalAct.style.visibility = 'visible';
+    divModalAct.style.visibility = 'visible';
     if(op == 'Agr'){
         h1Modal.innerHTML = 'Registro de un nuevo usuario';
         btnModal.innerHTML = 'Agregar';
@@ -111,7 +111,6 @@ async function mostrarModal(op, id){
             });  
         }
     }
-    divModalAct.style.visibility = 'hidden';
 }
 
 //Función que limpia toda la información que se encuentre en los inputs y la tabla y esconde el modal
@@ -119,7 +118,7 @@ function limpiarFormulario(){
     let Campos = document.querySelectorAll("input, select");
     Campos.forEach(campo => campo.value = "");
     tblUsuarios.innerHTML = "";
-    modalAct.style.visibility = 'hidden';
+    divModalAct.style.visibility = 'hidden';
 //Ejecuta la función 'cargarUsuarios'
     cargarUsuarios();
 }
