@@ -105,9 +105,9 @@ async function mostrarModal(op, id){
             document.getElementById('lblcontra').style.visibility = 'hidden';
             h1Modal.innerHTML = 'Edición de un usuario existente';
             btnModal.innerHTML = 'Editar';
+            inpContrasenna.value = 'edición';
             frmAgregarUsuarios.addEventListener('submit', function(e){
             e.preventDefault
-            inpContrasenna.value = 'edición';
             editarUsuarios(inpNombre.value,inpCorreo.value,inpTipo.value);
             });  
         }
