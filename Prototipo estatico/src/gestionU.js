@@ -85,7 +85,7 @@ async function mostrarModal(op, id){
     if(op == 'Agr'){
         h1Modal.innerHTML = 'Registro de un nuevo usuario';
         btnModal.innerHTML = 'Agregar';
-        frmAgregarUsuarios.addEventListener('click', function(e){
+        frmAgregarUsuarios.addEventListener('submit', function(e){
             e.preventDefault
             agregarUsuarios(inpNombre.value,inpCorreo.value,inpContrasenna.value,inpTipo.value);
         });    
@@ -105,7 +105,7 @@ async function mostrarModal(op, id){
             document.getElementById('lblcontra').style.visibility = 'hidden';
             h1Modal.innerHTML = 'Edición de un usuario existente';
             btnModal.innerHTML = 'Editar';
-            frmAgregarUsuarios.addEventListener('click', function(e){
+            frmAgregarUsuarios.addEventListener('submit', function(e){
             e.preventDefault
             editarUsuarios(inpNombre.value,inpCorreo.value,inpTipo.value);
             });  
