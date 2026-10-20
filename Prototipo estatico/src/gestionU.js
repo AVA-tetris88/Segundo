@@ -107,6 +107,7 @@ async function mostrarModal(op, id){
             btnModal.innerHTML = 'Editar';
             frmAgregarUsuarios.addEventListener('submit', function(e){
             e.preventDefault
+            inpContrasenna.value = 'edición';
             editarUsuarios(inpNombre.value,inpCorreo.value,inpTipo.value);
             });  
         }
