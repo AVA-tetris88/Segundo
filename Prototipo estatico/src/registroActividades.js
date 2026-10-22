@@ -18,16 +18,16 @@ async function cargarActividad(actividad){
         case 'Ext':
             frmRegistroActividades.innerHTML = 
             `<label for="nProfesor">Nombre del profesor:</label>
-            <select name="nProfesor" id="nProfesor" class="inpCampo" required>${obtenerOpciones('perfiles','nombre')}</select>
+            <select name="nProfesor" id="nProfesor" class="inpCampo" required>${await obtenerOpciones('perfiles','nombre')}</select>
             <br>
             <label for="tipo">Tipo de actividad:</label>
-            <select name="tipo" id="tipo" class="inpCampo" required>${obtenerOpciones('extension_tipo_actividad','tipo')}</select>
+            <select name="tipo" id="tipo" class="inpCampo" required>${await obtenerOpciones('extension_tipo_actividad','tipo')}</select>
             <br>
             <label for="nActividad">Nombre de la actividad:</label>
             <input type="text" name="nActividad" id="nActividad" class="inpCampo" required>
             <br>
             <label for="tituloP">Título de la participación</label>
-            <select name="tituloP" id="tituloP" class="inpCampo" required>${obtenerOpciones('extension_titulo_participacion','titulo')}</select>
+            <select name="tituloP" id="tituloP" class="inpCampo" required>${await obtenerOpciones('extension_titulo_participacion','titulo')}</select>
             <br>
             <label for="fecha">Fecha:</label>
             <input type="date" name="fecha" id="fecha" class="inpCampo" required>
@@ -36,7 +36,7 @@ async function cargarActividad(actividad){
             <input type="text" name="lugar" id="lugar" class="inpCampo" required>
             <br>
             <label for="tipoP">Tipo de participación:</label>
-            <select name="tipoP" id="tipoP" class="inpCampo" required>${obtenerOpciones('extension_tipo_participacion','tipo')}</select>
+            <select name="tipoP" id="tipoP" class="inpCampo" required>${await obtenerOpciones('extension_tipo_participacion','tipo')}</select>
             <br>
             <label for="organizadores">Organizadores:</label>
             <input type="text" name="organizadores" id="organizadores" class="inpCampo" required>
