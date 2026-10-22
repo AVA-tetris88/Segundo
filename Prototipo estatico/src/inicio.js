@@ -60,3 +60,5 @@ btnCerrarSesion.addEventListener('click', async function(e){
     e.preventDefault
     await cerrarSesion();
 })
+
+verificar;
