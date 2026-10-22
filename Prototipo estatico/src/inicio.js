@@ -5,6 +5,7 @@
 //    \/_/     \/_/\/_/  \/_/ /_/  \/_/  \/_/\/_/  \/_____/  \/_____/  \/_____/  \/_____/ 
 
 const btnGestionUsuarios = document.querySelector("#btnGestionUsuarios"); 
+const btnCerrarSesion = document.getElementById("cerrarSesion");
 
 //   ______   __  __    __   __    ______    __    ______    __   __    ______    ______    
 //  /\  ___\ /\ \/\ \  /\ "-.\ \  /\  ___\  /\ \  /\  __ \  /\ "-.\ \  /\  ___\  /\  ___\   
@@ -47,6 +48,16 @@ async function verificarAdministrador() {
     }
 }
 
+async function cerrarSesion() {
+    const {error} = await _supabase.auth.signOut();
+
+    if (error)console.error("Error al cerrar sesión:", error.message);
+    else {
+        console.log("Sesión cerrada exitosamente");
+        window.location.replace = "index.html"; 
+    }
+}
+
 //   ______    ______    ______    __  __    ______    __   __    ______    __    ______    
 //  /\  ___\  /\  ___\  /\  ___\  /\ \/\ \  /\  ___\  /\ "-.\ \  /\  ___\  /\ \  /\  __ \   
 //  \ \___  \ \ \  __\  \ \ \____ \ \ \_\ \ \ \  __\  \ \ \-.  \ \ \ \____ \ \ \ \ \  __ \  
@@ -55,3 +66,8 @@ async function verificarAdministrador() {
 
 //Ejecuta la funcón 'verificarAdministrador'
 verificarAdministrador();
+
+btnCerrarSesion.addEventListener('click', async function(e){
+    e.preventDefault
+    await cerrarSesion();
+})
