@@ -6,7 +6,7 @@
 
 const h1Actividad = document.getElementById('h1Actividad');
 const frmRegistroActividades = document.getElementById('frmRegistroActividades');
-const inpCampos = document.querySelectorAll('.inpCampo');
+const inpNombreProfesor = document.getElementById('nProfesor');
 
 //   ______   __  __    __   __    ______    __    ______    __   __    ______    ______    
 //  /\  ___\ /\ \/\ \  /\ "-.\ \  /\  ___\  /\ \  /\  __ \  /\ "-.\ \  /\  ___\  /\  ___\   
@@ -72,7 +72,8 @@ async function cargarActividad(actividad){
 }
 
 //Función que registra una nueva actividad de extensión
-async function registrarActividades(actividad, datos) {
+async function registrarActividades(actividad) {
+    const datos = document.querySelectorAll('.inpCampo');
     switch (actividad) {
         case 'actividad_de_extension':
             const {data, error} = await _supabase
@@ -108,11 +109,12 @@ async function cargarProfesorActual() {
 //Si hay algún error lo imprime
             if (error) console.error("Error al obtener perfil:", error.message);
 //Sino cambia la opción del input de profesores por 'nombre'
-            else inpCampos[0].value = data[0].nombre;
+            else inpNombreProfesor = data[0].nombre;
     }
 }
 
 function limpiarFormulario(){
+    const inpCampos = document.querySelectorAll('.inpCampo');
     inpCampos.forEach(campo => campo.value = '');
     cargarProfesorActual();
 }
