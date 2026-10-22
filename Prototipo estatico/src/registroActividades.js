@@ -66,7 +66,7 @@ async function obtenerOpciones(tabla,dato) {
     else{
         let opciones = '';
         data.forEach(fila => {
-            opciones = opciones + `<option>${fila.dato}<option>`
+            opciones = opciones + `<option>${fila[dato]}</option>`
         });
         return opciones;
     }
