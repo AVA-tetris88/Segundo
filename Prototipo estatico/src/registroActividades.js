@@ -57,10 +57,6 @@ async function cargarActividad(actividad){
                 <br>
                 <button type="submit">Registar actividad de extensión</button>`
                 h1Actividad.innerHTML = 'Registro de actividades de extensión'
-                frmRegistroActividades.addEventListener('submit', async function(e){
-                    e.preventDefault();
-                    await registrarActividades(sessionStorage.getItem('actividad'));
-                });
                 break;
             default:
                 break;
@@ -77,7 +73,7 @@ async function registrarActividades(actividad) {
             const {data, error} = await _supabase
             .from(actividad)
             .insert([{
-                nombre_profesor : datos[0].value, tipo_actividad : datos[1].value, nombre_actividad : datos[2].value, titulo_actividad : datos[3].value, fecha : datos[4].value, lugar : datos[5].value, tipo_participacion : datos[6].value, organizadores : datos[7].value, otra_informacion: datos[8].value
+                nombre_profesor : datos[0].value, tipo_actividad : datos[1].value, nombre_actividad : datos[2].value, titulo_participacion : datos[3].value, fecha : datos[4].value, lugar : datos[5].value, tipo_participacion : datos[6].value, organizadores : datos[7].value, otra_informacion: datos[8].value
             }])
 
             if(error) console.error('Error al registrar la actividad de extensión', error.message);
@@ -141,3 +137,8 @@ async function obtenerOpciones(tabla,dato) {
 //    \/_____/  \/_____/  \/_____/  \/_____/  \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_/\/_/ 
 
 cargarActividad(sessionStorage.getItem('actividad'));
+
+frmRegistroActividades.addEventListener('submit', async function(e){
+    e.preventDefault();
+    await registrarActividades(sessionStorage.getItem('actividad'));
+});
