@@ -6,7 +6,6 @@
 
 const h1Actividad = document.getElementById('h1Actividad');
 const frmRegistroActividades = document.getElementById('frmRegistroActividades');
-const inpNombreProfesor = document.getElementById('nProfesor');
 
 //   ______   __  __    __   __    ______    __    ______    __   __    ______    ______    
 //  /\  ___\ /\ \/\ \  /\ "-.\ \  /\  ___\  /\ \  /\  __ \  /\ "-.\ \  /\  ___\  /\  ___\   
@@ -24,7 +23,7 @@ async function cargarActividad(actividad){
     else{
         let opNombres = '';
         data.forEach(profe =>{
-            opNombres = opNombres + `<option value=${profe.nombre}>${profe.nombre}</option>`
+            opNombres = opNombres + `<option value="${profe.nombre}">${profe.nombre}</option>`
         })
         switch (actividad) {
             case 'actividad_de_extension':
@@ -67,7 +66,7 @@ async function cargarActividad(actividad){
             default:
                 break;
         }
-        //cargarProfesorActual();
+        await cargarProfesorActual();
     }
 }
 
@@ -96,6 +95,7 @@ async function registrarActividades(actividad) {
 
 //Función que pone como predeterminado en el campo 'Nombre del profesor' al profesor que tiene la sesión iniciada
 async function cargarProfesorActual() {
+    const inpCampos = document.querySelectorAll('.inpCampo');
 //Obtine el usuario que tiene la sesión iniciada
     const {data: {user}, error: authError} = await _supabase.auth.getUser();
 //Si no encuentra una sesión iniciada imprime el problema
@@ -109,7 +109,7 @@ async function cargarProfesorActual() {
 //Si hay algún error lo imprime
             if (error) console.error("Error al obtener perfil:", error.message);
 //Sino cambia la opción del input de profesores por 'nombre'
-            else inpNombreProfesor.value = data[0].nombre;
+            else inpCampos[0].value = data[0].nombre;
     }
 }
 
