@@ -38,7 +38,7 @@ function clicRegistrar(actividad){
     switch (actividad) {
 //Si es igual a 'Ext' redirige a la página 'extensiones'
         case 'Ext':
-            sessionStorage.setItem('actividad', 'actividad_de_extension');
+            sessionStorage.setItem('actividad', 'actividades_de_extension');
             break;
         default:
             break;

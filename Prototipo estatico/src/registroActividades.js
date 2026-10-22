@@ -26,7 +26,7 @@ async function cargarActividad(actividad){
             opNombres = opNombres + `<option value="${profe.nombre}">${profe.nombre}</option>`
         })
         switch (actividad) {
-            case 'actividad_de_extension':
+            case 'actividades_de_extension':
                 frmRegistroActividades.innerHTML = 
                 `<label for="nProfesor">Nombre del profesor:</label>
                 <select name="nProfesor" id="nProfesor" class="inpCampo" required>${opNombres}</select>
@@ -73,7 +73,7 @@ async function cargarActividad(actividad){
 async function registrarActividades(actividad) {
     const datos = document.querySelectorAll('.inpCampo');
     switch (actividad) {
-        case 'actividad_de_extension':
+        case 'actividades_de_extension':
             const {data, error} = await _supabase
             .from(actividad)
             .insert([{
