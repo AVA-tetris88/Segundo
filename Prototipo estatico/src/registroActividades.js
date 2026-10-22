@@ -18,7 +18,7 @@ async function cargarActividad(actividad){
         case 'Ext':
             frmRegistroActividades.innerHTML = 
             `<label for="nProfesor">Nombre del profesor:</label>
-            <select name="nProfesor" id="nProfesor" class="inpCampo" required>${await obtenerOpciones('perfiles','nombre')}</select>
+            <select name="nProfesor" id="nProfesor" class="inpCampo" required></select>
             <br>
             <label for="tipo">Tipo de actividad:</label>
             <select name="tipo" id="tipo" class="inpCampo" required>${await obtenerOpciones('extension_tipo_actividad','tipo')}</select>
