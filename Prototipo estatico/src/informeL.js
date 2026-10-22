@@ -4,11 +4,11 @@
 //   \ \__|   \ \_\ \_\ \ \_\ \_\ \ \_\ \ \_\ \_\ \ \_____\ \ \_____\ \ \_____\ \/\_____\ 
 //    \/_/     \/_/\/_/  \/_/ /_/  \/_/  \/_/\/_/  \/_____/  \/_____/  \/_____/  \/_____/
 
-const btnActividad = document.querySelector(".btnActividad");
+const btnActividad = document.querySelector("#btnActividad");
 const divModalAct = document.querySelector("#modalAct");
 const h1Act = document.getElementById("h1Act");
 const btnRegistrarAtc = document.getElementById("Registrar");
-const btnVerAct = document.querySelector(".VerAct");
+const btnVerAct = document.querySelector("#VerAct");
 
 //   ______   __  __    __   __    ______    __    ______    __   __    ______    ______    
 //  /\  ___\ /\ \/\ \  /\ "-.\ \  /\  ___\  /\ \  /\  __ \  /\ "-.\ \  /\  ___\  /\  ___\   
