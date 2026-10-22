@@ -13,17 +13,6 @@ const btnCerrarSesion = document.getElementById("cerrarSesion");
 //   \ \_\    \ \_____\ \ \_\\"\_\ \ \_____\ \ \_\ \ \_____\ \ \_\\"\_\ \ \_____\ \/\_____\ 
 //    \/_/     \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_____/  \/_/ \/_/  \/_____/  \/_____/ 
 
-//Función para cambiar la propiedad 'display_name' en cualquier usuario
-async function actualizarNombre(nuevoNombre) {
-    const { data, error } = await _supabase.auth.updateUser({
-    data: {
-    display_name: nuevoNombre
-    }
-    });
-    if (error) alert('Error al actualizar:', error.message);
-    else console.log('Nombre actualizado:', data.user);
-}
-
 //Función que verifica que el usuario sea administrador
 async function verificarAdministrador() {
     const {data: {user}, error: authError} = await _supabase.auth.getUser();
@@ -49,12 +38,12 @@ async function verificarAdministrador() {
 }
 
 async function cerrarSesion() {
-    const {error} = await _supabase.auth.signOut();
+    const {error} = await _supabase.auth.signOut({scope: 'local'});
 
     if (error)console.error("Error al cerrar sesión:", error.message);
     else {
+        window.location.replace("index.html"); 
         console.log("Sesión cerrada exitosamente");
-        window.location.replace = "index.html"; 
     }
 }
 
