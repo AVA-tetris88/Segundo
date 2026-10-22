@@ -109,7 +109,7 @@ async function cargarProfesorActual() {
 //Si hay algún error lo imprime
             if (error) console.error("Error al obtener perfil:", error.message);
 //Sino cambia la opción del input de profesores por 'nombre'
-            else inpNombreProfesor = data[0].nombre;
+            else inpNombreProfesor.value = data[0].nombre;
     }
 }
 
