@@ -14,42 +14,54 @@ const frmRegistroActividades = document.getElementById('frmRegistroActividades')
 //    \/_/     \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_____/  \/_/ \/_/  \/_____/  \/_____/ 
 
 async function cargarActividad(actividad){
-    switch (actividad) {
-        case 'Ext':
-            frmRegistroActividades.innerHTML = 
-            `<label for="nProfesor">Nombre del profesor:</label>
-            <select name="nProfesor" id="nProfesor" class="inpCampo" required></select>
-            <br>
-            <label for="tipo">Tipo de actividad:</label>
-            <select name="tipo" id="tipo" class="inpCampo" required>${await obtenerOpciones('extension_tipo_actividad','tipo')}</select>
-            <br>
-            <label for="nActividad">Nombre de la actividad:</label>
-            <input type="text" name="nActividad" id="nActividad" class="inpCampo" required>
-            <br>
-            <label for="tituloP">Título de la participación</label>
-            <select name="tituloP" id="tituloP" class="inpCampo" required>${await obtenerOpciones('extension_titulo_participacion','titulo')}</select>
-            <br>
-            <label for="fecha">Fecha:</label>
-            <input type="date" name="fecha" id="fecha" class="inpCampo" required>
-            <br>
-            <label for="lugar">Lugar:</label>
-            <input type="text" name="lugar" id="lugar" class="inpCampo" required>
-            <br>
-            <label for="tipoP">Tipo de participación:</label>
-            <select name="tipoP" id="tipoP" class="inpCampo" required>${await obtenerOpciones('extension_tipo_participacion','tipo')}</select>
-            <br>
-            <label for="organizadores">Organizadores:</label>
-            <input type="text" name="organizadores" id="organizadores" class="inpCampo" required>
-            <br>
-            <label for="otraInfo">Otra información:</label>
-            <textarea name="otraInfo" id="otraInfo" cols="45" rows="10" class="inpCampo"></textarea>
-            <br>
-            <button type="submit">Registar actividad de extensión</button>`
-            h1Actividad.innerHTML = 'Registro de actividades de extensión'
-            break;
-    
-        default:
-            break;
+    const {data, error} = await _supabase
+    .from('perfiles')
+    .select('nombre')
+    .eq('tipo', 'Profesor')
+
+    if(error) console.error('Error al obtener los nombres de los profesores', error);
+    else{
+        let opNombres = '';
+        data.forEach(profe =>{
+            opNombres = opNombres + `<option>${profe.nombre}</option>`
+        })
+        switch (actividad) {
+            case 'Ext':
+                frmRegistroActividades.innerHTML = 
+                `<label for="nProfesor">Nombre del profesor:</label>
+                <select name="nProfesor" id="nProfesor" class="inpCampo" required>${opNombres}</select>
+                <br>
+                <label for="tipo">Tipo de actividad:</label>
+                <select name="tipo" id="tipo" class="inpCampo" required>${await obtenerOpciones('extension_tipo_actividad','tipo')}</select>
+                <br>
+                <label for="nActividad">Nombre de la actividad:</label>
+                <input type="text" name="nActividad" id="nActividad" class="inpCampo" required>
+                <br>
+                <label for="tituloP">Título de la participación</label>
+                <select name="tituloP" id="tituloP" class="inpCampo" required>${await obtenerOpciones('extension_titulo_participacion','titulo')}</select>
+                <br>
+                <label for="fecha">Fecha:</label>
+                <input type="date" name="fecha" id="fecha" class="inpCampo" required>
+                <br>
+                <label for="lugar">Lugar:</label>
+                <input type="text" name="lugar" id="lugar" class="inpCampo" required>
+                <br>
+                <label for="tipoP">Tipo de participación:</label>
+                <select name="tipoP" id="tipoP" class="inpCampo" required>${await obtenerOpciones('extension_tipo_participacion','tipo')}</select>
+                <br>
+                <label for="organizadores">Organizadores:</label>
+                <input type="text" name="organizadores" id="organizadores" class="inpCampo" required>
+                <br>
+                <label for="otraInfo">Otra información:</label>
+                <textarea name="otraInfo" id="otraInfo" cols="45" rows="10" class="inpCampo"></textarea>
+                <br>
+                <button type="submit">Registar actividad de extensión</button>`
+                h1Actividad.innerHTML = 'Registro de actividades de extensión'
+                break;
+        
+            default:
+                break;
+        }
     }
 }
 
