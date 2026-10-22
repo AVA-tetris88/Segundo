@@ -58,7 +58,7 @@ async function cargarActividad(actividad){
                 <button type="submit">Registar actividad de extensión</button>`
                 h1Actividad.innerHTML = 'Registro de actividades de extensión'
                 frmRegistroActividades.addEventListener('submit', async function(e){
-                    e.preventDefault;
+                    e.preventDefault();
                     await registrarActividades(sessionStorage.getItem('actividad'));
                 });
                 break;

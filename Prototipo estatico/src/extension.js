@@ -27,7 +27,7 @@ async function registrarExtension(nProfesor, tActividad, nActividad, tituloP, fe
     const { data, error } = await _supabase
     .from('actividades_de_extension')
     .insert([
-    {nombre_profesor: nProfesor, tipo_actividad: tActividad, nombre_actividad: nActividad, titulo_participacion: tituloP, fecha: fecha, lugar: lugar, tipo_participacion: tipoP, organizadores: organizadores, comentarios: otraInfo}
+    {nombre_profesor: nProfesor, tipo_actividad: tActividad, nombre_actividad: nActividad, titulo_participacion: tituloP, fecha: fecha, lugar: lugar, tipo_participacion: tipoP, organizadores: organizadores, otra_informacion: otraInfo}
     ])
     .select();
 //Si hay algún error lo imprime
