@@ -15,4 +15,4 @@ async function verificarSesion() {
     else alert('Todo bien');
 }
 
-window.verificar = verificarSesion();
+if(!window.location.pathname.endsWith('index.html')) window.verificar = verificarSesion();
