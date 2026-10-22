@@ -15,4 +15,6 @@ async function verificarSesion() {
     else alert('Todo bien');
 }
 
-if(!window.location.pathname.endsWith('index.html')) window.verificar = verificarSesion();
+if (!rutaActual.endsWith('index.html') && rutaActual !== '/') {
+    window.verificar = verificarSesion();
+}
