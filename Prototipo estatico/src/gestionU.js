@@ -132,3 +132,5 @@ function limpiarFormulario(){
 
 //Ejecuta la función 'cargarUsuarios'
 cargarUsuarios();
+
+verificar;
