@@ -27,7 +27,7 @@ async function cargarActividad(actividad){
             <input type="text" name="nActividad" id="nActividad" class="inpCampo" required>
             <br>
             <label for="tituloP">Título de la participación</label>
-            <select name="tituloP" id="tituloP" class="inpCampo" required>${obtenerOpciones('extesion_titulo_participacion','titulo')}</select>
+            <select name="tituloP" id="tituloP" class="inpCampo" required>${obtenerOpciones('extension_titulo_participacion','titulo')}</select>
             <br>
             <label for="fecha">Fecha:</label>
             <input type="date" name="fecha" id="fecha" class="inpCampo" required>
@@ -45,6 +45,7 @@ async function cargarActividad(actividad){
             <textarea name="otraInfo" id="otraInfo" cols="45" rows="10" class="inpCampo"></textarea>
             <br>
             <button type="submit">Registar actividad de extensión</button>`
+            h1Actividad.innerHTML = 'Registro de actividades de extensión'
             break;
     
         default:

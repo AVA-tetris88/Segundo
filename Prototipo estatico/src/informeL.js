@@ -67,8 +67,4 @@ function clicVer(actividad){
 //   \/\_____\ \ \_____\ \ \_____\ \ \_____\ \ \_____\ \ \_\\"\_\ \ \_____\ \ \_\ \ \_\ \_\ 
 //    \/_____/  \/_____/  \/_____/  \/_____/  \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_/\/_/ 
 
-//Evento que ejecuta la funci´´on 'mostrarModal' al apretar algún botón de actividad
-btnActividad.addEventListener("click", function() {
-//Ejecuta la función 'mostrarModal' con el texto dentro del botón como variable
-    mostrarModal(btnActividad.innerHTML);
-})
+
