@@ -67,7 +67,7 @@ async function cargarActividad(actividad){
             default:
                 break;
         }
-        cargarProfesorActual();
+        //cargarProfesorActual();
     }
 }
 
