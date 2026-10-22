@@ -6,6 +6,7 @@
 
 const h1Actividad = document.getElementById('h1Actividad');
 const frmRegistroActividades = document.getElementById('frmRegistroActividades');
+const inpCampos = document.querySelectorAll('.inpCampo');
 
 //   ______   __  __    __   __    ______    __    ______    __   __    ______    ______    
 //  /\  ___\ /\ \/\ \  /\ "-.\ \  /\  ___\  /\ \  /\  __ \  /\ "-.\ \  /\  ___\  /\  ___\   
@@ -26,7 +27,7 @@ async function cargarActividad(actividad){
             opNombres = opNombres + `<option>${profe.nombre}</option>`
         })
         switch (actividad) {
-            case 'Ext':
+            case 'actividad_de_extension':
                 frmRegistroActividades.innerHTML = 
                 `<label for="nProfesor">Nombre del profesor:</label>
                 <select name="nProfesor" id="nProfesor" class="inpCampo" required>${opNombres}</select>
@@ -57,16 +58,63 @@ async function cargarActividad(actividad){
                 <br>
                 <button type="submit">Registar actividad de extensión</button>`
                 h1Actividad.innerHTML = 'Registro de actividades de extensión'
+                frmRegistroActividades.addEventListener('submit', async function(e){
+                    e.preventDefault;
+                    await registrarExtension(sessionStorage.getItem('actividad'));
+                });
                 break;
         
             default:
                 break;
         }
+        cargarProfesorActual();
+    }
+}
+
+//Función que registra una nueva actividad de extensión
+async function registrarActividades(actividad, datos) {
+    switch (actividad) {
+        case 'actividad_de_extension':
+            const {data, error} = await _supabase
+            .from(actividad)
+            .insert([{
+                nombre_profesor : datos[0].value, tipo_actividad : datos[1].value, nombre_actividad : datos[2].value, titulo_actividad : datos[3].value, fecha : datos[4].value, lugar : datos[5].value, tipo_participacion : datos[6].value, organizadores : datos[7].value, otra_informacion: datos[8].value
+            }])
+
+            if(error) console.error('Error al registrar la actividad de extensión', error.message);
+            else{
+                console.log('Actividad de extensión registrada', data);
+                limpiarFormulario();
+            }
+            break;
+    
+        default:
+            break;
+    }
+}
+
+//Función que pone como predeterminado en el campo 'Nombre del profesor' al profesor que tiene la sesión iniciada
+async function cargarProfesorActual() {
+//Obtine el usuario que tiene la sesión iniciada
+    const {data: {user}, error: authError} = await _supabase.auth.getUser();
+//Si no encuentra una sesión iniciada imprime el problema
+    if (authError || !user) console.error("No hay sesión activa:", authError?.message);
+//Sino obtine 'nombre' de todos los usuarios con 'id' igual al usuario con la sesión iniada
+    else{
+        const {data, error} = await _supabase
+            .from('perfiles')
+            .select('nombre')
+            .eq('id', user.id)
+//Si hay algún error lo imprime
+            if (error) console.error("Error al obtener perfil:", error.message);
+//Sino cambia la opción del input de profesores por 'nombre'
+            else inpCampos[0].value = data[0].nombre;
     }
 }
 
 function limpiarFormulario(){
-
+    inpCampos.forEach(campo => campo.value = '');
+    cargarProfesorActual();
 }
 
 async function obtenerOpciones(tabla,dato) {
@@ -74,7 +122,7 @@ async function obtenerOpciones(tabla,dato) {
     .from(tabla)
     .select('*')
 
-    if(error) console.error(error);
+    if(error) console.error('Error al obtener las opciones',error.message);
     else{
         let opciones = '';
         data.forEach(fila => {
