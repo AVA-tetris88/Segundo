@@ -24,7 +24,7 @@ async function cargarActividad(actividad){
     else{
         let opNombres = '';
         data.forEach(profe =>{
-            opNombres = opNombres + `<option>${profe.nombre}</option>`
+            opNombres = opNombres + `<option value=${profe.nombre}>${profe.nombre}</option>`
         })
         switch (actividad) {
             case 'actividad_de_extension':
