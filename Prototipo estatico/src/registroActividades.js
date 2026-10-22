@@ -142,3 +142,5 @@ frmRegistroActividades.addEventListener('submit', async function(e){
     e.preventDefault();
     await registrarActividades(sessionStorage.getItem('actividad'));
 });
+
+verificar;

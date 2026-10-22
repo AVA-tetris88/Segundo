@@ -15,6 +15,12 @@ async function verificarSesion() {
     else alert('Todo bien');
 }
 
+// Obtenemos la ruta actual (ej: "/index.html" o "/contacto.html" o "/")
+const rutaActual = window.location.pathname;
+
+// Verificamos si NO es el index
 if (!rutaActual.endsWith('index.html') && rutaActual !== '/') {
     window.verificar = verificarSesion();
+} else {
+    console.log("Estás en el index");
 }
