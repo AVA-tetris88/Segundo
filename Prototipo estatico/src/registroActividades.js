@@ -82,6 +82,7 @@ async function registrarActividades(actividad) {
 
             if(error) console.error('Error al registrar la actividad de extensión', error.message);
             else{
+                alert('Actividad de extensión registrada correctamente');
                 console.log('Actividad de extensión registrada', data);
                 limpiarFormulario();
             }
