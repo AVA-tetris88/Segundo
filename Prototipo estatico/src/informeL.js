@@ -23,42 +23,11 @@ function mostrarModal(actividad){
 //Si es igual a 'Ext' muestra la información para las actividades de extensión
         case 'Ext':
             h1Act.innerHTML = `Actividad de extensión`;
-            divModalAct.style.visibility = 'visible';
-            btnRegistro.setAttribute("onclick","clicRegistro('Ext')")
-            btnVisualizacion.setAttribute("onclick","clicVisualizacion('Ext')")
             break;
         default:
             break;
     };
-}
-
-//Función que dirige a las distintas páginas para registrar actividades
-function clicRegistro(actividad){
-//Pregunta por la variable 'actividad'
-    switch (actividad) {
-//Si es igual a 'Ext' redirige a la página 'extensiones'
-        case 'Ext':
-            sessionStorage.setItem('actividad', 'actividades_de_extension');
-            break;
-        default:
-            break;
-    }
-    window.location.replace('./registroActividades.html');
-}
-
-//Función que dirige a la página 'reporteriaInformeL'
-function clicVisualizacion(actividad){
-//Pregunta por la variable 'actividad'
-    switch (actividad) {
-//Si es igual a 'Ext' guarda en 'sessionStorage' la variable 'actividad' como 'activdades_de_extension'
-        case 'Ext':
-            sessionStorage.setItem('actividad', 'actividades_de_extension');
-            break;
-        default:
-            break;
-    }
-//Redirige a la página 'reporteriaInformeL'
-    window.location.replace('./reporteriaInformeL');
+    divModalAct.style.visibility = 'visible';
 }
 
 //   ______    ______    ______    __  __    ______    __   __    ______    __    ______    
@@ -67,5 +36,18 @@ function clicVisualizacion(actividad){
 //   \/\_____\ \ \_____\ \ \_____\ \ \_____\ \ \_____\ \ \_\\"\_\ \ \_____\ \ \_\ \ \_\ \_\ 
 //    \/_____/  \/_____/  \/_____/  \/_____/  \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_/\/_/ 
 
-window.mostrarModal = mostrarModal();
-window.clicVisualizacion = clicVisualizacion;
+btnExtension.addEventListener('click', function(e){
+    e.preventDefault();
+    sessionStorage.setItem('actividad', 'actividades_de_extension');
+    mostrarModal('Ext');
+});
+
+btnRegistro.addEventListener('click', function(e){
+    e.preventDefault();
+    window.location.replace('./registroActividades.html');
+});
+
+btnVisualizacion.addEventListener('click', function(e){
+    e.preventDefault();
+    window.location.replace('./reporteriaInformeL');
+});
