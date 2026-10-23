@@ -32,12 +32,9 @@ async function cargarActividad(datos, actividad) {
             case 'actividades_de_extension':
 //Define variables de texto que serán opciones de filtros
                 let opProfesores = ``;
-                let opTipoA = `<option value="Charla">Charla</option><option value="Proyecto">Proyecto</option><option value="Seminario">Seminario</option>`
-                let opTituloP = `<option value="Ponente">Ponente</option><option value="Asistente">Asistente</option>`
-                let opTipoP = `<option value="Ponente">Ponente</option><option value="Charlista">Charlista</option>`    
 //Busca y guarda los nombre de profesores como opciones de filtros
-                data.forEach(prof => {
-                    opProfesores = opProfesores + `<option value="${prof.nombre}">${prof.nombre}</option>` 
+                data.forEach(profe => {
+                    opProfesores = opProfesores + `<option value="${profe.nombre}">${profe.nombre}</option>` 
                 });
 //Escribe las columnas de la tabla 'actividades_de_extension' de la base de datos
                 tblCabeza.innerHTML = 
@@ -57,7 +54,7 @@ async function cargarActividad(datos, actividad) {
                 <label for="nActividad">Nombre de la actividad:</label>
                 <input type="text" name="nActividad" class="inpFiltro" id="nActividad" onchange="cargarFiltro('nombre_actividad',1)">
                 <label for="tipo">Tipo de actividad:</label>
-                <select name="tipo" class="inpFiltro" id="tipo" onchange="cargarFiltro('tipo',2)">${opTipoA}</select>
+                <select name="tipo" class="inpFiltro" id="tipo" onchange="cargarFiltro('tipo',2)">${obtenerOpciones('extension_tipo_actividad','tipo')}</select>
                 <label for="tituloP">Título de la participación:</label>
                 <select name="tituloP" class="inpFiltro" id="tituloP" onchange="cargarFiltro('titulo_participacion',3)">${opTituloP}</select>
                 <label for="fecha">Fecha:</label>
