@@ -3,7 +3,9 @@
 //  \ \ \'/  \ \  __ \ \ \  __<  \ \ \ \ \  __ \ \ \  __<  \ \ \____ \ \  __\  \ \___  \  
 //   \ \__|   \ \_\ \_\ \ \_\ \_\ \ \_\ \ \_\ \_\ \ \_____\ \ \_____\ \ \_____\ \/\_____\ 
 //    \/_/     \/_/\/_/  \/_/ /_/  \/_/  \/_/\/_/  \/_____/  \/_____/  \/_____/  \/_____/ 
+
 import {cerrarSesion, verificarAdministrador} from "../supabase.js";
+
 const btnGestionUsuarios = document.getElementById("btnGestionUsuarios"); 
 const btnCerrarSesion = document.getElementById("btnCerrarSesion");
 
@@ -22,11 +24,9 @@ const btnCerrarSesion = document.getElementById("btnCerrarSesion");
 //    \/_____/  \/_____/  \/_____/  \/_____/  \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_/\/_/ 
 
 //Ejecuta la funcón 'verificarAdministrador'
-verificarAdministrador();
+verificarAdministrador(btnGestionUsuarios);
 
 btnCerrarSesion.addEventListener('click', async function(e){
     e.preventDefault
     await cerrarSesion();
 })
-
-verificar;

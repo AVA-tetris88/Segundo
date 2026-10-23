@@ -5,9 +5,9 @@
 //    \/_/     \/_/\/_/  \/_/ /_/  \/_/  \/_/\/_/  \/_____/  \/_____/  \/_____/  \/_____/ 
 
 import {iniciarSesion} from "../supabase.js";
+
 const inpCorreo = document.getElementById("correo");
 const inpContrasenna = document.getElementById("contrasenna");
-const btnInicioSesion = document.querySelector("#btnInicioSesion");
 const frmInicioSesion = document.getElementById("frmInicioSesion");
 
 //   ______    ______    ______    __  __    ______    __   __    ______    __    ______    
@@ -21,17 +21,17 @@ document.addEventListener('keypress', async function(e){
     if(e.key == 'Enter'){
         e.preventDefault();
 //Verifica que los inputs sí tengan algo escrito, entonces ejecuta la función
-        if(inpCorreo.value != "" && inpContrasenna.value != ""){
+        if(inpCorreo.value != '' && inpContrasenna.value != ''){
             await iniciarSesion(inpCorreo.value, inpContrasenna.value);
         }
     }
 });
 
 //Evento que ejecuta la función 'iniciarSesion' cuando se aprieta el botón
-frmInicioSesion.addEventListener("submit", async function(e) {
+frmInicioSesion.addEventListener('submit', async function(e) {
     e.preventDefault();
 //Verifica que los inputs sí tengan algo escrito, entonces ejecuta la función
-    if(inpCorreo.value != "" && inpContrasenna.value != ""){
+    if(inpCorreo.value != '' && inpContrasenna.value != ''){
         await iniciarSesion(inpCorreo.value, inpContrasenna.value);
     }
 });

@@ -4,11 +4,11 @@
 //   \ \__|   \ \_\ \_\ \ \_\ \_\ \ \_\ \ \_\ \_\ \ \_____\ \ \_____\ \ \_____\ \/\_____\ 
 //    \/_/     \/_/\/_/  \/_/ /_/  \/_/  \/_/\/_/  \/_____/  \/_____/  \/_____/  \/_____/
 
-const btnActividad = document.querySelector("#btnActividad");
-const divModalAct = document.querySelector("#modalAct");
+const btnActividad = document.getElementById("btnActividad");
+const divModalAct = document.getElementById("divModalAct");
 const h1Act = document.getElementById("h1Act");
-const btnRegistrarAtc = document.getElementById("Registrar");
-const btnVerAct = document.querySelector("#VerAct");
+const btnRegistro = document.getElementById("btnRegistro");
+const btnVisualizacion = document.getElementById("btnVisualizacion");
 
 //   ______   __  __    __   __    ______    __    ______    __   __    ______    ______    
 //  /\  ___\ /\ \/\ \  /\ "-.\ \  /\  ___\  /\ \  /\  __ \  /\ "-.\ \  /\  ___\  /\  ___\   
@@ -22,10 +22,10 @@ function mostrarModal(actividad){
     switch (actividad) {
 //Si es igual a 'Ext' muestra la información para las actividades de extensión
         case 'Ext':
-            h1Act.innerHTML = "Actividad de extensión";
-            divModalAct.style.visibility = "visible";
-            btnRegistrarAtc.setAttribute("onclick","clicRegistrar('Ext')")
-            btnVerAct.setAttribute("onclick","clicVer('Ext')")
+            h1Act.innerHTML = `Actividad de extensión`;
+            divModalAct.style.visibility = 'visible';
+            btnRegistro.setAttribute("onclick","clicRegistro('Ext')")
+            btnVisualizacion.setAttribute("onclick","clicVisializacion('Ext')")
             break;
         default:
             break;
@@ -33,7 +33,7 @@ function mostrarModal(actividad){
 }
 
 //Función que dirige a las distintas páginas para registrar actividades
-function clicRegistrar(actividad){
+function clicRegistro(actividad){
 //Pregunta por la variable 'actividad'
     switch (actividad) {
 //Si es igual a 'Ext' redirige a la página 'extensiones'
@@ -43,11 +43,11 @@ function clicRegistrar(actividad){
         default:
             break;
     }
-    window.location.replace("./registroActividades.html");
+    window.location.replace('./registroActividades.html');
 }
 
 //Función que dirige a la página 'reporteriaInformeL'
-function clicVer(actividad){
+function clicVisializacion(actividad){
 //Pregunta por la variable 'actividad'
     switch (actividad) {
 //Si es igual a 'Ext' guarda en 'sessionStorage' la variable 'actividad' como 'activdades_de_extension'
@@ -58,7 +58,7 @@ function clicVer(actividad){
             break;
     }
 //Redirige a la página 'reporteriaInformeL'
-    window.location.replace("./reporteriaInformeL");
+    window.location.replace('./reporteriaInformeL');
 }
 
 //   ______    ______    ______    __  __    ______    __   __    ______    __    ______    
@@ -66,5 +66,3 @@ function clicVer(actividad){
 //  \ \___  \ \ \  __\  \ \ \____ \ \ \_\ \ \ \  __\  \ \ \-.  \ \ \ \____ \ \ \ \ \  __ \  
 //   \/\_____\ \ \_____\ \ \_____\ \ \_____\ \ \_____\ \ \_\\"\_\ \ \_____\ \ \_\ \ \_\ \_\ 
 //    \/_____/  \/_____/  \/_____/  \/_____/  \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_/\/_/ 
-
-verificar;

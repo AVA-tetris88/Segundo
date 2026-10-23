@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reportería</title>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="supabase.js" defer></script>
     <script src="src/reporteriaIL.js" type="module"defer></script>
     <link rel="stylesheet" href="src/style.css">
 </head>
@@ -16,11 +15,11 @@
     <main>
         <section>
             <label for="actividad">Mostrando</label>
-            <select name="actividad" id="actividad">
+            <select name="actividad" id="inpMostrarActividad">
                 <option value="actividades_de_extension">Actividades de extensión</option>
                 <option value="actividades_de_investigacion">Actividades de investigación</option>
             </select>
-            <div id="filtros">
+            <div id="sctFiltros">
             </div>
         </section>
         <table>
