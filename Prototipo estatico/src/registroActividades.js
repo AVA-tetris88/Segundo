@@ -143,6 +143,4 @@ frmRegistroActividades.addEventListener('submit', async function(e){
     await registrarActividades(sessionStorage.getItem('actividad'));
 });
 
-window.obtenerOpciones() = obtenerOpciones();
-window.cargarProfesorActual() = cargarProfesorActual();
 verificar;
