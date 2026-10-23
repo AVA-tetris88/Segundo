@@ -8,18 +8,6 @@
 const { createClient } = supabase;
 const SUPABASE_URL = "https://pxndzjbdfcdoxjruihid.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB4bmR6amJkZmNkb3hqcnVpaGlkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTEyODkzMzcsImV4cCI6MjEwNjg2NTMzN30.MEupu-T5V84jKPj_maKO8-kJce_B0wzSPWbakVzSVY0";
-const rutaActual = window.location.pathname;
-//INDEXIS
-
-//INICIO
-
-//INFORMEL
-
-//REGISTROACTIVIDADES
-
-//REPORTERIAIL
-
-//GESTIONU
 
 //   ______   __  __    __   __    ______    __    ______    __   __    ______    ______    
 //  /\  ___\ /\ \/\ \  /\ "-.\ \  /\  ___\  /\ \  /\  __ \  /\ "-.\ \  /\  ___\  /\  ___\   
@@ -29,11 +17,14 @@ const rutaActual = window.location.pathname;
 
 //GLOBAL
 async function verificarSesion() {
-    const {data: {user}, error: authError} = await _supabase.auth.getUser();
-    if (authError || !user){
-        alert("No hay sesión activa");
-        console.error('No hay sesión activa:', authError)
-        window.location.replace('index.html');
+    const rutaActual = window.location.pathname;
+    if (!rutaActual.endsWith('index.html') && rutaActual !== '/') {
+        const {data: {user}, error: authError} = await _supabase.auth.getUser();
+        if (authError || !user){
+            alert("No hay sesión activa");
+            console.error('No hay sesión activa:', authError)
+            window.location.replace('index.html');
+        }
     }
 }
 
@@ -60,6 +51,39 @@ export async function iniciarSesion(correo, contrasenna) {
 
 //INICIO --------------------------------------------------------------------------------------------------------
 
+//Función que verifica que el usuario sea administrador
+export async function verificarAdministrador() {
+    const {data: {user}, error: authError} = await _supabase.auth.getUser();
+//Si no hay una sesión activa lo imprime
+    if (authError || !user) {
+        console.error("No hay sesión activa:", authError?.message);
+        return;
+    }
+//Agarra la propiedad 'tipo' únicamente con del usuario que comparte 'id' con el que tiene la sesión activa
+    const {data, error} = await _supabase
+        .from('perfiles')
+        .select('tipo')
+        .eq('id', user.id)
+//Si hay algún error a momento de obtener 'tipo' lo imprime
+    if (error) {
+        console.error("Error al obtener tipo:", error.message);
+        return;
+    }
+//Sino vuelve visible un botón para entrar a la página 'gestionUsuarios'
+    else{
+        if(data[0].tipo == "Administrador") btnGestionUsuarios.style.visibility = 'visible';
+    }
+}
+
+export async function cerrarSesion() {
+    const {error} = await _supabase.auth.signOut({scope: 'local'});
+
+    if (error)console.error("Error al cerrar sesión:", error.message);
+    else {
+        window.location.replace("index.html"); 
+        console.log("Sesión cerrada exitosamente");
+    }
+}
 //INFORMEL ------------------------------------------------------------------------------------------------------
 
 //REGISTROACTIVIDADES -------------------------------------------------------------------------------------------
@@ -75,6 +99,5 @@ export async function iniciarSesion(correo, contrasenna) {
 //    \/_____/  \/_____/  \/_____/  \/_____/  \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_/\/_/ 
 
 window._supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-if (!rutaActual.endsWith('index.html') && rutaActual !== '/') {
-    window.verificar = verificarSesion();
-}
+
+window.verificar = verificarSesion();
