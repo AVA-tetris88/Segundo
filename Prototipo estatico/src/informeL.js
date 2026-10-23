@@ -68,5 +68,4 @@ function clicVisualizacion(actividad){
 //    \/_____/  \/_____/  \/_____/  \/_____/  \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_/\/_/ 
 
 window.mostrarModal = mostrarModal();
-window.clicRegistro = clicRegistro();
 window.clicVisualizacion = clicVisualizacion;
