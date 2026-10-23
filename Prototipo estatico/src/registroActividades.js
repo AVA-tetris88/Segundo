@@ -90,7 +90,7 @@ async function registrarActividades(actividad) {
 }
 
 //Función que pone como predeterminado en el campo 'Nombre del profesor' al profesor que tiene la sesión iniciada
-async function cargarProfesorActual() {
+export async function cargarProfesorActual() {
     const inpCampos = document.querySelectorAll('.inpCampo');
 //Obtine el usuario que tiene la sesión iniciada
     const {data: {user}, error: authError} = await _supabase.auth.getUser();
@@ -115,7 +115,7 @@ function limpiarFormulario(){
     cargarProfesorActual();
 }
 
-async function obtenerOpciones(tabla,dato) {
+export async function obtenerOpciones(tabla,dato) {
     const {data, error} = await _supabase
     .from(tabla)
     .select('*')

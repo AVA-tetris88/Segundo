@@ -4,6 +4,7 @@
 //   \ \__|   \ \_\ \_\ \ \_\ \_\ \ \_\ \ \_\ \_\ \ \_____\ \ \_____\ \ \_____\ \/\_____\ 
 //    \/_/     \/_/\/_/  \/_/ /_/  \/_/  \/_/\/_/  \/_____/  \/_____/  \/_____/  \/_____/
 
+import {obtenerOpciones, cargarProfesorActual} from "./registroActividades";
 const inpMostrarActividad = document.getElementById("actividad");
 const tblCabeza = document.getElementById("tblCabeza");
 const tblCuerpo = document.getElementById("tblCuerpo");
@@ -56,13 +57,13 @@ async function cargarActividad(datos, actividad) {
                 <label for="tipo">Tipo de actividad:</label>
                 <select name="tipo" class="inpFiltro" id="tipo" onchange="cargarFiltro('tipo',2)">${obtenerOpciones('extension_tipo_actividad','tipo')}</select>
                 <label for="tituloP">Título de la participación:</label>
-                <select name="tituloP" class="inpFiltro" id="tituloP" onchange="cargarFiltro('titulo_participacion',3)">${opTituloP}</select>
+                <select name="tituloP" class="inpFiltro" id="tituloP" onchange="cargarFiltro('titulo_participacion',3)">${obtenerOpciones('extension_titulo_participacion','titulo')}</select>
                 <label for="fecha">Fecha:</label>
                 <input type="date" name="fecha" class="inpFiltro"id="fecha" onchange="cargarFiltro('fecha',4)">
                 <label for="lugar">Lugar:</label>
                 <input type="text" name="lugar" class="inpFiltro" id="lugar" onchange="cargarFiltro('lugar',5)">
                 <label for="tipoP">Tipo de participación:</label>
-                <select name="tipoP" class="inpFiltro" id="tipoP" onchange="cargarFiltro('tipo_participacion',6)">${opTipoP}</select>
+                <select name="tipoP" class="inpFiltro" id="tipoP" onchange="cargarFiltro('tipo_participacion',6)">${obtenerOpciones('extension_tipo_participacion','tipo')}</select>
                 <label for="organizadores">Organizador(es):</label>
                 <input type="text" name="organizadores" class="inpFiltro" id="organizadores" onchange="cargarFiltro('organizadores',7)">
                 <label for="otraInfo">Otra información:</label>
