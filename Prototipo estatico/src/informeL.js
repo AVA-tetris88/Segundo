@@ -4,7 +4,7 @@
 //   \ \__|   \ \_\ \_\ \ \_\ \_\ \ \_\ \ \_\ \_\ \ \_____\ \ \_____\ \ \_____\ \/\_____\ 
 //    \/_/     \/_/\/_/  \/_/ /_/  \/_/  \/_/\/_/  \/_____/  \/_____/  \/_____/  \/_____/
 
-const btnActividad = document.getElementById("btnActividad");
+const btnExtension = document.getElementById("btnExtension");
 const divModalAct = document.getElementById("divModalAct");
 const h1Act = document.getElementById("h1Act");
 const btnRegistro = document.getElementById("btnRegistro");
@@ -25,7 +25,7 @@ function mostrarModal(actividad){
             h1Act.innerHTML = `Actividad de extensión`;
             divModalAct.style.visibility = 'visible';
             btnRegistro.setAttribute("onclick","clicRegistro('Ext')")
-            btnVisualizacion.setAttribute("onclick","clicVisializacion('Ext')")
+            btnVisualizacion.setAttribute("onclick","clicVisualizacion('Ext')")
             break;
         default:
             break;
@@ -47,7 +47,7 @@ function clicRegistro(actividad){
 }
 
 //Función que dirige a la página 'reporteriaInformeL'
-function clicVisializacion(actividad){
+function clicVisualizacion(actividad){
 //Pregunta por la variable 'actividad'
     switch (actividad) {
 //Si es igual a 'Ext' guarda en 'sessionStorage' la variable 'actividad' como 'activdades_de_extension'
@@ -66,3 +66,7 @@ function clicVisializacion(actividad){
 //  \ \___  \ \ \  __\  \ \ \____ \ \ \_\ \ \ \  __\  \ \ \-.  \ \ \ \____ \ \ \ \ \  __ \  
 //   \/\_____\ \ \_____\ \ \_____\ \ \_____\ \ \_____\ \ \_\\"\_\ \ \_____\ \ \_\ \ \_\ \_\ 
 //    \/_____/  \/_____/  \/_____/  \/_____/  \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_/\/_/ 
+
+window.mostrarModal = mostrarModal();
+window.clicRegistro = clicRegistro();
+window.clicVisualizacion = clicVisualizacion;
