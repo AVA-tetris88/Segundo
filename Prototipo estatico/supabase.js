@@ -202,7 +202,7 @@ export async function obtenerOpciones(tabla,dato) {
 //REPORTERIAIL --------------------------------------------------------------------------------------------------
 
 //Función para mostrar toda la información de las actividades en una tabla
-export async function cargarActividad(datos, actividad) {
+export async function cargarActividades(datos, actividad) {
 //Obtiene la información con los con 'tipo' igual a 'Profesor'
     const {data, error} = await _supabase
         .from('perfiles')
@@ -290,7 +290,7 @@ export async function aplicarFiltro(filtro, inp) {
 //Si hay algún error lo imprime
     if(error) console.error('Error al aplicar el filtro', error);
 //Sino ejecuta la función 'cargarActividad' con la información recolectada de la base de datos y la tabla que se buscó como variables
-    else cargarActividad(data, inpMostrarActividad.value);
+    else cargarActividades(data, inpMostrarActividad.value);
 }
 
 //Función que ejecuta la función 'cargarActividad'
@@ -304,7 +304,7 @@ export async function obtenerActividad(actividad, inp) {
 //Sino selecciona la opción correspondiente a la actividad seleccionada en el input para seleccionar actividades y ejecuta la función 'cargarActividad' con la información de la tabla y la actividad como variables
     else{
         inp.value = actividad;
-        cargarActividad(data, actividad);
+        cargarActividades(data, actividad);
     }
 }
 

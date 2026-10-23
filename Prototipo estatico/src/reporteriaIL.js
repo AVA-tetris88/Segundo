@@ -4,7 +4,7 @@
 //   \ \__|   \ \_\ \_\ \ \_\ \_\ \ \_\ \ \_\ \_\ \ \_____\ \ \_____\ \ \_____\ \/\_____\ 
 //    \/_/     \/_/\/_/  \/_/ /_/  \/_/  \/_/\/_/  \/_____/  \/_____/  \/_____/  \/_____/
 
-import {cargarActividad, aplicarFiltro, obtenerActividad} from "../supabase.js";
+import {cargarActividades, aplicarFiltro, obtenerActividad} from "../supabase.js";
 
 const inpMostrarActividad = document.getElementById("inpMostrarActividad");
 const tblCabeza = document.getElementById("tblCabeza");
