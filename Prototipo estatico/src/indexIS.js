@@ -4,35 +4,11 @@
 //   \ \__|   \ \_\ \_\ \ \_\ \_\ \ \_\ \ \_\ \_\ \ \_____\ \ \_____\ \ \_____\ \/\_____\ 
 //    \/_/     \/_/\/_/  \/_/ /_/  \/_/  \/_/\/_/  \/_____/  \/_____/  \/_____/  \/_____/ 
 
+import {iniciarSesion} from "../supabase.js";
 const inpCorreo = document.getElementById("correo");
 const inpContrasenna = document.getElementById("contrasenna");
 const btnInicioSesion = document.querySelector("#btnInicioSesion");
 const frmInicioSesion = document.getElementById("frmInicioSesion");
-
-//   ______   __  __    __   __    ______    __    ______    __   __    ______    ______    
-//  /\  ___\ /\ \/\ \  /\ "-.\ \  /\  ___\  /\ \  /\  __ \  /\ "-.\ \  /\  ___\  /\  ___\   
-//  \ \  __\ \ \ \_\ \ \ \ \-.  \ \ \ \____ \ \ \ \ \ \/\ \ \ \ \-.  \ \ \  __\  \ \___  \  
-//   \ \_\    \ \_____\ \ \_\\"\_\ \ \_____\ \ \_\ \ \_____\ \ \_\\"\_\ \ \_____\ \/\_____\ 
-//    \/_/     \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_____/  \/_/ \/_/  \/_____/  \/_____/ 
-
-//Función para iniciar sesión con la base de datos
-async function iniciarSesion(correo, contrasenna) {
-    const { data, error } = await _supabase.auth.signInWithPassword({
-      email: correo,
-      password: contrasenna
-    });
-//Si las credenciales son incorrectas o hay algún otro error lo imprime y alerta
-    if (error) {
-      console.error(error.message, error);
-      alert("Error: " + error.message);
-      return;
-    } 
-//Sino lleva a la página 'inicio'
-    else {
-      console.log("Inicio de sesión exitoso:", data);
-      window.location.replace("./inicio.html"); 
-    }
-}
 
 //   ______    ______    ______    __  __    ______    __   __    ______    __    ______    
 //  /\  ___\  /\  ___\  /\  ___\  /\ \/\ \  /\  ___\  /\ "-.\ \  /\  ___\  /\ \  /\  __ \   
@@ -41,9 +17,9 @@ async function iniciarSesion(correo, contrasenna) {
 //    \/_____/  \/_____/  \/_____/  \/_____/  \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_/\/_/ 
         
 //Evento que ejecuta la función 'iniciarSesion' cuando se aprieta la tecla enter
-document.addEventListener('keypress', async function(tecla){
-    if(tecla.key == 'Enter'){
-        tecla.preventDefault();
+document.addEventListener('keypress', async function(e){
+    if(e.key == 'Enter'){
+        e.preventDefault();
 //Verifica que los inputs sí tengan algo escrito, entonces ejecuta la función
         if(inpCorreo.value != "" && inpContrasenna.value != ""){
             await iniciarSesion(inpCorreo.value, inpContrasenna.value);
