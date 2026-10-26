@@ -4,7 +4,7 @@
 //   \ \__|   \ \_\ \_\ \ \_\ \_\ \ \_\ \ \_\ \_\ \ \_____\ \ \_____\ \ \_____\ \/\_____\ 
 //    \/_/     \/_/\/_/  \/_/ /_/  \/_/  \/_/\/_/  \/_____/  \/_____/  \/_____/  \/_____/
 
-import {iniciarSesion} from "../supabase.js";
+import {cargarUsuarios, agregarUsuarios, editarUsuarios} from "../supabase.js";
 
 const tblUsuarios = document.getElementById("tblUsuarios");
 const inpNombre = document.getElementById("nombre");
@@ -14,7 +14,7 @@ const inpTipo = document.getElementById("tipo");
 const frmAgregarUsuarios = document.getElementById("AgregarUsuarios");
 const divModalAct = document.querySelector(".modalAct");
 const h1Modal = document.getElementById("h1Modal");
-const btnModal = document.getElementById("btnModal");
+const btnAgregarU = document.getElementById("btnAgregarU");
 
 //   ______   __  __    __   __    ______    __    ______    __   __    ______    ______    
 //  /\  ___\ /\ \/\ \  /\ "-.\ \  /\  ___\  /\ \  /\  __ \  /\ "-.\ \  /\  ___\  /\  ___\   
@@ -38,7 +38,8 @@ function limpiarFormulario(){
 //   \/\_____\ \ \_____\ \ \_____\ \ \_____\ \ \_____\ \ \_\\"\_\ \ \_____\ \ \_\ \ \_\ \_\ 
 //    \/_____/  \/_____/  \/_____/  \/_____/  \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_/\/_/ 
 
+btnAgregarU.addEventListener('click', async function(e){
+    agregarUsuarios(inpNombre.value, inpCorreo.value, inpContrasenna.value, inpTipo.value);
+})
 //Ejecuta la función 'cargarUsuarios'
 cargarUsuarios();
-
-verificar;
