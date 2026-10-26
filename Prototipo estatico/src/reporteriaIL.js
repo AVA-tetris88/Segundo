@@ -25,13 +25,15 @@ const sctFiltros = document.getElementById("sctFiltros");
 //   \/\_____\ \ \_____\ \ \_____\ \ \_____\ \ \_____\ \ \_\\"\_\ \ \_____\ \ \_\ \ \_\ \_\ 
 //    \/_____/  \/_____/  \/_____/  \/_____/  \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_/\/_/ 
 
-//Evento que ejecuta la función 'cargarMostrarActividad' cada vez que se cambie la opción del input para seleccionar actividades
+inpMostrarActividad.value = sessionStorage.getItem 
+
+//Evento que ejecuta la función 'obtenerActividad' cada vez que se cambie la opción del input para seleccionar actividades
 inpMostrarActividad.addEventListener("change", async function(e){
     e.preventDefault();
 //Guarda en 'sessionStorage' la variable 'actividad' como el valor del input para seleccionar actividades
     sessionStorage.setItem('actividad',inpMostrarActividad.value)
-//Ejecuta la función 'cargarMostrarActividad' con el valor del input para seleccionar actividad como variable
-    await obtenerActividad(inpMostrarActividad.value, inpMostrarActividad);
+//Ejecuta la función 'obtenerActividad' con el valor del input para seleccionar actividad como variable
+    await obtenerActividad(inpMostrarActividad.value);
 })
 
 //Ejecuta la función 'cargarMostrarActividad' con la variable 'actividad' de 'sessionStorage'

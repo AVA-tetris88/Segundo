@@ -294,7 +294,7 @@ export async function aplicarFiltro(filtro, inp) {
 }
 
 //Función que ejecuta la función 'cargarActividades'
-export async function obtenerActividad(actividad, inp) {
+export async function obtenerActividad(actividad) {
 //Obtiene la toda la información de la tabla seleccionada
     const {data, error} = await _supabase
         .from(actividad)
@@ -303,7 +303,7 @@ export async function obtenerActividad(actividad, inp) {
     if(error) console.error('Error al obtener los datos:',error);
 //Sino selecciona la opción correspondiente a la actividad seleccionada en el input para seleccionar actividades y ejecuta la función 'cargarActividades' con la información de la tabla y la actividad como variables
     else{
-        inp.value = actividad;
+        inpMostrarActividad.value = actividad;
         cargarActividades(data, actividad);
     }
 }

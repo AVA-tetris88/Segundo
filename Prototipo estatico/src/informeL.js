@@ -4,11 +4,11 @@
 //   \ \__|   \ \_\ \_\ \ \_\ \_\ \ \_\ \ \_\ \_\ \ \_____\ \ \_____\ \ \_____\ \/\_____\ 
 //    \/_/     \/_/\/_/  \/_/ /_/  \/_/  \/_/\/_/  \/_____/  \/_____/  \/_____/  \/_____/
 
-const btnExtension = document.getElementById("btnExtension");
 const divModalAct = document.getElementById("divModalAct");
 const h1Act = document.getElementById("h1Act");
 const btnRegistro = document.getElementById("btnRegistro");
 const btnVisualizacion = document.getElementById("btnVisualizacion");
+const btnActividades = document.querySelectorAll(".btnActividad");
 
 //   ______   __  __    __   __    ______    __    ______    __   __    ______    ______    
 //  /\  ___\ /\ \/\ \  /\ "-.\ \  /\  ___\  /\ \  /\  __ \  /\ "-.\ \  /\  ___\  /\  ___\   
@@ -36,10 +36,18 @@ function mostrarModal(actividad){
 //   \/\_____\ \ \_____\ \ \_____\ \ \_____\ \ \_____\ \ \_\\"\_\ \ \_____\ \ \_\ \ \_\ \_\ 
 //    \/_____/  \/_____/  \/_____/  \/_____/  \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_/\/_/ 
 
-btnExtension.addEventListener('click', function(e){
-    e.preventDefault();
-    sessionStorage.setItem('actividad', 'actividades_de_extension');
-    mostrarModal('Ext');
+btnActividades.forEach((btnActividad, indice) => {
+    btnActividad.addEventListener('click', (e) => {
+        e.preventDefault();
+        switch (indice) {
+            case 0:
+                sessionStorage('actividad','actividades_de_extension')
+                break;
+        
+            default:
+                break;
+        }
+    });
 });
 
 btnRegistro.addEventListener('click', function(e){
