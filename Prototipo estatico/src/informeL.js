@@ -17,12 +17,14 @@ const btnActividades = document.querySelectorAll(".btnActividad");
 //    \/_/     \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_____/  \/_/ \/_/  \/_____/  \/_____/ 
 
 //Función que vuelve visible el modal
-function mostrarModal(actividad){
+function mostrarModal(tipo){
 //Pregunta por la variable actividad
-    switch (actividad) {
+    switch (tipo) {
 //Si es igual a 'Ext' muestra la información para las actividades de extensión
         case 'Ext':
             h1Act.innerHTML = `Actividad de extensión`;
+            divModalAct.style.visibility = 'visible';
+            sessionStorage.setItem('actividad','actividades_de_extension');
             break;
         default:
             break;
@@ -41,7 +43,7 @@ btnActividades.forEach((btnActividad, indice) => {
         e.preventDefault();
         switch (indice) {
             case 0:
-                sessionStorage.setItem('actividad','actividades_de_extension')
+                mostrarModal('Ext')
                 break;
         
             default:
