@@ -4,7 +4,7 @@
 //   \ \__|   \ \_\ \_\ \ \_\ \_\ \ \_\ \ \_\ \_\ \ \_____\ \ \_____\ \ \_____\ \/\_____\ 
 //    \/_/     \/_/\/_/  \/_/ /_/  \/_/  \/_/\/_/  \/_____/  \/_____/  \/_____/  \/_____/
 
-import {registrarActividades, cargarActividad, cargarPorfesorActual, obtenerOpciones} from "../supabase.js";
+import {registrarActividades, cargarActividad, cargarProfesorActual, obtenerOpciones} from "../supabase.js";
 
 const h1Actividad = document.getElementById('h1Actividad');
 const frmRegistroActividades = document.getElementById('frmRegistroActividades');
