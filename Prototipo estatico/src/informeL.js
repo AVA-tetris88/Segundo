@@ -41,7 +41,7 @@ btnActividades.forEach((btnActividad, indice) => {
         e.preventDefault();
         switch (indice) {
             case 0:
-                sessionStorage('actividad','actividades_de_extension')
+                sessionStorage.setItem('actividad','actividades_de_extension')
                 break;
         
             default:
