@@ -16,7 +16,7 @@ const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 //    \/_/     \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_____/  \/_/ \/_/  \/_____/  \/_____/ 
 
 //GLOBAL
-async function verificarSesion() {
+export async function verificarSesion() {
     const rutaActual = window.location.pathname;
     if (!rutaActual.endsWith('index.html') && rutaActual !== '/') {
         const {data: {user}, error: authError} = await _supabase.auth.getUser();
@@ -377,5 +377,3 @@ export async function editarUsuarios(nuevoNombre, nuevoCorreo, nuevoTipo) {
 //    \/_____/  \/_____/  \/_____/  \/_____/  \/_____/  \/_/ \/_/  \/_____/  \/_/  \/_/\/_/ 
 
 window._supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-window.verificar = await verificarSesion();

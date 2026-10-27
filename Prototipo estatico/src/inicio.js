@@ -4,8 +4,7 @@
 //   \ \__|   \ \_\ \_\ \ \_\ \_\ \ \_\ \ \_\ \_\ \ \_____\ \ \_____\ \ \_____\ \/\_____\ 
 //    \/_/     \/_/\/_/  \/_/ /_/  \/_/  \/_/\/_/  \/_____/  \/_____/  \/_____/  \/_____/ 
 
-verificar;
-import {cerrarSesion, verificarAdministrador} from "../supabase.js";
+import {cerrarSesion, verificarAdministrador, verificar} from "../supabase.js";
 
 const btnGestionUsuarios = document.getElementById("btnGestionUsuarios"); 
 const btnCerrarSesion = document.getElementById("btnCerrarSesion");
@@ -31,3 +30,5 @@ btnCerrarSesion.addEventListener('click', async function(e){
     e.preventDefault
     await cerrarSesion();
 });
+
+verificar();
