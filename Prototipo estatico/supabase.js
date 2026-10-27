@@ -4,10 +4,10 @@
 //   \ \__|   \ \_\ \_\ \ \_\ \_\ \ \_\ \ \_\ \_\ \ \_____\ \ \_____\ \ \_____\ \/\_____\ 
 //    \/_/     \/_/\/_/  \/_/ /_/  \/_/  \/_/\/_/  \/_____/  \/_____/  \/_____/  \/_____/
 
-//GLOBAL
 const { createClient } = supabase;
 const SUPABASE_URL = "https://pxndzjbdfcdoxjruihid.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB4bmR6amJkZmNkb3hqcnVpaGlkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTEyODkzMzcsImV4cCI6MjEwNjg2NTMzN30.MEupu-T5V84jKPj_maKO8-kJce_B0wzSPWbakVzSVY0";
+const rutaActual = window.location.pathname;
 
 //   ______   __  __    __   __    ______    __    ______    __   __    ______    ______    
 //  /\  ___\ /\ \/\ \  /\ "-.\ \  /\  ___\  /\ \  /\  __ \  /\ "-.\ \  /\  ___\  /\  ___\   
@@ -17,7 +17,6 @@ const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 
 //GLOBAL
 export async function verificarSesion() {
-    const rutaActual = window.location.pathname;
     if (!rutaActual.endsWith('index.html') && rutaActual !== '/') {
         const {data: {user}, error: authError} = await _supabase.auth.getUser();
         if (authError || !user){
@@ -52,7 +51,7 @@ export async function iniciarSesion(correo, contrasenna) {
 //INICIO --------------------------------------------------------------------------------------------------------
 
 //Función que verifica que el usuario sea administrador
-export async function verificarAdministrador(btn) {
+export async function verificarAdministrador() {
     const {data: {user}, error: authError} = await _supabase.auth.getUser();
 //Si no hay una sesión activa lo imprime
     if (authError || !user) {
@@ -69,9 +68,17 @@ export async function verificarAdministrador(btn) {
         console.error('Error al obtener tipo:', error.message);
         return;
     }
-//Sino vuelve visible un botón para entrar a la página 'gestionUsuarios'
-    else{
-        if(data[0].tipo == 'Administrador') btn.style.visibility = 'visible';
+//Si la ruta es 'inicio' vuelve visible un botón para entrar a la página 'gestionUsuarios'
+    else if(!rutaActual.endsWith('inicio.html') && rutaActual !== '/inicio'){
+        if(data[0].tipo == 'Administrador') btnGestionUsuarios.style.visibility = 'visible';
+    }
+//Si la ruta en 'gestionUsuarios'
+    else if(!rutaActual.endsWith('gestionUsuarios.html') && rutaActual !== '/gestionUsuarios'){
+//Si no es un usuario alerta 'Página solo apra administradores' y redirige a 'inicio'
+        if(data[0].tipo != 'Administrador'){
+            alert('Página solo para administradores');
+            window.location.replace('./inicio.html');
+        }
     }
 }
 
