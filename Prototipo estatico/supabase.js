@@ -56,7 +56,7 @@ export async function verificarAdministrador() {
 //Si no hay una sesión activa lo imprime
     if (authError || !user) {
         console.error('No hay sesión activa:', authError?.message);
-        window.location.replace('./inicio.html');
+        window.location.replace('./index.html');
     }
 //Agarra la propiedad 'tipo' únicamente con del usuario que comparte 'id' con el que tiene la sesión activa
     const {data, error} = await _supabase
@@ -69,11 +69,11 @@ export async function verificarAdministrador() {
         return;
     }
 //Si la ruta es 'inicio' vuelve visible un botón para entrar a la página 'gestionUsuarios'
-    else if(!rutaActual.endsWith('inicio.html') && rutaActual !== '/inicio'){
+    else if(rutaActual.endsWith('inicio.html') || rutaActual == '/inicio'){
         if(data[0].tipo == 'Administrador') btnGestionUsuarios.style.visibility = 'visible';
     }
 //Si la ruta en 'gestionUsuarios'
-    else if(!rutaActual.endsWith('gestionUsuarios.html') && rutaActual !== '/gestionUsuarios'){
+    else if(rutaActual.endsWith('gestionUsuarios.html') || rutaActual == '/gestionUsuarios'){
 //Si no es un usuario alerta 'Página solo apra administradores' y redirige a 'inicio'
         if(data[0].tipo != 'Administrador'){
             alert('Página solo para administradores');
