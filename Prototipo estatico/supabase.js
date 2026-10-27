@@ -378,4 +378,4 @@ export async function editarUsuarios(nuevoNombre, nuevoCorreo, nuevoTipo) {
 
 window._supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-window.verificar = verificarSesion();
+window.verificar = await verificarSesion();
