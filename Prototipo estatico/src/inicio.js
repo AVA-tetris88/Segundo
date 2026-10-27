@@ -4,7 +4,6 @@
 //   \ \__|   \ \_\ \_\ \ \_\ \_\ \ \_\ \ \_\ \_\ \ \_____\ \ \_____\ \ \_____\ \/\_____\ 
 //    \/_/     \/_/\/_/  \/_/ /_/  \/_/  \/_/\/_/  \/_____/  \/_____/  \/_____/  \/_____/ 
 
-import { version } from "react";
 import {cerrarSesion, verificarAdministrador} from "../supabase.js";
 
 const btnGestionUsuarios = document.getElementById("btnGestionUsuarios"); 
