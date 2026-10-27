@@ -4,6 +4,8 @@
 //   \ \__|   \ \_\ \_\ \ \_\ \_\ \ \_\ \ \_\ \_\ \ \_____\ \ \_____\ \ \_____\ \/\_____\ 
 //    \/_/     \/_/\/_/  \/_/ /_/  \/_/  \/_/\/_/  \/_____/  \/_____/  \/_____/  \/_____/
 
+verificar;
+
 const divModalAct = document.getElementById("divModalAct");
 const h1Act = document.getElementById("h1Act");
 const btnRegistro = document.getElementById("btnRegistro");
@@ -61,5 +63,3 @@ btnVisualizacion.addEventListener('click', function(e){
     e.preventDefault();
     window.location.replace('./reporteriaInformeL');
 });
-
-verificar;

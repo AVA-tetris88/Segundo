@@ -80,7 +80,7 @@ export async function cerrarSesion() {
 
     if (error)console.error('Error al cerrar sesión:', error.message);
     else {
-        //window.location.replace('index.html'); 
+        window.location.replace('index.html'); 
         console.log('Sesión cerrada exitosamente');
     }
 }

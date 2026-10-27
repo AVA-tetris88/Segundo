@@ -4,6 +4,7 @@
 //   \ \__|   \ \_\ \_\ \ \_\ \_\ \ \_\ \ \_\ \_\ \ \_____\ \ \_____\ \ \_____\ \/\_____\ 
 //    \/_/     \/_/\/_/  \/_/ /_/  \/_/  \/_/\/_/  \/_____/  \/_____/  \/_____/  \/_____/
 
+verificar;
 import {registrarActividades, cargarActividad, cargarProfesorActual, obtenerOpciones} from "../supabase.js";
 
 const h1Actividad = document.getElementById('h1Actividad');
@@ -33,5 +34,3 @@ frmRegistroActividades.addEventListener('submit', async function(e){
     e.preventDefault();
     await registrarActividades(sessionStorage.getItem('actividad'));
 });
-
-verificar;

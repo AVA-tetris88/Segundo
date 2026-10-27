@@ -4,6 +4,7 @@
 //   \ \__|   \ \_\ \_\ \ \_\ \_\ \ \_\ \ \_\ \_\ \ \_____\ \ \_____\ \ \_____\ \/\_____\ 
 //    \/_/     \/_/\/_/  \/_/ /_/  \/_/  \/_/\/_/  \/_____/  \/_____/  \/_____/  \/_____/ 
 
+verificar;
 import {iniciarSesion} from "../supabase.js";
 
 const inpCorreo = document.getElementById("correo");

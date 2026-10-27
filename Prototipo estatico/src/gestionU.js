@@ -4,6 +4,7 @@
 //   \ \__|   \ \_\ \_\ \ \_\ \_\ \ \_\ \ \_\ \_\ \ \_____\ \ \_____\ \ \_____\ \/\_____\ 
 //    \/_/     \/_/\/_/  \/_/ /_/  \/_/  \/_/\/_/  \/_____/  \/_____/  \/_____/  \/_____/
 
+verificar;
 import {cargarUsuarios, agregarUsuarios, editarUsuarios} from "../supabase.js";
 
 const tblUsuarios = document.getElementById("tblUsuarios");
@@ -43,5 +44,3 @@ btnAgregarU.addEventListener('click', async function(e){
 })
 //Ejecuta la función 'cargarUsuarios'
 cargarUsuarios();
-
-verificar;
