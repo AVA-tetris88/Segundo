@@ -61,3 +61,5 @@ btnVisualizacion.addEventListener('click', function(e){
     e.preventDefault();
     window.location.replace('./reporteriaInformeL');
 });
+
+verificar;

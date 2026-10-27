@@ -38,3 +38,5 @@ inpMostrarActividad.addEventListener("change", async function(e){
 
 //Ejecuta la función 'cargarMostrarActividad' con la variable 'actividad' de 'sessionStorage'
 obtenerActividad(sessionStorage.getItem('actividad'));
+
+verificar;

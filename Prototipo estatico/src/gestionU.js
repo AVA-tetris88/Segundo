@@ -43,3 +43,5 @@ btnAgregarU.addEventListener('click', async function(e){
 })
 //Ejecuta la función 'cargarUsuarios'
 cargarUsuarios();
+
+verificar;
