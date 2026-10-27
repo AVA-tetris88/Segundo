@@ -4,7 +4,7 @@
 //   \ \__|   \ \_\ \_\ \ \_\ \_\ \ \_\ \ \_\ \_\ \ \_____\ \ \_____\ \ \_____\ \/\_____\ 
 //    \/_/     \/_/\/_/  \/_/ /_/  \/_/  \/_/\/_/  \/_____/  \/_____/  \/_____/  \/_____/
 
-verificar;
+import {verificarSesion} from "../supabase.js";
 
 const divModalAct = document.getElementById("divModalAct");
 const h1Act = document.getElementById("h1Act");
@@ -63,3 +63,5 @@ btnVisualizacion.addEventListener('click', function(e){
     e.preventDefault();
     window.location.replace('./reporteriaInformeL');
 });
+
+verificarSesion();

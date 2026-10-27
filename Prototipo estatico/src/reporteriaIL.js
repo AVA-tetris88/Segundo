@@ -4,8 +4,7 @@
 //   \ \__|   \ \_\ \_\ \ \_\ \_\ \ \_\ \ \_\ \_\ \ \_____\ \ \_____\ \ \_____\ \/\_____\ 
 //    \/_/     \/_/\/_/  \/_/ /_/  \/_/  \/_/\/_/  \/_____/  \/_____/  \/_____/  \/_____/
 
-verificar;
-import {cargarActividades, aplicarFiltro, obtenerActividad} from "../supabase.js";
+import {cargarActividades, aplicarFiltro, obtenerActividad, verificarSesion} from "../supabase.js";
 
 const inpMostrarActividad = document.getElementById("inpMostrarActividad");
 const tblCabeza = document.getElementById("tblCabeza");
@@ -39,3 +38,5 @@ inpMostrarActividad.addEventListener("change", async function(e){
 
 //Ejecuta la función 'cargarMostrarActividad' con la variable 'actividad' de 'sessionStorage'
 obtenerActividad(sessionStorage.getItem('actividad'));
+
+verificarSesion();

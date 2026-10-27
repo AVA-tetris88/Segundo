@@ -4,8 +4,7 @@
 //   \ \__|   \ \_\ \_\ \ \_\ \_\ \ \_\ \ \_\ \_\ \ \_____\ \ \_____\ \ \_____\ \/\_____\ 
 //    \/_/     \/_/\/_/  \/_/ /_/  \/_/  \/_/\/_/  \/_____/  \/_____/  \/_____/  \/_____/
 
-verificar;
-import {registrarActividades, cargarActividad, cargarProfesorActual, obtenerOpciones} from "../supabase.js";
+import {registrarActividades, cargarActividad, cargarProfesorActual, obtenerOpciones, verificarSesion} from "../supabase.js";
 
 const h1Actividad = document.getElementById('h1Actividad');
 const frmRegistroActividades = document.getElementById('frmRegistroActividades');
@@ -34,3 +33,5 @@ frmRegistroActividades.addEventListener('submit', async function(e){
     e.preventDefault();
     await registrarActividades(sessionStorage.getItem('actividad'));
 });
+
+verificarSesion();
