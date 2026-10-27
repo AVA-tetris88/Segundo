@@ -36,4 +36,4 @@ frmInicioSesion.addEventListener('submit', async function(e) {
     }
 });
 
-verificar();
+verificar;

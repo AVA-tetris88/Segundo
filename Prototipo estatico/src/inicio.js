@@ -32,4 +32,4 @@ btnCerrarSesion.addEventListener('click', async function(e){
     await cerrarSesion();
 })
 
-verificar();
+verificar;
