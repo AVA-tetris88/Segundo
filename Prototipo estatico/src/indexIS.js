@@ -35,3 +35,5 @@ frmInicioSesion.addEventListener('submit', async function(e) {
         await iniciarSesion(inpCorreo.value, inpContrasenna.value);
     }
 });
+
+verificar();
