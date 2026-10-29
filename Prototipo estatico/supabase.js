@@ -202,7 +202,7 @@ export async function obtenerOpciones(tabla,dato) {
     else{
         let opciones = ``;
         data.forEach(fila => {
-            opciones = opciones + `<option>${fila[dato]}</option>`
+            opciones = opciones + `<option value="${fila[dato]}">${fila[dato]}</option>`
         });
         return opciones;
     }
@@ -268,8 +268,9 @@ export async function cargarActividades(datos, actividad, filtro) {
                 break;
         }
         if(!filtro){
-            divFiltros.innerHTML = ``;
+            divFiltros.innerHTML = `<label for="nombre_profesor">Nombre del profesor</label><select name="nombre_profesor" id="nombre_profesor" class="inpFiltro"></select>`;
             filtros.forEach(async fltr =>{
+                console.log(divFiltros.innerHTML);
                 switch (fltr.tipo) {
                     case 0:
                         divFiltros.innerHTML = divFiltros.innerHTML + `<label for="${fltr.id}">${fltr.atributo}</label><select name="${fltr.id}" id="${fltr.id}" class="inpFiltro"><option value="*">Todos</option>${await obtenerOpciones(fltr.tabla,fltr.dato)}</select>`
