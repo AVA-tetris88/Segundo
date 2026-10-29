@@ -267,30 +267,30 @@ export async function cargarActividades(datos, actividad, filtro) {
                 break;
         }
         if(!filtro){
-            divFiltros.innerHTML = `<label for="nombre_profesor">Nombre del profesor</label><select name="nombre_profesor" id="nombre_profesor" class="inpFiltro">${opProfesores}</select>`;
-            filtros.forEach(async fltr =>{
-                console.log(fltr);
+            let htmlFiltros = `<label for="nombre_profesor">Nombre del profesor</label><select name="nombre_profesor" id="nombre_profesor" class="inpFiltro">${opProfesores}</select>`;
+            for(fltr of filtros){
                 switch (fltr.tipo) {
                     case 0:
-                        divFiltros.innerHTML = divFiltros.innerHTML + `<label for="${fltr.id}">${fltr.atributo}</label><select name="${fltr.id}" id="${fltr.id}" class="inpFiltro"><option value="*">Todos</option>${await obtenerOpciones(fltr.tabla,fltr.dato)}</select>`
+                        htmlFiltros = htmlFiltros + `<label for="${fltr.id}">${fltr.atributo}</label><select name="${fltr.id}" id="${fltr.id}" class="inpFiltro"><option value="*">Todos</option>${await obtenerOpciones(fltr.tabla,fltr.dato)}</select>`
                         break;
 
                     case 1:
-                        divFiltros.innerHTML = divFiltros.innerHTML + `<label for="${fltr.id}">${fltr.atributo}</label><input type="text" name="${fltr.id}" id="${fltr.id}" class="inpFiltro">`
+                        htmlFiltros = htmlFiltros + `<label for="${fltr.id}">${fltr.atributo}</label><input type="text" name="${fltr.id}" id="${fltr.id}" class="inpFiltro">`
                         break;
 
                     case 2:
-                        divFiltros.innerHTML = divFiltros.innerHTML + `<label for="${fltr.id}">${fltr.atributo}</label><input type="date" name="${fltr.id}" id="${fltr.id}" class="inpFiltro">`
+                        htmlFiltros = htmlFiltros + `<label for="${fltr.id}">${fltr.atributo}</label><input type="date" name="${fltr.id}" id="${fltr.id}" class="inpFiltro">`
                         break;
 
                     case 3:
-                        divFiltros.innerHTML = divFiltros.innerHTML + `<label for="${fltr.id}">${fltr.atributo}</label><text type="text" name="${fltr.id}" id="${fltr.id}" class="inpFiltro" cols="10" rows="10"></textarea>`
+                        htmlFiltros = htmlFiltros + `<label for="${fltr.id}">${fltr.atributo}</label><textarea type="text" name="${fltr.id}" id="${fltr.id}" class="inpFiltro" cols="10" rows="10"></textarea>`
                         break;
 
                     default:
                         break;
                 }
-            });
+            }
+            divFiltros.innerHTML = htmlFiltros;
         }
     }
 }
