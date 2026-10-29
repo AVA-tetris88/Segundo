@@ -68,7 +68,7 @@ divFiltros.addEventListener('change', async function(e) {
         await obtenerActividad(inpMostrarActividad.value);
         return; 
     }
-
+    console.log(filtrador);
     aplicarFiltro(filtrador);
 });
 //Ejecuta la función 'cargarMostrarActividad' con la variable 'actividad' de 'sessionStorage'
