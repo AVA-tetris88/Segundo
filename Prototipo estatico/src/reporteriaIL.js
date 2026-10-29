@@ -49,27 +49,27 @@ divFiltros.addEventListener('change', async function(e) {
         }
     });
 
-    let filtrador = ``;
+    let query = _supabase.from(inpMostrarActividad.value).select('*');
     if(e.target.value !== '' && e.target.value !== '*' && inpFiltro[0].value !== '*') {
         if(e.target.id !== inpFiltro[0].id) {
-            filtrador = `${e.target.id}.eq.${e.target.value},${inpFiltro[0].id}.eq.${inpFiltro[0].value}`;
+            query.ilike(e.target.id,`%${e.target.value}%`).eq('nombre',inpFiltro[0].value);
         } 
         else{
-            filtrador = `${e.target.id}.eq.${e.target.value}`;
+            query.eq('nombre',inpFiltro[0].value);
         }
     }
     else if((e.target.value === '' || e.target.value === '*') && inpFiltro[0].value !== '*') {
-        filtrador = `${inpFiltro[0].id}.eq.${inpFiltro.value}`;
+        query.eq('nombre',inpFiltro[0].value);
     }
     else if (e.target.value !== '' && e.target.value !== '*' && inpFiltro[0].value === '*') {
-        filtrador = `${e.target.id}.eq.${e.target.value}`;
+        query.ilike(e.target.id,`%${e.target.value}%`)
     }
     else {
         await obtenerActividad(inpMostrarActividad.value);
         return; 
     }
-    console.log(filtrador);
-    aplicarFiltro(filtrador);
+    console.log(query);
+    aplicarFiltro(query);
 });
 //Ejecuta la función 'cargarMostrarActividad' con la variable 'actividad' de 'sessionStorage'
 obtenerActividad(sessionStorage.getItem('actividad'));

@@ -296,18 +296,11 @@ export async function cargarActividades(datos, actividad, filtro) {
 }
 
 //Función que busca la información según el filtro seleccionado
-export async function aplicarFiltro(filtro) {
-//Selecciona todo de la tabla de la base de datos solicitada donde cuente con el valor del filtro colocado
-    const {data, error} = await _supabase
-        .from(inpMostrarActividad.value)
-        .select('*')
-        .and(filtro)
-//Si hay algún error lo imprime
-    if(error) console.error('Error al aplicar el filtro', error);
-//Sino ejecuta la función 'cargarActividades' con la información recolectada de la base de datos y la tabla que se buscó como variables
-    else{
-        cargarActividades(data, inpMostrarActividad.value, 1);
-    }
+export async function aplicarFiltro(query) {
+    const {data, error} = await query;
+
+    if(error) console.error('Error al aplicar el filtro', error)
+    else cargarActividades(data, inpMostrarActividad.value, 1)
 }
 
 //Función que ejecuta la función 'cargarActividades'
