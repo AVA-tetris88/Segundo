@@ -38,7 +38,7 @@ inpMostrarActividad.addEventListener('change', async function(e){
 })
 
 if(inpFiltro){
-    inpFiltro.forEach((filtro, indice) =>{
+    inpFiltro.forEach(filtro =>{
         filtro.addEventListener('change', async function(e){
             e.preventDefault();
             let filtrador = ``;
@@ -46,14 +46,23 @@ if(inpFiltro){
                 if(otroFiltro != e.target && otroIndice != 0){
                     otroFiltro.value = ``;
                 }
-                if(indice == otroIndice == 0){
-                    filtrador = `${e.target.id}.eq.${e.target.value}`;
+            });
+
+            if((e.target.value != '' || '*') && inpFiltro[0].value != '*'){
+                if(e.target.id != inpFiltro[0].id){
+                    filtrador = `${e.target.id}.eq.${e.target.value},${inpFiltro[0].id}.eq.${inpFiltro[0].value}`;
                 }
                 else{
-                    filtrador = `${otroFiltro.id}.eq.${otroFiltro.value},${e.target.id}.eq.${e.target.value}`
+                    filtrador = `${e.target.id}.eq.${e.target.value}`;
                 }
-            });
-            await aplicarFiltro(filtrador);
+            }
+            else if(e.target == '' || '*' && inpFiltro[0].value != '*'){
+                filtrador = `${inpFiltro[0].id}.eq.${inpFiltro[0].value}`;
+            }
+            else if((e.target.value != '' || '*') && inpFiltro[0].value == '*'){
+                filtrador = `${e.target.id}.eq.${e.target.value}`;
+            }
+            else obtenerActividad(inpMostrarActividad.value);
             });
     });
 }

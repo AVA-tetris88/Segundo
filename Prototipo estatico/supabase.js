@@ -227,7 +227,7 @@ export async function cargarActividades(datos, actividad, filtro) {
 //Si es igual a 'actividades_de_extension'
             case 'actividades_de_extension':
 //Define variables de texto que serán opciones de filtros
-                let opProfesores = `<option value="*">Todos</option> `;
+                let opProfesores = `<option value="*">Todos</option>`;
 //Busca y guarda los nombre de profesores como opciones de filtros
                 data.forEach(profe => {
                     opProfesores = opProfesores + `<option value="${profe.nombre}">${profe.nombre}</option>` 
@@ -272,7 +272,7 @@ export async function cargarActividades(datos, actividad, filtro) {
             filtros.forEach(fltr =>{
                 switch (fltr.tipo) {
                     case 0:
-                        divFiltros.innerHTML = divFiltros.innerHTML + `<label for="${fltr.id}">${fltr.atributo}</label><select name="${fltr.id}" id="${fltr.id}" class="inpFiltro">${obtenerOpciones(fltr.tabla,fltr.dato)}</select>`
+                        divFiltros.innerHTML = divFiltros.innerHTML + `<label for="${fltr.id}">${fltr.atributo}</label><select name="${fltr.id}" id="${fltr.id}" class="inpFiltro"><option value="*">Todos</option>${obtenerOpciones(fltr.tabla,fltr.dato)}</select>`
                         break;
 
                     case 1:
