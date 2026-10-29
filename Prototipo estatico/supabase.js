@@ -268,7 +268,7 @@ export async function cargarActividades(datos, actividad, filtro) {
                 break;
         }
         if(!filtro){
-            divFiltros = ``;
+            divFiltros.innerHTML = ``;
             filtros.forEach(fltr =>{
                 switch (fltr.tipo) {
                     case 0:
