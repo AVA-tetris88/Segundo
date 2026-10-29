@@ -283,7 +283,7 @@ export async function cargarActividades(datos, actividad, filtro) {
                         break;
 
                     case 3:
-                        htmlFiltros = htmlFiltros + `<label for="${fltr.id}">${fltr.atributo}</label><textarea type="text" name="${fltr.id}" id="${fltr.id}" class="inpFiltro" cols="10" rows="10"></textarea>`
+                        htmlFiltros = htmlFiltros + `<label for="${fltr.id}">${fltr.atributo}</label><textarea type="text" name="${fltr.id}" id="${fltr.id}" class="inpFiltro"></textarea>`
                         break;
 
                     default:

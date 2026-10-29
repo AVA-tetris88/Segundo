@@ -10,7 +10,6 @@ const inpMostrarActividad = document.getElementById("inpMostrarActividad");
 const tblCabeza = document.getElementById("tblCabeza");
 const tblCuerpo = document.getElementById("tblCuerpo");
 const divFiltros = document.getElementById("divFiltros");
-const inpFiltro = document.querySelectorAll(".inpFiltro");
 
 //   ______   __  __    __   __    ______    __    ______    __   __    ______    ______    
 //  /\  ___\ /\ \/\ \  /\ "-.\ \  /\  ___\  /\ \  /\  __ \  /\ "-.\ \  /\  ___\  /\  ___\   
@@ -37,35 +36,41 @@ inpMostrarActividad.addEventListener('change', async function(e){
     await obtenerActividad(inpMostrarActividad.value);
 })
 
-if(inpFiltro){
-    inpFiltro.forEach(filtro =>{
-        filtro.addEventListener('change', async function(e){
-            e.preventDefault();
-            let filtrador = ``;
-            inpFiltro.forEach((otroFiltro, otroIndice) =>{  
-                if(otroFiltro != e.target && otroIndice != 0){
-                    otroFiltro.value = ``;
-                }
-            });
+divFiltros.addEventListener('change', async function(e) {
 
-            if((e.target.value != '' || '*') && inpFiltro[0].value != '*'){
-                if(e.target.id != inpFiltro[0].id){
-                    filtrador = `${e.target.id}.eq.${e.target.value},${inpFiltro[0].id}.eq.${inpFiltro[0].value}`;
-                }
-                else{
-                    filtrador = `${e.target.id}.eq.${e.target.value}`;
-                }
-            }
-            else if(e.target == '' || '*' && inpFiltro[0].value != '*'){
-                filtrador = `${inpFiltro[0].id}.eq.${inpFiltro[0].value}`;
-            }
-            else if((e.target.value != '' || '*') && inpFiltro[0].value == '*'){
-                filtrador = `${e.target.id}.eq.${e.target.value}`;
-            }
-            else obtenerActividad(inpMostrarActividad.value);
-            });
+    if (!e.target.classList.contains('inpFiltro')) return;
+
+    e.preventDefault();
+    const inpFiltro = document.querySelectorAll(".inpFiltro");
+
+    inpFiltro.forEach((otroFiltro, otroIndice) => {  
+        if (otroFiltro !== e.target && otroIndice !== 0) {
+            otroFiltro.value = ``;
+        }
     });
-}
+
+    let filtrador = ``;
+    if(e.target.value !== '' && e.target.value !== '*' && inpFiltro[0].value !== '*') {
+        if(e.target.id !== inpFiltro[0].id) {
+            filtrador = `${e.target.id}.eq.${e.target.value},${inpFiltro[0].id}.eq.${inpFiltro[0].value}`;
+        } 
+        else{
+            filtrador = `${e.target.id}.eq.${e.target.value}`;
+        }
+    }
+    else if((e.target.value === '' || e.target.value === '*') && inpFiltro[0].value !== '*') {
+        filtrador = `${inpFiltro[0].id}.eq.${inpFiltro.value}`;
+    }
+    else if (e.target.value !== '' && e.target.value !== '*' && inpFiltro[0].value === '*') {
+        filtrador = `${e.target.id}.eq.${e.target.value}`;
+    }
+    else {
+        await obtenerActividad(inpMostrarActividad.value);
+        return; 
+    }
+
+    aplicarFiltro(filtrador);
+});
 //Ejecuta la función 'cargarMostrarActividad' con la variable 'actividad' de 'sessionStorage'
 obtenerActividad(sessionStorage.getItem('actividad'));
 
