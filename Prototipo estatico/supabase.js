@@ -268,7 +268,7 @@ export async function cargarActividades(datos, actividad, filtro) {
                 break;
         }
         if(!filtro){
-            divFiltros.innerHTML = `<label for="nombre_profesor">Nombre del profesor</label><select name="nombre_profesor" id="nombre_profesor" class="inpFiltro"></select>`;
+            divFiltros.innerHTML = `<label for="nombre_profesor">Nombre del profesor</label><select name="nombre_profesor" id="nombre_profesor" class="inpFiltro">${opProfesores}</select>`;
             filtros.forEach(async fltr =>{
                 console.log(divFiltros.innerHTML);
                 switch (fltr.tipo) {
