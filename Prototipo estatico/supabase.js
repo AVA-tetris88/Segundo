@@ -268,7 +268,7 @@ export async function cargarActividades(datos, actividad, filtro) {
         }
         if(!filtro){
             let htmlFiltros = `<label for="nombre_profesor">Nombre del profesor</label><select name="nombre_profesor" id="nombre_profesor" class="inpFiltro">${opProfesores}</select>`;
-            for(fltr of filtros){
+            for(const fltr of filtros){
                 switch (fltr.tipo) {
                     case 0:
                         htmlFiltros = htmlFiltros + `<label for="${fltr.id}">${fltr.atributo}</label><select name="${fltr.id}" id="${fltr.id}" class="inpFiltro"><option value="*">Todos</option>${await obtenerOpciones(fltr.tabla,fltr.dato)}</select>`
