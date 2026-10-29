@@ -222,16 +222,15 @@ export async function cargarActividades(datos, actividad, filtro) {
 //Sino modifica todo el documento según la actividad
     else{
         let filtros = [];
-//Pregunta por la variable 'activiad'
-        switch (actividad) {
-//Si es igual a 'actividades_de_extension'
-            case 'actividades_de_extension':
-//Define variables de texto que serán opciones de filtros
-                let opProfesores = `<option value="*">Todos</option>`;
+        let opProfesores = `<option value="*">Todos</option>`;
 //Busca y guarda los nombre de profesores como opciones de filtros
                 data.forEach(profe => {
                     opProfesores = opProfesores + `<option value="${profe.nombre}">${profe.nombre}</option>` 
                 });
+//Pregunta por la variable 'activiad'
+        switch (actividad) {
+//Si es igual a 'actividades_de_extension'
+            case 'actividades_de_extension':
 //Escribe las columnas de la tabla 'actividades_de_extension' de la base de datos
                 tblCabeza.innerHTML = 
                 `<th>Nombre del profesor</th>
@@ -277,15 +276,15 @@ export async function cargarActividades(datos, actividad, filtro) {
                         break;
 
                     case 1:
-                        divFiltros.innerHTML = divFiltros.innerHTML + `<label for"${fltr.id}">${fltr.atributo}</label><input type="text" name="${fltr.id} id="${fltr.id}" class="inpFiltro">`
+                        divFiltros.innerHTML = divFiltros.innerHTML + `<label for="${fltr.id}">${fltr.atributo}</label><input type="text" name="${fltr.id}" id="${fltr.id}" class="inpFiltro">`
                         break;
 
                     case 2:
-                        divFiltros.innerHTML = divFiltros.innerHTML + `<label for"${fltr.id}">${fltr.atributo}</label><input type="date" name="${fltr.id} id="${fltr.id}" class="inpFiltro">`
+                        divFiltros.innerHTML = divFiltros.innerHTML + `<label for="${fltr.id}">${fltr.atributo}</label><input type="date" name="${fltr.id}" id="${fltr.id}" class="inpFiltro">`
                         break;
 
                     case 3:
-                        divFiltros.innerHTML = divFiltros.innerHTML + `<label for"${fltr.id}">${fltr.atributo}</label><text type="text" name="${fltr.id} id="${fltr.id}" class="inpFiltro" cols="10" rows="10"></textarea>`
+                        divFiltros.innerHTML = divFiltros.innerHTML + `<label for="${fltr.id}">${fltr.atributo}</label><text type="text" name="${fltr.id}" id="${fltr.id}" class="inpFiltro" cols="10" rows="10"></textarea>`
                         break;
 
                     default:
