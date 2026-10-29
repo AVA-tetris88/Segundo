@@ -9,6 +9,8 @@ const SUPABASE_URL = "https://pxndzjbdfcdoxjruihid.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB4bmR6amJkZmNkb3hqcnVpaGlkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTEyODkzMzcsImV4cCI6MjEwNjg2NTMzN30.MEupu-T5V84jKPj_maKO8-kJce_B0wzSPWbakVzSVY0";
 const rutaActual = window.location.pathname;
 
+const atributosExtension = [{'id':'tipoActividad','atributo':'Tipo de actividad', 'tipo':0, 'tabla':'extension_tipo_actividad','dato':'tipo'},{'id':'nombreActividad','atributo':'Nombre de la actividad', 'tipo':1},{'id':'tituloParticipacion','atributo':'Título de la participación','tipo':0, 'tabla':'extension_titulo_participacion','dato':'titulo'},{'id':'fecha','atributo':'Fecha','tipo':2},{'id':'lugar','atributo':'Lugar','tipo':1},{'id':'tipoParticipacion','atributo':'Tipo de participación','tipo':0,'tabla':'extension_tipo_participacion','dato':'tipo'},{'id':'organizadores','atributo':'Organizador(es)','tipo':1},{'id':'otraInfo','atributo':'Otra información','tipo':3}];
+
 //   ______   __  __    __   __    ______    __    ______    __   __    ______    ______    
 //  /\  ___\ /\ \/\ \  /\ "-.\ \  /\  ___\  /\ \  /\  __ \  /\ "-.\ \  /\  ___\  /\  ___\   
 //  \ \  __\ \ \ \_\ \ \ \ \-.  \ \ \ \____ \ \ \ \ \ \/\ \ \ \ \-.  \ \ \  __\  \ \___  \  
@@ -209,7 +211,7 @@ export async function obtenerOpciones(tabla,dato) {
 //REPORTERIAIL --------------------------------------------------------------------------------------------------
 
 //Función para mostrar toda la información de las actividades en una tabla
-export async function cargarActividades(datos, actividad) {
+export async function cargarActividades(datos, actividad, filtro) {
 //Obtiene la información con los con 'tipo' igual a 'Profesor'
     const {data, error} = await _supabase
         .from('perfiles')
@@ -219,12 +221,13 @@ export async function cargarActividades(datos, actividad) {
     if(error)console.error('Error al cargar los profes:',error)
 //Sino modifica todo el documento según la actividad
     else{
+        let filtros = [];
 //Pregunta por la variable 'activiad'
         switch (actividad) {
 //Si es igual a 'actividades_de_extension'
             case 'actividades_de_extension':
 //Define variables de texto que serán opciones de filtros
-                let opProfesores = ``;
+                let opProfesores = `<option value="*">Todos</option> `;
 //Busca y guarda los nombre de profesores como opciones de filtros
                 data.forEach(profe => {
                     opProfesores = opProfesores + `<option value="${profe.nombre}">${profe.nombre}</option>` 
@@ -241,25 +244,7 @@ export async function cargarActividades(datos, actividad) {
                 <th>Organizador(es)</th>
                 <th>Otra información</th>`;
 //Escribe todos los filtros de las actividades de extensión junto con sus opciones
-                sctFiltros.innerHTML = 
-                `<label for="nProfesor">Nombre del profesor:</label>
-                <select name="nombre" class="inpFiltro" id="nProfesor" onchange="aplicarFiltro('nombre_profesor',0)">${opProfesores}</select>
-                <label for="nActividad">Nombre de la actividad:</label>
-                <input type="text" name="nActividad" class="inpFiltro" id="nActividad" onchange="aplicarFiltro('nombre_actividad',1)">
-                <label for="tipo">Tipo de actividad:</label>
-                <select name="tipo" class="inpFiltro" id="tipo" onchange="aplicarFiltro('tipo',2)">${obtenerOpciones('extension_tipo_actividad','tipo')}</select>
-                <label for="tituloP">Título de la participación:</label>
-                <select name="tituloP" class="inpFiltro" id="tituloP" onchange="aplicarFiltro('titulo_participacion',3)">${obtenerOpciones('extension_titulo_participacion','titulo')}</select>
-                <label for="fecha">Fecha:</label>
-                <input type="date" name="fecha" class="inpFiltro"id="fecha" onchange="aplicarFiltro('fecha',4)">
-                <label for="lugar">Lugar:</label>
-                <input type="text" name="lugar" class="inpFiltro" id="lugar" onchange="aplicarFiltro('lugar',5)">
-                <label for="tipoP">Tipo de participación:</label>
-                <select name="tipoP" class="inpFiltro" id="tipoP" onchange="aplicarFiltro('tipo_participacion',6)">${obtenerOpciones('extension_tipo_participacion','tipo')}</select>
-                <label for="organizadores">Organizador(es):</label>
-                <input type="text" name="organizadores" class="inpFiltro" id="organizadores" onchange="aplicarFiltro('organizadores',7)">
-                <label for="otraInfo">Otra información:</label>
-                <input type="text" name="otraInfo" class="inpFiltro" id="otraInfo" onchange="aplicarFiltro('comentarios',8)">`
+                filtros = atributosExtension;
 //Limpia el contenido en las filas de la tabla
                 tblCuerpo.innerHTML = ``;
 //Escribe la información de la tabla 'actividades_de_extension' en las filas de la tabla
@@ -282,22 +267,47 @@ export async function cargarActividades(datos, actividad) {
             default:
                 break;
         }
+        if(!filtro){
+            divFiltros = ``;
+            filtros.forEach(fltr =>{
+                switch (fltr.tipo) {
+                    case 0:
+                        divFiltros.innerHTML = divFiltros.innerHTML + `<label for="${fltr.id}">${fltr.atributo}</label><select name="${fltr.id}" id="${fltr.id}" class="inpFiltro">${obtenerOpciones(fltr.tabla,fltr.dato)}</select>`
+                        break;
+
+                    case 1:
+                        divFiltros.innerHTML = divFiltros.innerHTML + `<label for"${fltr.id}">${fltr.atributo}</label><input type="text" name="${fltr.id} id="${fltr.id}" class="inpFiltro">`
+                        break;
+
+                    case 2:
+                        divFiltros.innerHTML = divFiltros.innerHTML + `<label for"${fltr.id}">${fltr.atributo}</label><input type="date" name="${fltr.id} id="${fltr.id}" class="inpFiltro">`
+                        break;
+
+                    case 3:
+                        divFiltros.innerHTML = divFiltros.innerHTML + `<label for"${fltr.id}">${fltr.atributo}</label><text type="text" name="${fltr.id} id="${fltr.id}" class="inpFiltro" cols="10" rows="10"></textarea>`
+                        break;
+
+                    default:
+                        break;
+                }
+            });
+        }
     }
 }
 
 //Función que busca la información según el filtro seleccionado
-export async function aplicarFiltro(filtro, inp) {
-//Obtiene la información de todos los filtros
-    const inpFiltro = document.querySelectorAll('.inpFiltro');
+export async function aplicarFiltro(filtro) {
 //Selecciona todo de la tabla de la base de datos solicitada donde cuente con el valor del filtro colocado
     const {data, error} = await _supabase
         .from(inpMostrarActividad.value)
         .select('*')
-        .eq(filtro, inpFiltro[inp].value)
+        .and(filtro)
 //Si hay algún error lo imprime
     if(error) console.error('Error al aplicar el filtro', error);
 //Sino ejecuta la función 'cargarActividades' con la información recolectada de la base de datos y la tabla que se buscó como variables
-    else cargarActividades(data, inpMostrarActividad.value);
+    else{
+        cargarActividades(data, inpMostrarActividad.value, 1);
+    }
 }
 
 //Función que ejecuta la función 'cargarActividades'

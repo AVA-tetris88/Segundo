@@ -9,7 +9,8 @@ import {cargarActividades, aplicarFiltro, obtenerActividad, verificarSesion} fro
 const inpMostrarActividad = document.getElementById("inpMostrarActividad");
 const tblCabeza = document.getElementById("tblCabeza");
 const tblCuerpo = document.getElementById("tblCuerpo");
-const sctFiltros = document.getElementById("sctFiltros");
+const divFiltros = document.getElementById("divFiltros");
+const inpFiltro = document.querySelectorAll(".inpFiltro");
 
 //   ______   __  __    __   __    ______    __    ______    __   __    ______    ______    
 //  /\  ___\ /\ \/\ \  /\ "-.\ \  /\  ___\  /\ \  /\  __ \  /\ "-.\ \  /\  ___\  /\  ___\   
@@ -28,7 +29,7 @@ const sctFiltros = document.getElementById("sctFiltros");
 inpMostrarActividad.value = sessionStorage.getItem 
 
 //Evento que ejecuta la función 'obtenerActividad' cada vez que se cambie la opción del input para seleccionar actividades
-inpMostrarActividad.addEventListener("change", async function(e){
+inpMostrarActividad.addEventListener('change', async function(e){
     e.preventDefault();
 //Guarda en 'sessionStorage' la variable 'actividad' como el valor del input para seleccionar actividades
     sessionStorage.setItem('actividad',inpMostrarActividad.value)
@@ -36,6 +37,26 @@ inpMostrarActividad.addEventListener("change", async function(e){
     await obtenerActividad(inpMostrarActividad.value);
 })
 
+if(inpFiltro){
+    inpFiltro.forEach((filtro, indice) =>{
+        filtro.addEventListener('change', async function(e){
+            e.preventDefault();
+            let filtrador = ``;
+            inpFiltro.forEach((otroFiltro, otroIndice) =>{  
+                if(otroFiltro != e.target && otroIndice != 0){
+                    otroFiltro.value = ``;
+                }
+                if(indice == otroIndice == 0){
+                    filtrador = `${e.target.id}.eq.${e.target.value}`;
+                }
+                else{
+                    filtrador = `${otroFiltro.id}.eq.${otroFiltro.value},${e.target.id}.eq.${e.target.value}`
+                }
+            });
+            await aplicarFiltro(filtrador);
+            });
+    });
+}
 //Ejecuta la función 'cargarMostrarActividad' con la variable 'actividad' de 'sessionStorage'
 obtenerActividad(sessionStorage.getItem('actividad'));
 
