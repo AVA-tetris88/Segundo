@@ -9,7 +9,7 @@ const SUPABASE_URL = "https://pxndzjbdfcdoxjruihid.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB4bmR6amJkZmNkb3hqcnVpaGlkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTEyODkzMzcsImV4cCI6MjEwNjg2NTMzN30.MEupu-T5V84jKPj_maKO8-kJce_B0wzSPWbakVzSVY0";
 const rutaActual = window.location.pathname;
 
-const atributosExtension = [{'id':'tipoActividad','atributo':'Tipo de actividad', 'tipo':0, 'tabla':'extension_tipo_actividad','dato':'tipo'},{'id':'nombreActividad','atributo':'Nombre de la actividad', 'tipo':1},{'id':'tituloParticipacion','atributo':'Título de la participación','tipo':0, 'tabla':'extension_titulo_participacion','dato':'titulo'},{'id':'fecha','atributo':'Fecha','tipo':2},{'id':'lugar','atributo':'Lugar','tipo':1},{'id':'tipoParticipacion','atributo':'Tipo de participación','tipo':0,'tabla':'extension_tipo_participacion','dato':'tipo'},{'id':'organizadores','atributo':'Organizador(es)','tipo':1},{'id':'otraInfo','atributo':'Otra información','tipo':3}];
+const atributosExtension = [{'id':'tipo_actividad','atributo':'Tipo de actividad', 'tipo':0, 'tabla':'extension_tipo_actividad','dato':'tipo'},{'id':'nombre_actividad','atributo':'Nombre de la actividad', 'tipo':1},{'id':'titulo_participacion','atributo':'Título de la participación','tipo':0, 'tabla':'extension_titulo_participacion','dato':'titulo'},{'id':'fecha','atributo':'Fecha','tipo':2},{'id':'lugar','atributo':'Lugar','tipo':1},{'id':'tipo_participacion','atributo':'Tipo de participación','tipo':0,'tabla':'extension_tipo_participacion','dato':'tipo'},{'id':'organizadores','atributo':'Organizador(es)','tipo':1},{'id':'otra_informacion','atributo':'Otra información','tipo':3}];
 
 //   ______   __  __    __   __    ______    __    ______    __   __    ______    ______    
 //  /\  ___\ /\ \/\ \  /\ "-.\ \  /\  ___\  /\ \  /\  __ \  /\ "-.\ \  /\  ___\  /\  ___\   
@@ -269,10 +269,10 @@ export async function cargarActividades(datos, actividad, filtro) {
         }
         if(!filtro){
             divFiltros.innerHTML = ``;
-            filtros.forEach(fltr =>{
+            filtros.forEach(async fltr =>{
                 switch (fltr.tipo) {
                     case 0:
-                        divFiltros.innerHTML = divFiltros.innerHTML + `<label for="${fltr.id}">${fltr.atributo}</label><select name="${fltr.id}" id="${fltr.id}" class="inpFiltro"><option value="*">Todos</option>${obtenerOpciones(fltr.tabla,fltr.dato)}</select>`
+                        divFiltros.innerHTML = divFiltros.innerHTML + `<label for="${fltr.id}">${fltr.atributo}</label><select name="${fltr.id}" id="${fltr.id}" class="inpFiltro"><option value="*">Todos</option>${await obtenerOpciones(fltr.tabla,fltr.dato)}</select>`
                         break;
 
                     case 1:
