@@ -48,28 +48,7 @@ divFiltros.addEventListener('change', async function(e) {
             otroFiltro.value = ``;
         }
     });
-
-    let query = _supabase.from(inpMostrarActividad.value).select('*');
-    if(e.target.value !== '' && e.target.value !== '*' && inpFiltro[0].value !== '*') {
-        if(e.target.id !== inpFiltro[0].id) {
-            query.ilike(e.target.id,`%${e.target.value}%`).eq('nombre',inpFiltro[0].value);
-        } 
-        else{
-            query.eq('nombre',inpFiltro[0].value);
-        }
-    }
-    else if((e.target.value === '' || e.target.value === '*') && inpFiltro[0].value !== '*') {
-        query.eq('nombre',inpFiltro[0].value);
-    }
-    else if (e.target.value !== '' && e.target.value !== '*' && inpFiltro[0].value === '*') {
-        query.ilike(e.target.id,`%${e.target.value}%`)
-    }
-    else {
-        await obtenerActividad(inpMostrarActividad.value);
-        return; 
-    }
-    console.log(query);
-    aplicarFiltro(query);
+    aplicarFiltro(e.target, inpFiltro[0]);
 });
 //Ejecuta la función 'cargarMostrarActividad' con la variable 'actividad' de 'sessionStorage'
 obtenerActividad(sessionStorage.getItem('actividad'));
