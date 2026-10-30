@@ -322,7 +322,7 @@ export async function aplicarFiltro(activador, nombreProfesor) {
     const {data, error} = await query;
 
     if(error) console.error('Error al aplicar el filtro', error)
-    else console.log('Filtro aplicado:', activador.value);
+    else cargarActividades(data, inpMostrarActividad.value, 1);
 }
 
 //Función que ejecuta la función 'cargarActividades'
