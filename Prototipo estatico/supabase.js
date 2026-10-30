@@ -309,7 +309,7 @@ export async function aplicarFiltro(activador, nombreProfesor) {
         }
     }
     else if((activador.value === '' || activador.value === '*') && nombreProfesor.value !== '*') {
-        query.eq('nombre',nombreProfesor.value);
+        query.eq('nombre_profesor',nombreProfesor.value);
     }
     else if (activador.value !== '' && activador.value !== '*' && nombreProfesor.value === '*') {
         if(activador.type == 'text') query.ilike(activador.id,`%${activador.value}%`);
